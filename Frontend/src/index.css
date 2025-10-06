@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face{
+  font-family: 'Mulish';
+  src: url('./assets/Mulish-VariableFont_wght.ttf');
+}
+
+body{
+  color: white;
+  --navbar: #171721;
+  --bg:#191924;
+  font-family: 'Mulish';
+  overflow: auto;
+  background-color:#1e1e29;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.sb::-webkit-scrollbar {
+  display: none;
+}
+.sb {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.wap{
+  padding-bottom: 100px;
+  background: linear-gradient(
+      38.73deg,
+      rgba(204, 0, 187, 0.15) 0%,
+      rgba(201, 32, 184, 0) 50%
+    ),
+    linear-gradient(
+      141.27deg,
+      rgba(0, 70, 209, 0) 50%,
+      rgba(0, 70, 209, 0.15) 100%
+    );
+  width: 100%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 98%, 0 100%);
+}
+.wapp{
+  padding-bottom: 100px;
+  background: linear-gradient(
+      38.73deg,
+      rgba(61, 0, 204, 0.15) 0%,
+      rgba(38, 32, 201, 0) 50%
+    ),
+    linear-gradient(
+      141.27deg,
+      rgba(209, 0, 188, 0) 50%,
+      rgba(209, 0, 167, 0.15) 100%
+    );
+  width: 100%;
+  clip-path: polygon(100% 0, 0 0, 0 100%, 70% 98%, 100% 100%);
+}
+
+.cut{
+  padding-bottom: 100px;
+  clip-path: polygon(100% 0, 0 0, 0 100%, 70% 98%, 100% 100%);
+}
+
+.bs {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
