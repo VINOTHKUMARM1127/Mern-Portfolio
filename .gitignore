@@ -26,3 +26,19 @@ dist-ssr
 
 # Environment files
 .env
+
+# Node modules
+node_modules/
+Frontend/node_modules/
+Backend/node_modules/
+
+# Build folders
+dist/
+Frontend/dist/
+
+# Env files
+Frontend/.env
+Backend/.env
+
+# Misc
+.DS_Store
