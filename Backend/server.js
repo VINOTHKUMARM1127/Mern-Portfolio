@@ -11,8 +11,11 @@ app.use(cors());
 
 connectdb();
 
+const educationRoute = require("./routes/educationRoute");
+app.use("/", educationRoute);
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.listen(8000, () => console.log("🚀 Server running on port 8000"));
+app.listen(5000, () => console.log("🚀 Server running on port 5000"));
