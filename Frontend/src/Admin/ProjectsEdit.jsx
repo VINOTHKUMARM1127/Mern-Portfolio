@@ -45,10 +45,10 @@ const ProjectsEdit = () => {
         await axios.put(
           `http://localhost:5000/update-projects/${editingId}`,
           formData,
-          form
+          {headers: { "Content-Type": "multipart/form-data" }}
         );
       } else {
-        await axios.post("http://localhost:5000/add-projects", formData);
+        await axios.post("http://localhost:5000/add-projects", formData,{headers: { "Content-Type": "multipart/form-data" }});
       }
       seteditingId(null);
       fetchProjectsData();
