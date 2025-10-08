@@ -17,6 +17,9 @@ connectdb();
 const educationRoute = require("./routes/educationRoute");
 app.use("/", educationRoute);
 
+const projectsRoute = require("./Routes/ProjectsRoute.js")
+app.use("/",projectsRoute)
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
