@@ -39,7 +39,11 @@ const ProjectsEdit = () => {
       formData.append("Github", form.Github);
       formData.append("Tech", form.Tech);
       formData.append("Year", form.Year);
-      if (form.Image) formData.append("Image", form.Image);
+      if (form.Image instanceof File) {
+        formData.append("Image", form.Image);
+      } else {
+        formData.append("Image", form.Image);
+      }
 
       if (editingId) {
         await axios.put(
@@ -52,6 +56,7 @@ const ProjectsEdit = () => {
           headers: { "Content-Type": "multipart/form-data" },
         });
       }
+      alert("Project Uploaded Successfully");
       seteditingId(null);
       fetchProjectsData();
       setForm({
@@ -65,6 +70,7 @@ const ProjectsEdit = () => {
       });
     } catch (err) {
       console.log(err);
+      alert("Project not Uploaded");
     }
   };
 
@@ -72,6 +78,7 @@ const ProjectsEdit = () => {
     try {
       await axios.delete(`http://localhost:5000/delete-projects/${id}`);
       fetchProjectsData();
+      alert("Project Deleted Successfully");
     } catch (err) {
       console.log(err);
     }
@@ -161,7 +168,7 @@ const ProjectsEdit = () => {
           {editingId ? "Update Projects" : "Add Projects"}
         </button>
       </form>
-      
+
       <ul className="space-y-2">
         {projectsData.map((pro) => (
           <li

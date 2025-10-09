@@ -3,12 +3,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 const connectdb = require("./db.js");
-const path = require('path');
 
 const app = express();
-
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 app.use(express.json());
 app.use(cors());
 
@@ -23,4 +19,5 @@ app.use("/",projectsRoute)
 const UserDataRoute = require("./Routes/UserDataRoute.js")
 app.use("/",UserDataRoute)
 
-app.listen(5000, () => console.log("🚀 Server running on port 5000"));
+app.listen(process.env.PORT, () => console.log("🚀 Server running on port 5000"));
+

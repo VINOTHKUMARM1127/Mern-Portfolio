@@ -10,7 +10,7 @@ const Header = () => {
   const HandleLogout = () => {
     localStorage.removeItem("loginVerify");
     localStorage.removeItem("loginExpiry");
-    window.location.href = "/login";
+    window.location.href = "/";
   };
   return (
     <section
