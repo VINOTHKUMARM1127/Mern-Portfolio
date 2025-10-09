@@ -20,8 +20,7 @@ app.use("/", educationRoute);
 const projectsRoute = require("./Routes/ProjectsRoute.js")
 app.use("/",projectsRoute)
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+const UserDataRoute = require("./Routes/UserDataRoute.js")
+app.use("/",UserDataRoute)
 
 app.listen(5000, () => console.log("🚀 Server running on port 5000"));
