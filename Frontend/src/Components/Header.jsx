@@ -19,8 +19,7 @@ const Header = () => {
     >
       <div className="w-[90%] lg:w-[85%] flex justify-between mx-auto my-0">
         <div
-          onClick={() => {
-            navigate("/login");
+          onClick={() => {loginVerify? navigate("/Edit-page"): navigate("/login");
           }}
           className="text-[1.5em] font-bold cursor-pointer"
         >
