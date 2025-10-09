@@ -45,10 +45,12 @@ const ProjectsEdit = () => {
         await axios.put(
           `http://localhost:5000/update-projects/${editingId}`,
           formData,
-          {headers: { "Content-Type": "multipart/form-data" }}
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
       } else {
-        await axios.post("http://localhost:5000/add-projects", formData,{headers: { "Content-Type": "multipart/form-data" }});
+        await axios.post("http://localhost:5000/add-projects", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
       }
       seteditingId(null);
       fetchProjectsData();
@@ -90,6 +92,7 @@ const ProjectsEdit = () => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   return (
     <section className="p-6 max-w-2xl mx-auto">
       <div>Projects Edit Page</div>
@@ -158,7 +161,7 @@ const ProjectsEdit = () => {
           {editingId ? "Update Projects" : "Add Projects"}
         </button>
       </form>
-
+      
       <ul className="space-y-2">
         {projectsData.map((pro) => (
           <li
@@ -168,7 +171,7 @@ const ProjectsEdit = () => {
             <div className="w-[70%]">
               {pro.Image && (
                 <img
-                  src={`http://localhost:5000/${pro.Image}`}
+                  src={pro.Image}
                   alt={pro.ProjectName}
                   className="w-32 h-20 object-cover"
                 />

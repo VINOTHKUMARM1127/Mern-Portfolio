@@ -6,7 +6,6 @@ import Main from '../Components/Main';
 import Skils from '../Components/Skils';
 import Education from '../Components/Education';
 import Projects from '../Components/Projects';
-import { Contactus } from '../Components/Contactus';
 
 const EditPage = () => {
     const navigate = useNavigate();
