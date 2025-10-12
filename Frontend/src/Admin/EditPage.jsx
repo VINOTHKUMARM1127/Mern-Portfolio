@@ -17,6 +17,14 @@ const EditPage = () => {
 
       <div>
         <ScrollProgress />
+                  <div
+            onClick={() => navigate("/Edit-Page/details")}
+            className="relative "
+          >
+            <div className="absolute top-[15px] lg:top-[30px] right-[5%] lg:right-[18%] z-10" >
+              <TbEdit className="text-[1.5em]  lg:text-[2em] mb-[2em]" />
+            </div>
+          </div>
         <div id="home">
           <Main />
         </div>
@@ -37,7 +45,7 @@ const EditPage = () => {
           </div>
         </div>
         <div className="wapp" id="projects">
-                    <div
+          <div
             onClick={() => navigate("/Edit-Page/Projects")}
             className="relative "
           >

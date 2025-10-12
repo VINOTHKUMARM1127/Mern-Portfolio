@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { projects } from "../Data";
 import Details from "./Details";
 import axios from "axios";
 
@@ -11,7 +10,6 @@ const Projects = () => {
     try {
       const response = await axios.get("http://localhost:5000/get-projects");
       SetProjectData(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }

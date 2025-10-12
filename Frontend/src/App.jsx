@@ -7,6 +7,7 @@ import EditPage from "./Admin/EditPage";
 import ProjectsEdit from "./Admin/ProjectsEdit";
 import EducationEdit from "./Admin/EducationEdit";
 import LoginCheck from "./Admin/LoginCheck";
+import DetailsEdit from "./Admin/DetailsEdit";
 
 const App = () => {
   const [loginVerify, setLoginVerify] = useState(false);
@@ -17,14 +18,11 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/login"
-            element={<Login/>}
-          />
+          <Route path="/login" element={<Login />} />
           <Route
             path="/Edit-Page"
             element={
-              <LoginCheck >
+              <LoginCheck>
                 <EditPage />
               </LoginCheck>
             }
@@ -32,7 +30,7 @@ const App = () => {
           <Route
             path="/Edit-Page/Projects"
             element={
-              <LoginCheck >
+              <LoginCheck>
                 <ProjectsEdit />
               </LoginCheck>
             }
@@ -40,8 +38,16 @@ const App = () => {
           <Route
             path="/Edit-Page/Education"
             element={
-              <LoginCheck >
+              <LoginCheck>
                 <EducationEdit />
+              </LoginCheck>
+            }
+          />
+          <Route
+            path="/Edit-Page/details"
+            element={
+              <LoginCheck>
+                <DetailsEdit />
               </LoginCheck>
             }
           />

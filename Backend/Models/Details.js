@@ -11,6 +11,6 @@ const Detailschema = new mongoose.Schema({
 })
 
 
-const Details = new mongoose.model("Detals", Detailschema)
+const Details = new mongoose.model("Details", Detailschema)
 
-module.expoerts = Details;
+module.exports = Details;
