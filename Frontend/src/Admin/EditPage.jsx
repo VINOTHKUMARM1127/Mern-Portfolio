@@ -29,6 +29,14 @@ const EditPage = () => {
           <Main />
         </div>
         <div className="wap">
+                    <div
+            onClick={() => navigate("/Edit-Page/skills")}
+            className="relative "
+          >
+            <div className="absolute top-[15px] lg:top-[30px] right-[5%] lg:right-[18%]" >
+              <TbEdit className="text-[1.5em]  lg:text-[2em] mb-[2em]" />
+            </div>
+          </div>
           <div id="skills">
             <Skils />
           </div>

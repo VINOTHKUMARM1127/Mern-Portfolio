@@ -35,7 +35,7 @@ const Details = ({ project, onClose }) => {
             {project.Year}
           </div>
 
-          <div className="py-3 flex gap-5 text-[0.9em] my-1 text-[#792bff]">
+          <div className="py-3 flex gap-5 flex-wrap text-[0.9em] my-1 text-[#792bff]">
             {project.Tech?.split(",").map((tech, idx) => (
               <div key={idx} className="bg-[#854ce61F] rounded-md px-2">
                 {tech}

@@ -8,6 +8,7 @@ import ProjectsEdit from "./Admin/ProjectsEdit";
 import EducationEdit from "./Admin/EducationEdit";
 import LoginCheck from "./Admin/LoginCheck";
 import DetailsEdit from "./Admin/DetailsEdit";
+import SkillsEdit from "./Admin/SkillsEdit";
 
 const App = () => {
   const [loginVerify, setLoginVerify] = useState(false);
@@ -48,6 +49,14 @@ const App = () => {
             element={
               <LoginCheck>
                 <DetailsEdit />
+              </LoginCheck>
+            }
+          />
+          <Route
+            path="/Edit-Page/skills"
+            element={
+              <LoginCheck>
+                <SkillsEdit />
               </LoginCheck>
             }
           />
