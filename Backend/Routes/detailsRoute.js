@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const axios = require("axios");
-const Details = require("../Models/Details");
+const Details = require("../Models/Details.js");
 require("dotenv").config();
 
 const upload = multer({ storage: multer.memoryStorage() });

@@ -5,6 +5,7 @@ const educationSchema = new mongoose.Schema({
   Degree: { type: String, required: true },
   Year: { type: String, required: true },
   Description: { type: String, required: true },
+  Order: {type: Number, required: true}
 });
 
 const Education = new mongoose.model("Education", educationSchema);

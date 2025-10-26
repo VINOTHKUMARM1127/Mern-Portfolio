@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const Education = require("../Models/Education");
+const Education = require("../Models/Education.js");
 
 router.post("/add-education", async (req, res) => {
   try {
-    const { CollegeName, Degree, Year, Description } = req.body;
+    const { CollegeName, Degree, Year, Description, Order } = req.body;
     const newEducation = new Education({
       CollegeName,
       Degree,
       Year,
       Description,
+      Order
     });
     await newEducation.save();
     res.status(200).json("Education Added");
@@ -38,12 +39,13 @@ router.delete("/delete-education/:id", async (req, res) => {
 
 router.put("/update-education/:id", async (req, res) => {
   try {
-    const { CollegeName, Degree, Year, Description } = req.body;
+    const { CollegeName, Degree, Year, Description, Order } = req.body;
     await Education.findByIdAndUpdate(req.params.id, {
       CollegeName,
       Degree,
       Year,
       Description,
+      Order
     });
     res.status(200).json("Education Updated");
   } catch (err) {

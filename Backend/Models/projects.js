@@ -9,6 +9,7 @@ const projectsSchema = new mongoose.Schema({
   Github: { type: String, required: true },
   Tech: { type: String, required: true },
   Year: { type: String, required: true },
+  Order: {type: Number, required: true}
 });
 
 const Projects = new mongoose.model("Projects", projectsSchema);

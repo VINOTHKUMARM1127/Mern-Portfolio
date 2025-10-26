@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const axios = require("axios");
-const Projects = require("../Models/Projects");
-require("dotenv").config(); // ✅ Ensure env vars loaded
+const Projects = require("../Models/Projects.js");
+require("dotenv").config(); 
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -18,7 +18,7 @@ router.get("/get-projects", async (req, res) => {
 
 router.post("/add-projects", upload.single("Image"), async (req, res) => {
   try {
-    const { ProjectName, Description, Link, Github, Tech, Year } = req.body;
+    const { ProjectName, Description, Link, Github, Tech, Year, Order } = req.body;
     let imageUrl = null;
     let deleteUrl = null;
 
@@ -45,6 +45,7 @@ router.post("/add-projects", upload.single("Image"), async (req, res) => {
       Github,
       Tech,
       Year,
+      Order
     });
 
     await newProjects.save();
@@ -71,7 +72,7 @@ router.delete("/delete-projects/:id", async (req, res) => {
 
 router.put("/update-projects/:id", upload.single("Image"), async (req, res) => {
   try {
-    const { ProjectName, Description, Link, Github, Tech, Year } = req.body;
+    const { ProjectName, Description, Link, Github, Tech, Year, Order } = req.body;
     const project = await Projects.findById(req.params.id);
     if (!project) return res.status(404).json({ message: "Project not found" });
 
@@ -108,6 +109,7 @@ router.put("/update-projects/:id", upload.single("Image"), async (req, res) => {
       Github,
       Tech,
       Year,
+      Order
     });
 
     res.status(200).json("Projects Updated");
