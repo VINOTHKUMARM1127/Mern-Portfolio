@@ -17,11 +17,11 @@ const UserDataRoute = require("./Routes/UserDataRoute.js");
 const detailsRoute = require("./Routes/detailsRoute.js");
 const SkillsRoute = require("./Routes/SkillsRoute.js");
 
-app.use("/", educationRoute);
-app.use("/", projectsRoute);
-app.use("/", UserDataRoute);
-app.use("/", detailsRoute);
-app.use("/", SkillsRoute);
+//app.use("/", educationRoute);
+//app.use("/", projectsRoute);
+//app.use("/", UserDataRoute);
+//app.use("/", detailsRoute);
+//app.use("/", SkillsRoute);
 
 app.listen(process.env.PORT || 5000, () =>
   console.log("🚀 Server running on port 5000")
