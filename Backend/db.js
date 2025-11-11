@@ -1,16 +1,15 @@
+// db.js
 const mongoose = require("mongoose");
 
 const connectdb = async () => {
-  if (mongoose.connection.readyState === 1) {
-    console.log("✅ MongoDB already connected");
-    return;
-  }
-
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("✅ MongoDB Connected Successfully");
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log("MongoDB Connected...");
   } catch (err) {
-    console.error("❌ MongoDB Connection Error:", err);
+    console.error("!!!!!!!!!! MONGODB CONNECTION FAILED !!!!!!!!!!");
+    console.error(err.message);
+    // Vercel la function crash aagurathukku intha log mukkiyam
+    process.exit(1); // Server ah stop panniru
   }
 };
 
