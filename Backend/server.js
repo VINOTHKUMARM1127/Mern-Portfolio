@@ -1,34 +1,17 @@
+// server.js
 const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-require("dotenv").config();
-const serverless = require("serverless-http");
-const connectdb = require("./db.js");
-
 const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
 app.use(express.json());
-app.use(cors());
 
-connectdb();
+// Basic route
+app.get("/", (req, res) => {
+  res.send("Hello, Server is running successfully!");
+});
 
-const educationRoute = require("./Routes/educationRoute.js");
-const projectsRoute = require("./Routes/ProjectsRoute.js");
-const UserDataRoute = require("./Routes/UserDataRoute.js");
-const detailsRoute = require("./Routes/detailsRoute.js");
-const SkillsRoute = require("./Routes/SkillsRoute.js");
-
-app.use("/", educationRoute);
-app.use("/", projectsRoute);
-app.use("/", UserDataRoute);
-app.use("/", detailsRoute);
-app.use("/", SkillsRoute);
-
-app.get("/", (req,res)=>{
-  res.send("Server Running")
-})
-app.listen(process.env.PORT || 5000, () =>
-  console.log("🚀 Server running on port 5000")
-);
-
-module.exports = app;
-module.exports.handler = serverless(app);
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
