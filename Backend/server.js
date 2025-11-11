@@ -23,6 +23,9 @@ app.use("/", UserDataRoute);
 app.use("/", detailsRoute);
 app.use("/", SkillsRoute);
 
+app.get("/", (req,res)=>{
+  res.send("Server Running")
+})
 app.listen(process.env.PORT || 5000, () =>
   console.log("🚀 Server running on port 5000")
 );
