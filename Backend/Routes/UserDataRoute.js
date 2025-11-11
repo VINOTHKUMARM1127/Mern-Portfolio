@@ -5,7 +5,7 @@ const User = require("../Models/Userdata.js");
 router.get("/get-user", async (req, res) => {
   try {
     const SecretKey = process.env.SecretKey;
-    if (req.query.key !== SecretKey) {
+    if (req.query.key !== 'Developer@123') {
       return res.status(401).json({ error: "Unauthorized Access" });
     }
 
