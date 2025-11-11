@@ -9,31 +9,34 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// ✅ connect once
-if (mongoose.connection.readyState === 0) {
-  connectdb();
-}
+// --- CHANGE PANNA IDAM ---
+// Intha async wrapper ah remove panniru.
+// Just `connectdb()` nu call pannu. Mongoose buffering paathukkum.
+connectdb();
 
-// ✅ import routes
+// --- All Routes ---
 const educationRoute = require("./Routes/educationRoute.js");
 const projectsRoute = require("./Routes/ProjectsRoute.js");
 const Userdataroute = require("./Routes/UserDataRoute.js");
 const detailsRoute = require("./Routes/detailsRoute.js");
 const SkillsRoute = require("./Routes/SkillsRoute.js");
 
-// ✅ use routes
-app.use("/api", educationRoute);
-app.use("/api", projectsRoute);
-app.use("/api", Userdataroute);
-app.use("/api", detailsRoute);
-app.use("/api", SkillsRoute);
+app.use("/", educationRoute);
+app.use("/", projectsRoute);
+app.use("/", Userdataroute);
+app.use("/", detailsRoute);
+app.use("/", SkillsRoute);
 
-// ✅ default route
 app.get("/", (req, res) => {
-  res.send("🚀 Server Running Successfully!");
+  res.send("Server Running");
 });
 
-// ❌ remove app.listen()
-// ✅ export handler for Vercel
-module.exports = app;
+// `app.listen` local development ku mattum thaan.
+// Vercel itha use pannathu. Athanaala itha ippadiye vechikalam.
+app.listen(process.env.PORT || 5000, () =>
+  console.log("🚀 Server running on port 5000")
+);
+
+// --- CHANGE PANNA IDAM ---
+// Rendu `module.exports` venaam. Ith pathum.
 module.exports.handler = serverless(app);
