@@ -6,12 +6,14 @@ router.get("/get-user", async (req, res) => {
   try {
     const SecretKey = process.env.SecretKey;
     if (req.query.key !== SecretKey) {
-      return res.status(401).json({error:"Unauthorized Access"});
+      return res.status(401).json({ error: "Unauthorized Access" });
     }
+
     const UserList = await User.find();
     res.status(200).json(UserList);
   } catch (err) {
-    res.status(400).json(err);
+    console.error("Get User Error:", err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
