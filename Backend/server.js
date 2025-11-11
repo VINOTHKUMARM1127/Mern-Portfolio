@@ -9,29 +9,31 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-(async () => {
-  await connectdb();
-})();
+// ✅ connect once
+if (mongoose.connection.readyState === 0) {
+  connectdb();
+}
 
-
-//const educationRoute = require("./Routes/educationRoute.js");
-//const projectsRoute = require("./Routes/ProjectsRoute.js");
+// ✅ import routes
+const educationRoute = require("./Routes/educationRoute.js");
+const projectsRoute = require("./Routes/ProjectsRoute.js");
 const Userdataroute = require("./Routes/UserDataRoute.js");
 const detailsRoute = require("./Routes/detailsRoute.js");
 const SkillsRoute = require("./Routes/SkillsRoute.js");
 
-//app.use("/", educationRoute);
-//app.use("/", projectsRoute);
-app.use("/", Userdataroute);
-app.use("/", detailsRoute);
-app.use("/", SkillsRoute);
+// ✅ use routes
+app.use("/api", educationRoute);
+app.use("/api", projectsRoute);
+app.use("/api", Userdataroute);
+app.use("/api", detailsRoute);
+app.use("/api", SkillsRoute);
 
-app.get("/", (req,res)=>{
-  res.send("Server Running")
-})
-app.listen(process.env.PORT || 5000, () =>
-  console.log("🚀 Server running on port 5000")
-);
+// ✅ default route
+app.get("/", (req, res) => {
+  res.send("🚀 Server Running Successfully!");
+});
 
+// ❌ remove app.listen()
+// ✅ export handler for Vercel
 module.exports = app;
 module.exports.handler = serverless(app);
