@@ -12,21 +12,20 @@ app.use(cors());
 connectdb();
 
 const educationRoute = require("./Routes/educationRoute.js");
+const projectsRoute = require("./Routes/ProjectsRoute.js");
+const UserDataRoute = require("./Routes/UserDataRoute.js");
+const detailsRoute = require("./Routes/detailsRoute.js");
+const SkillsRoute = require("./Routes/SkillsRoute.js");
+
 app.use("/", educationRoute);
+app.use("/", projectsRoute);
+app.use("/", UserDataRoute);
+app.use("/", detailsRoute);
+app.use("/", SkillsRoute);
 
-const projectsRoute = require("./Routes/ProjectsRoute.js")
-app.use("/",projectsRoute)
-
-const UserDataRoute = require("./Routes/UserDataRoute.js")
-app.use("/",UserDataRoute)
-
-const detailsRoute = require("./Routes/detailsRoute.js")
-app.use("/",detailsRoute)
-
-const SkillsRoute = require("./Routes/SkillsRoute.js")
-app.use("/",SkillsRoute)
-
-//app.listen(process.env.PORT, () => console.log("🚀 Server running on port 5000"));
+app.listen(process.env.PORT || 5000, () =>
+  console.log("🚀 Server running on port 5000")
+);
 
 module.exports = app;
 module.exports.handler = serverless(app);
