@@ -37,6 +37,4 @@ app.listen(process.env.PORT || 5000, () =>
   console.log("🚀 Server running on port 5000")
 );
 
-// --- CHANGE PANNA IDAM ---
-// Rendu `module.exports` venaam. Ith pathum.
 module.exports.handler = serverless(app);

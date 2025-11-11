@@ -1,4 +1,4 @@
-// db.js
+
 const mongoose = require("mongoose");
 
 const connectdb = async () => {
@@ -8,8 +8,7 @@ const connectdb = async () => {
   } catch (err) {
     console.error("!!!!!!!!!! MONGODB CONNECTION FAILED !!!!!!!!!!");
     console.error(err.message);
-    // Vercel la function crash aagurathukku intha log mukkiyam
-    process.exit(1); // Server ah stop panniru
+    process.exit(1); 
   }
 };
 
