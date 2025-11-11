@@ -15,13 +15,13 @@ connectdb();
 //const projectsRoute = require("./Routes/ProjectsRoute.js");
 //const UserDataRoute = require("./Routes/UserDataRoute.js");
 const detailsRoute = require("./Routes/detailsRoute.js");
-//const SkillsRoute = require("./Routes/SkillsRoute.js");
+const SkillsRoute = require("./Routes/SkillsRoute.js");
 
 //app.use("/", educationRoute);
 //app.use("/", projectsRoute);
 //app.use("/", UserDataRoute);
 app.use("/", detailsRoute);
-//app.use("/", SkillsRoute);*/
+app.use("/", SkillsRoute);
 
 app.get("/", (req,res)=>{
   res.send("Server Running")
