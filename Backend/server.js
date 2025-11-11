@@ -9,7 +9,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-connectdb();
+(async () => {
+  await connectdb();
+})();
+
 
 //const educationRoute = require("./Routes/educationRoute.js");
 //const projectsRoute = require("./Routes/ProjectsRoute.js");
