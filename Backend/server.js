@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 
 
 app.listen(process.env.PORT || 5000, () =>
-  console.log("🚀 Server running on port 5000")
+  console.log("Server running on port 5000")
 );
 
 module.exports.handler = serverless(app);
