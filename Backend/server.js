@@ -17,7 +17,7 @@ const userRoute = require("./Routes/userRoute.js");
 const detailsRoute = require("./Routes/detailsRoute.js");
 const SkillsRoute = require("./Routes/SkillsRoute.js");
 
-/*app.use("/", educationRoute);*/
+//app.use("/", educationRoute);
 app.use("/", projectsRoute);
 app.use("/", userRoute);
 app.use("/", detailsRoute);
