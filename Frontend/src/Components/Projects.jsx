@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Details from "./Details";
 import axios from "axios";
 import Dummy from "../assets/dummypic.jpg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -69,9 +71,10 @@ const Projects = () => {
                   onClick={() => click(item)}
                   className="border border-[#1f1f1f] bg-[#171721] rounded-xl py-4 px-2 mx-auto my-0 opacity-80 shadow-[0_0_6px_#1f1f1f] mb-8 hover:bs hover:scale-105"
                 >
-                  <img
+                  <LazyLoadImage
                     src={item.Image}
-                    alt=""
+                    alt="Item"
+                    effect="blur"
                     className="rounded-lg overflow-hidden min-h-[180px] min-w-[220px] px-1 mb-2"
                   />
                   <div className="px-2 py-1 flex gap-3 text-[0.8em] my-1 text-[#9557ff]">
