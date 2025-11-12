@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../index.css";
 import axios from "axios";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Main = () => {
   const [Details, setDetails] = useState([]);
@@ -16,7 +18,7 @@ const Main = () => {
     } catch (err) {
       console.log(err);
       setLoading(false);
-    } 
+    }
   };
 
   useEffect(() => {
@@ -74,8 +76,10 @@ const Main = () => {
             </div>
 
             <div>
-              <img
+              <LazyLoadImage
                 src={item.Image}
+                alt="Item"
+                effect="blur"
                 className="w-[300px] md:w-[350px] min-h-[300px] md:min-h-[350px] rounded-full border-2 border-violet-600 mt-5 md:mt-0  shadow-[0_0_40px_purple]"
               />
             </div>
