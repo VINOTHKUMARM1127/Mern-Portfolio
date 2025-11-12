@@ -1,7 +1,6 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-scroll";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ const Header = () => {
     } else {
       document.body.style.overflow = "auto";
     }
-  },[menuopen]);
+  }, [menuopen]);
   return (
     <section
       className="bg-[#171721] z-40 lg:px-[100px] 
@@ -42,70 +41,58 @@ const Header = () => {
               menuopen ? "flex" : "hidden"
             } z-10 flex-col lg:flex-row lg:flex text-center cursor-pointer text-[1em] absolute top-[0] right-[0] lg:pt-0 pt-[100px] w-[80%] lg:min-h-full min-h-screen bg-[#191924] lg:static lg:w-auto lg:bg-transparent px-5 py-1 gap-7 lg:gap-3`}
           >
-            <Link
+            <a
+              href="#home"
               onClick={() => {
                 navigate("/");
                 setMenuopen(false);
               }}
-              to="home"
-              smooth={true}
-              duration={500}
-              offset={-80}
               className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
             >
               About
-            </Link>
-            <Link
+            </a>
+            <a
+              href="#skills"
               onClick={() => {
                 navigate("/");
                 setMenuopen(false);
               }}
-              to="skills"
-              smooth={true}
-              duration={500}
-              offset={-80}
               className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
             >
               Skills
-            </Link>
-            <Link
+            </a>
+            <a
+              href="#education"
               onClick={() => {
                 navigate("/");
                 setMenuopen(false);
               }}
-              to="education"
-              smooth={true}
-              duration={500}
-              offset={-80}
               className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
             >
               Education
-            </Link>
-            <Link
+            </a>
+            <a
+              href="#projects"
               onClick={() => {
                 navigate("/");
                 setMenuopen(false);
               }}
-              to="projects"
-              smooth={true}
-              duration={500}
-              offset={-80}
               className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
             >
               Projects
-            </Link>
+            </a>
 
             <div className="lg:hidden block py-1 w-2/4 mx-auto">
               {!loginVerify ? (
-                <div
+                <a
+                  href="https://github.com/VINOTHKUMARM1127"
+                  className="mx-0 my-auto border-[2px] border-none lg:border-[#6536ff] px-6 py-0 rounded-full text-[#ffffffee] hover:bg-violet-600 hover:text-white"
                   onClick={() => {
-                    window.open("https://github.com/VINOTHKUMARM1127");
                     setMenuopen(false);
                   }}
-                  className="mx-0 my-auto border-[2px] border-none lg:border-[#6536ff] px-6 py-2 rounded-full text-[#ffffffee] hover:bg-violet-600 hover:text-white"
                 >
                   Github
-                </div>
+                </a>
               ) : (
                 <div
                   onClick={HandleLogout}
@@ -121,7 +108,7 @@ const Header = () => {
           {!loginVerify ? (
             <a
               href="https://github.com/VINOTHKUMARM1127"
-              className="mx-0 my-auto border-[2px] border-[#6536ff] px-6 py-2 rounded-full text-[#ffffffee] hover:bg-violet-600 hover:text-white"
+              className="text-[1.1em] cursor-pointer border-[2px] border-[#6536ff] px-6 py-2 rounded-full text-[#ffffffee] hover:bg-violet-600 hover:text-white"
             >
               Github
             </a>

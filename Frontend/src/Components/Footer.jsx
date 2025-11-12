@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-scroll'
 
 const Footer = () => {
   return (
@@ -7,10 +6,10 @@ const Footer = () => {
         <div className='w-[90vw] text-center'>
       <div className='text-[1.4em] mt-5'>Vinoth Kumar M</div>
       <div>
-        <Link to='home' smooth={true} duration={500} offset={-80} className='block my-[1em] hover:text-violet-600'>About</Link>
-        <Link to='skills' smooth={true} duration={500} offset={-80} className='block my-[1em] hover:text-violet-600'>Skills</Link>
-        <Link to='education' smooth={true} duration={500} offset={-80} className='block my-[1em] hover:text-violet-600'>Education</Link>
-        <Link to='projects' smooth={true} duration={500} offset={-80} className='block my-[1em] hover:text-violet-600'>Projects</Link>
+        <a className='block my-[1em] hover:text-violet-600' href="#home">About</a>
+        <a className='block my-[1em] hover:text-violet-600' href="#skills">Skills</a>
+        <a className='block my-[1em] hover:text-violet-600' href="#education">Education</a>
+        <a className='block my-[1em] hover:text-violet-600' href="#projects">Projects</a>
       </div>
       </div>
     </div>
