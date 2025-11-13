@@ -32,7 +32,7 @@ router.post("/add-projects", upload.single("Image"), async (req, res) => {
         imageUrl = response.data?.data?.url || null;
         deleteUrl = response.data.data.delete_url || null;
       } catch (uploadErr) {
-        console.error("IMGBB Upload Error:", uploadErr.message);
+        res.status(500).json(uploadErr.message);
       }
     }
 
@@ -51,7 +51,6 @@ router.post("/add-projects", upload.single("Image"), async (req, res) => {
     await newProjects.save();
     res.status(200).json("Projects Added");
   } catch (err) {
-    console.error(err);
     res.status(400).json(err);
   }
 });
@@ -65,7 +64,6 @@ router.delete("/delete-projects/:id", async (req, res) => {
     await Projects.findByIdAndDelete(req.params.id);
     res.status(200).json("Projects Deleted");
   } catch (err) {
-    console.error(err);
     res.status(400).json(err);
   }
 });
@@ -85,7 +83,7 @@ router.put("/update-projects/:id", upload.single("Image"), async (req, res) => {
           try {
             await axios.get(project.DeleteUrl);
           } catch (err) {
-            console.error("Old IMGBB Delete Error:", err.message);
+            res.status(500).json(err.message);
           }
         }
         const imageBase64 = req.file.buffer.toString("base64");
@@ -96,7 +94,7 @@ router.put("/update-projects/:id", upload.single("Image"), async (req, res) => {
         imageUrl = response.data?.data?.url || imageUrl;
         deleteUrl = response.data?.data?.delete_url || deleteUrl;
       } catch (uploadErr) {
-        console.error("IMGBB Upload Error:", uploadErr.message);
+        res.status(500).json(uploadErr.message);
       }
     }
 
@@ -114,7 +112,6 @@ router.put("/update-projects/:id", upload.single("Image"), async (req, res) => {
 
     res.status(200).json("Projects Updated");
   } catch (err) {
-    console.error(err);
     res.status(400).json(err);
   }
 });

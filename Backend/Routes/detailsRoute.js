@@ -24,7 +24,7 @@ router.post("/add-details", upload.single("Image"), async (req, res) => {
         imageUrl = response.data?.data?.url || null;
         deleteUrl = response.data.data.delete_url || null;
       } catch (uploadErr) {
-        console.error("IMGBB Upload Error:", uploadErr.message);
+        res.status(500).json(uploadErr.message);
       }
     }
 
@@ -80,7 +80,7 @@ router.put("/update-details/:id",upload.single("Image"),async (req,res)=>{
               imageUrl = response.data?.data?.url || imageUrl;
               deleteUrl = response.data?.data?.delete_url || deleteUrl;
             } catch (uploadErr) {
-              console.error("IMGBB Upload Error:", uploadErr.message);
+              res.status(500).json(uploadErr.message);
             }
           }
 
