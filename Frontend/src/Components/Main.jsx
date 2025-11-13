@@ -67,13 +67,14 @@ const Main = () => {
               <div className="text-[1em] md:text-[1.3em] opacity-70 mt-3 text-justify">
                 {item.Description}
               </div>
-              <a
-                className="text-[1.1em] bg-gradient-to-r from-purple-700 to-blue-700 w-fit px-8 py-4 rounded-lg mx-auto lg:mx-0 my-6 cursor-pointer hover:scale-105 "
-                href={item.ResumeLink}
-              >
-                Check Resume
-              </a>
-              
+              <div className="mt-5">
+                <a
+                  className="text-[1.1em] bg-gradient-to-r from-purple-700 to-blue-700 w-fit px-8 py-4 rounded-lg mx-auto lg:mx-0 my-6 cursor-pointer hover:scale-105 "
+                  href={item.ResumeLink}
+                >
+                  Check Resume
+                </a>
+              </div>
             </div>
 
             <div>
