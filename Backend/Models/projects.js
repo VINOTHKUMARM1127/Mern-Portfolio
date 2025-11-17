@@ -5,11 +5,11 @@ const projectsSchema = new mongoose.Schema({
   Description: { type: String, required: true },
   Link: { type: String, required: true },
   Image: { type: String, required: true },
-  DeleteUrl: { type: String },
+  PublicId: { type: String, required: true },
   Github: { type: String, required: true },
   Tech: { type: String, required: true },
   Year: { type: String, required: true },
-  Order: {type: Number, required: true}
+  Order: { type: Number, required: true },
 });
 
 const Projects = new mongoose.model("Projects", projectsSchema);

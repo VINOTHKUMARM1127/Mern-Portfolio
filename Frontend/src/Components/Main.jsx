@@ -82,7 +82,7 @@ const Main = () => {
                 src={item.Image}
                 alt="Item"
                 effect="blur"
-                className="w-[300px] md:w-[350px] min-h-[300px] md:min-h-[350px] rounded-full border-2 border-violet-600 mt-5 md:mt-0  shadow-[0_0_40px_purple]"
+                className="w-[300px] h-[300px] object-cover md:w-[350px] min-h-[300px] md:min-h-[350px] rounded-full border-2 border-violet-600 mt-5 md:mt-0  shadow-[0_0_40px_purple]"
               />
             </div>
           </div>

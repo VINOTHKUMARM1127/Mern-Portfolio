@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Details = ({ project, onClose }) => {
   useEffect(() => {
@@ -22,9 +24,10 @@ const Details = ({ project, onClose }) => {
           ✕
         </button>
         <div className="p-4">
-          <img
+          <LazyLoadImage
             src={project.Image}
-            alt=""
+            alt="Item"
+            effect="blur"
             className="max-h-[90%] rounded-lg mx-auto my-0 mb-2"
           />
 

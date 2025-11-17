@@ -6,6 +6,8 @@ import Details from "../Components/Details";
 import PopUp from "../Components/PopUp";
 
 const ProjectsEdit = () => {
+  const [loading, setLoading] = useState(false);
+
   const [projectsData, setprojectsData] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [popup, setPopup] = useState(false);
@@ -39,6 +41,8 @@ const ProjectsEdit = () => {
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // START LOADING
+
     try {
       const formData = new FormData();
       formData.append("ProjectName", form.ProjectName);
@@ -48,9 +52,8 @@ const ProjectsEdit = () => {
       formData.append("Tech", form.Tech);
       formData.append("Year", form.Year);
       formData.append("Order", form.Order);
+
       if (form.Image instanceof File) {
-        formData.append("Image", form.Image);
-      } else {
         formData.append("Image", form.Image);
       }
 
@@ -64,14 +67,14 @@ const ProjectsEdit = () => {
         await axios.post(
           `${import.meta.env.VITE_BACKEND_URL}/add-projects`,
           formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          }
+          { headers: { "Content-Type": "multipart/form-data" } }
         );
       }
+
       shoowMsg("Project Uploaded Successfully");
       seteditingId(null);
       fetchProjectsData();
+
       setForm({
         ProjectName: "",
         Description: "",
@@ -82,8 +85,11 @@ const ProjectsEdit = () => {
         Year: "",
         Order: "",
       });
+      document.querySelector('input[name="Image"]').value = "";
     } catch (err) {
       shoowMsg("Project not Uploaded");
+    } finally {
+      setLoading(false); // STOP LOADING
     }
   };
 
@@ -98,6 +104,13 @@ const ProjectsEdit = () => {
       shoowMsg(err);
     }
   };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const HandleEdit = (item) => {
     setForm({
       ProjectName: item.ProjectName,
@@ -110,6 +123,7 @@ const ProjectsEdit = () => {
       Order: item.Order,
     });
     seteditingId(item._id);
+    scrollToTop();
   };
 
   const handleChange = (e) => {
@@ -130,6 +144,12 @@ const ProjectsEdit = () => {
 
   return (
     <div>
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/50 z-50">
+          <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
+
       {popup && <PopUp msg={msg} />}
       <section className="p-6 max-w-2xl mx-auto">
         <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">

@@ -5,6 +5,7 @@ import PopUp from "../Components/PopUp";
 
 const SkillsEdit = () => {
   const [skillsData, setskillsData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState(false);
   const [msg, setMsg] = useState("");
   const [form, setform] = useState({
@@ -32,7 +33,7 @@ const SkillsEdit = () => {
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const existingOrder = skillsData.find(
       (skill) =>
         Number(skill.Order) === Number(form.Order) &&
@@ -41,6 +42,7 @@ const SkillsEdit = () => {
 
     if (existingOrder) {
       shoowMsg("Order Already Exists");
+      setLoading(false)
       return;
     }
     try {
@@ -62,6 +64,8 @@ const SkillsEdit = () => {
       setform({ Skill: "", Icon: "", Category: "", Order: "" });
     } catch (err) {
       shoowMsg(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -77,6 +81,13 @@ const SkillsEdit = () => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const HandleEdit = (item) => {
     setform({
       Skill: item.Skill,
@@ -85,6 +96,7 @@ const SkillsEdit = () => {
       Order: item.Order,
     });
     seteditingId(item._id);
+    scrollToTop();
   };
 
   const handleChange = (e) => {
@@ -103,6 +115,11 @@ const SkillsEdit = () => {
 
   return (
     <div>
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/50 z-50">
+          <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
       {popup && <PopUp msg={msg} />}
       <section className="p-6 max-w-2xl mx-auto">
         <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">

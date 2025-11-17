@@ -3,6 +3,7 @@ import axios from "axios";
 import PopUp from "../Components/PopUp";
 
 const educationEdit = () => {
+  const [loading, setLoading] = useState(false);
   const [educationData, seteducationData] = useState([]);
   const [popup, setPopup] = useState(false);
   const [msg, setMsg] = useState("");
@@ -31,6 +32,7 @@ const educationEdit = () => {
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       if (editingId) {
         await axios.put(
@@ -56,6 +58,8 @@ const educationEdit = () => {
       });
     } catch (err) {
       shoowMsg(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,6 +75,12 @@ const educationEdit = () => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   const HandleEdit = (item) => {
     setform({
       CollegeName: item.CollegeName,
@@ -80,6 +90,7 @@ const educationEdit = () => {
       Order: item.Order,
     });
     seteditingId(item._id);
+    scrollToTop();
   };
 
   const handleChange = (e) => {
@@ -96,6 +107,11 @@ const educationEdit = () => {
 
   return (
     <div>
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/50 z-50">
+          <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
       {popup && <PopUp msg={msg} />}
       <section className="p-6 max-w-2xl mx-auto">
         <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">

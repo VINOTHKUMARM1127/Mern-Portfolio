@@ -1,7 +1,7 @@
 
 A **dynamic portfolio web application** built with the **MERN stack** (MongoDB, Express.js, React.js, Node.js), allowing the **admin** to manage portfolio data such as **education, skills, and projects** in real-time.
 
-**Live Demo:** [https://vinothkumarm27.netlify.app/](#)
+**Live Demo:** [https://vinothkumarm27.vercel.app/](#)
 
 ---
 

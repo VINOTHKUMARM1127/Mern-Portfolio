@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-const axios = require("axios");
 const Projects = require("../Models/projects.js");
-require("dotenv").config(); 
-
-const upload = multer({ storage: multer.memoryStorage() });
+require("dotenv").config();
+const upload = require("../config/multer.js");
+const cloudinary = require("../config/cloudinary.js");
 
 router.get("/get-projects", async (req, res) => {
   try {
@@ -18,22 +16,18 @@ router.get("/get-projects", async (req, res) => {
 
 router.post("/add-projects", upload.single("Image"), async (req, res) => {
   try {
-    const { ProjectName, Description, Link, Github, Tech, Year, Order } = req.body;
+    const { ProjectName, Description, Link, Github, Tech, Year, Order } =
+      req.body;
     let imageUrl = null;
-    let deleteUrl = null;
+    let publicId = null;
 
     if (req.file) {
-      try {
-        const imageBase64 = req.file.buffer.toString("base64");
-        const response = await axios.post(
-          `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_API_KEY}`,
-          new URLSearchParams({ image: imageBase64 })
-        );
-        imageUrl = response.data?.data?.url || null;
-        deleteUrl = response.data.data.delete_url || null;
-      } catch (uploadErr) {
-        res.status(500).json(uploadErr.message);
-      }
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "project_details",
+      });
+
+      imageUrl = result.secure_url;
+      publicId = result.public_id;
     }
 
     const newProjects = new Projects({
@@ -41,11 +35,11 @@ router.post("/add-projects", upload.single("Image"), async (req, res) => {
       Description,
       Link,
       Image: imageUrl,
-      DeleteUrl: deleteUrl,
+      PublicId: publicId,
       Github,
       Tech,
       Year,
-      Order
+      Order,
     });
 
     await newProjects.save();
@@ -58,8 +52,9 @@ router.post("/add-projects", upload.single("Image"), async (req, res) => {
 router.delete("/delete-projects/:id", async (req, res) => {
   try {
     const project = await Projects.findById(req.params.id);
-    if (project.DeleteUrl) {
-      await axios.get(project.DeleteUrl);
+    if (!project) return res.status(404).json("Project not found");
+    if (project.PublicId) {
+      await cloudinary.uploader.destroy(project.PublicId);
     }
     await Projects.findByIdAndDelete(req.params.id);
     res.status(200).json("Projects Deleted");
@@ -70,45 +65,42 @@ router.delete("/delete-projects/:id", async (req, res) => {
 
 router.put("/update-projects/:id", upload.single("Image"), async (req, res) => {
   try {
-    const { ProjectName, Description, Link, Github, Tech, Year, Order } = req.body;
+    const { ProjectName, Description, Link, Github, Tech, Year, Order } =
+      req.body;
     const project = await Projects.findById(req.params.id);
     if (!project) return res.status(404).json({ message: "Project not found" });
 
     let imageUrl = project.Image;
-    let deleteUrl = project.DeleteUrl;
+    let publicId = project.PublicId;
 
     if (req.file) {
-      try {
-        if (project.DeleteUrl) {
-          try {
-            await axios.get(project.DeleteUrl);
-          } catch (err) {
-            res.status(500).json(err.message);
-          }
-        }
-        const imageBase64 = req.file.buffer.toString("base64");
-        const response = await axios.post(
-          `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_API_KEY}`,
-          new URLSearchParams({ image: imageBase64 })
-        );
-        imageUrl = response.data?.data?.url || imageUrl;
-        deleteUrl = response.data?.data?.delete_url || deleteUrl;
-      } catch (uploadErr) {
-        res.status(500).json(uploadErr.message);
+      if (publicId) {
+        await cloudinary.uploader.destroy(publicId);
       }
+
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "project_details",
+      });
+
+      imageUrl = result.secure_url;
+      publicId = result.public_id;
     }
 
-    await Projects.findByIdAndUpdate(req.params.id, {
-      ProjectName,
-      Description,
-      Link,
-      Image: imageUrl,
-      DeleteUrl: deleteUrl,
-      Github,
-      Tech,
-      Year,
-      Order
-    });
+    await Projects.findByIdAndUpdate(
+      req.params.id,
+      {
+        ProjectName,
+        Description,
+        Link,
+        Image: imageUrl,
+        PublicId: publicId,
+        Github,
+        Tech,
+        Year,
+        Order,
+      },
+      { new: true }
+    );
 
     res.status(200).json("Projects Updated");
   } catch (err) {

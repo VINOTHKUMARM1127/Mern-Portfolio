@@ -3,8 +3,11 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Await } from "react-router-dom";
 import PopUp from "../Components/PopUp";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const DetailsEdit = () => {
+  const [loading, setLoading] = useState(false);
   const [detailsData, setdetailsData] = useState([]);
   const [popup, setPopup] = useState(false);
   const [msg, setMsg] = useState("");
@@ -41,6 +44,7 @@ const DetailsEdit = () => {
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append("Greetings", form.Greetings);
@@ -49,8 +53,6 @@ const DetailsEdit = () => {
       formData.append("Description", form.Description);
       formData.append("ResumeLink", form.ResumeLink);
       if (form.Image instanceof File) {
-        formData.append("Image", form.Image);
-      } else {
         formData.append("Image", form.Image);
       }
       await axios.put(
@@ -72,6 +74,8 @@ const DetailsEdit = () => {
     } catch (err) {
       console.log(err);
       shoowMsg("Detail not Uploaded");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,6 +105,11 @@ const DetailsEdit = () => {
 
   return (
     <div className="wapp">
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/50 z-50">
+          <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
       {popup && <PopUp msg={msg} />}
       <section className="p-6 max-w-2xl mx-auto">
         <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">
@@ -184,7 +193,7 @@ const DetailsEdit = () => {
                 {item.Description}
               </div>
               <div
-                onClick={() => window.open("item.ResumeLink")}
+                onClick={() => window.open(item.ResumeLink)}
                 className="text-[1.1em] bg-gradient-to-r from-purple-700 to-blue-700 w-fit px-8 py-4 rounded-lg mx-auto lg:mx-0 my-6 cursor-pointer hover:scale-105 "
               >
                 Check Resume
@@ -192,9 +201,11 @@ const DetailsEdit = () => {
             </div>
 
             <div className="mx-4">
-              <img
+              <LazyLoadImage
                 src={item.Image}
-                className="w-[300px] md:w-[350px] min-h-[300px] md:min-h-[350px] rounded-full border-2 border-violet-600 mt-5 md:mt-0  shadow-[0_0_40px_purple]"
+                alt="Item"
+                effect="blur"
+                className="w-[300px] h-[300px] object-cover md:w-[350px] min-h-[300px] md:min-h-[350px] rounded-full border-2 border-violet-600 mt-5 md:mt-0  shadow-[0_0_40px_purple]"
               />
             </div>
           </div>
