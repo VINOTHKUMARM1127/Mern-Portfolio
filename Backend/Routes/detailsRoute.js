@@ -11,14 +11,20 @@ router.post("/add-details", upload.single("Image"), async (req, res) => {
     let imageUrl = null;
     let deleteUrl = null;
 
-    if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "portfolio_details",
-      });
+if (req.file) {
+  const result = await cloudinary.uploader.upload(req.file.path, {
+    folder: "portfolio_details",
+    transformation: [
+      { width: 800, crop: "limit" },
+      { quality: "auto" },
+      { fetch_format: "auto" }
+    ]
+  });
 
-      imageUrl = result.secure_url;
-      publicId = result.public_id;
-    }
+  imageUrl = result.secure_url;
+  publicId = result.public_id;
+}
+
 
     const newDetails = new Details({
       Greetings,
@@ -54,18 +60,24 @@ router.put("/update-details/:id", upload.single("Image"), async (req, res) => {
     let imageUrl = detail.Image;
     let publicId = detail.PublicId;
 
-    if (req.file) {
-      if (publicId) {
-        await cloudinary.uploader.destroy(publicId);
-      }
+if (req.file) {
+  if (publicId) {
+    await cloudinary.uploader.destroy(publicId);
+  }
 
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "portfolio_details",
-      });
+  const result = await cloudinary.uploader.upload(req.file.path, {
+    folder: "portfolio_details",
+    transformation: [
+      { width: 800, crop: "limit" },
+      { quality: "auto" },
+      { fetch_format: "auto" }
+    ]
+  });
 
-      imageUrl = result.secure_url;
-      publicId = result.public_id;
-    }
+  imageUrl = result.secure_url;
+  publicId = result.public_id;
+}
+
 
     await Details.findByIdAndUpdate(req.params.id, {
       Greetings,

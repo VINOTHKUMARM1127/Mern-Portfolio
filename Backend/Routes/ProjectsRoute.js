@@ -24,6 +24,11 @@ router.post("/add-projects", upload.single("Image"), async (req, res) => {
     if (req.file) {
       const result = await cloudinary.uploader.upload(req.file.path, {
         folder: "project_details",
+        transformation: [
+      { width: 800, crop: "limit" },
+      { quality: "auto" },
+      { fetch_format: "auto" }
+    ]
       });
 
       imageUrl = result.secure_url;
@@ -80,6 +85,11 @@ router.put("/update-projects/:id", upload.single("Image"), async (req, res) => {
 
       const result = await cloudinary.uploader.upload(req.file.path, {
         folder: "project_details",
+        transformation: [
+          { width: 800, crop: "limit" },
+          { quality: "auto" },
+          { fetch_format: "auto" },
+        ],
       });
 
       imageUrl = result.secure_url;

@@ -2,11 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/src/assets/icon.png" />
+    <link rel="icon" type="image/png" href="/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Vinoth Kumar M - MERN Developer Portfolio</title>
-
 
     <meta
       name="description"
@@ -19,8 +18,9 @@
     <meta name="author" content="Vinoth Kumar M" />
     <meta name="theme-color" content="#7c3aed" />
 
-
     <link rel="canonical" href="https://vinothkumarm27.vercel.app/" />
+
+    <!-- Preconnect -->
     <link
       rel="preconnect"
       href="https://vinothkumarm27backend.vercel.app"
@@ -28,10 +28,24 @@
     />
     <link rel="preconnect" href="https://api.iconify.design" crossorigin />
 
+    <!-- IMPORTANT: Replace the CSS + JS filenames after build -->
+    <link
+      rel="preload"
+      href="/assets/index-EFGH5678.css"
+      as="style"
+    />
+    <link
+      rel="preload"
+      href="/assets/index-ABCD1234.js"
+      as="script"
+    />
 
-    <link rel="preload" as="script" href="/src/main.jsx" />
+    <link
+      rel="stylesheet"
+      href="/assets/index-EFGH5678.css"
+    />
 
-
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
@@ -44,11 +58,11 @@
     <meta property="og:url" content="https://vinothkumarm27.vercel.app/" />
     <meta
       property="og:image"
-      content="https://vinothkumarm27.vercel.app/preview.jpg"
+      content="https://vinothkumarm27.vercel.app/preview.webp"
     />
     <meta property="og:locale" content="en_IN" />
 
-
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -60,17 +74,17 @@
     />
     <meta
       name="twitter:image"
-      content="https://vinothkumarm27.vercel.app/preview.jpg"
+      content="https://vinothkumarm27.vercel.app/preview.webp"
     />
 
-
+    <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Vinoth Kumar M",
         "url": "https://vinothkumarm27.vercel.app/",
-        "image": "https://vinothkumarm27.vercel.app/preview.jpg",
+        "image": "https://vinothkumarm27.vercel.app/preview.webp",
         "jobTitle": "MERN Stack Developer",
         "worksFor": {
           "@type": "Organization",
@@ -86,26 +100,19 @@
   </head>
 
   <body>
-
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:p-2 focus:bg-violet-100"
       >Skip to main content</a
     >
 
-    <header>
-
-    </header>
-
-    <main id="main-content" role="main">
+    <main id="main-content">
       <div id="root"></div>
     </main>
 
-    <footer>
-
-    </footer>
-
     <noscript>You need to enable JavaScript to view this site.</noscript>
-    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- IMPORTANT: Replace with actual build JS file -->
+    <script type="module" src="/assets/index-ABCD1234.js" async></script>
   </body>
 </html>
