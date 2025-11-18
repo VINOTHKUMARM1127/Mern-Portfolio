@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home Page -->
   <url>
     <loc>https://vinothkumarm27.vercel.app/</loc>
-    <priority>1.00</priority>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <!-- Projects Section -->
+  <url>
+    <loc>https://vinothkumarm27.vercel.app/#projects</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- Skills Section -->
+  <url>
+    <loc>https://vinothkumarm27.vercel.app/#skills</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- Contact Section -->
+  <url>
+    <loc>https://vinothkumarm27.vercel.app/#contact</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
   </url>
 </urlset>
