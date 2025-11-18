@@ -9,7 +9,7 @@ router.post("/add-details", upload.single("Image"), async (req, res) => {
   try {
     const { Greetings, Name, Desigination, Description, ResumeLink } = req.body;
     let imageUrl = null;
-    let deleteUrl = null;
+    let publicId = null;
 
 if (req.file) {
   const result = await cloudinary.uploader.upload(req.file.path, {
