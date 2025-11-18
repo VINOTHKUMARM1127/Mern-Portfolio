@@ -5,43 +5,38 @@ require("dotenv").config();
 const upload = require("../config/multer.js");
 const cloudinary = require("../config/cloudinary.js");
 
-
-// ================= GET PROJECTS =================
 router.get("/get-projects", async (req, res) => {
   try {
-    const list = await Projects.find();
-    res.status(200).json(list);
+    const ProjectList = await Projects.find();
+    res.status(200).json(ProjectList);
   } catch (err) {
-    console.log("GET PROJECTS ERROR:", err);
-    res.status(400).json({ error: err.message });
+    res.status(400).json(err);
   }
 });
 
-
-// ================= ADD PROJECT =================
 router.post("/add-projects", upload.single("Image"), async (req, res) => {
   try {
-    const { ProjectName, Description, Link, Github, Tech, Year, Order } = req.body;
-
+    const { ProjectName, Description, Link, Github, Tech, Year, Order } =
+      req.body;
     let imageUrl = null;
     let publicId = null;
 
-    if (req.file && req.file.path) {
-      const result = await cloudinary.uploader.upload(req.file.path, {
+    if (req.file) {
+      const uploadResult = await cloudinary.uploader.upload(req.file.path, {
         folder: "project_details",
-        transformation: [
-          { width: 800, crop: "limit" },
-          { quality: "auto" },
-          { fetch_format: "auto" }
-        ]
+        eager: [
+          { width: 800, crop: "limit", quality: "auto", fetch_format: "auto" },
+        ],
+        eager_async: false,
       });
 
-      imageUrl = result.secure_url;
-      publicId = result.public_id;
-      console.log("Uploaded:", publicId);
+      await cloudinary.uploader.destroy(uploadResult.public_id);
+
+      imageUrl = uploadResult.eager[0].secure_url;
+      publicId = uploadResult.eager[0].public_id;
     }
 
-    const newProject = new Projects({
+    const newProjects = new Projects({
       ProjectName,
       Description,
       Link,
@@ -53,81 +48,58 @@ router.post("/add-projects", upload.single("Image"), async (req, res) => {
       Order,
     });
 
-    await newProject.save();
-    res.status(200).json("Project Added");
+    await newProjects.save();
+    res.status(200).json("Projects Added");
   } catch (err) {
-    console.log("ADD PROJECT ERROR:", err);
-    res.status(400).json({ error: err.message });
+    res.status(400).json(err);
   }
 });
 
-
-// ================= DELETE PROJECT =================
 router.delete("/delete-projects/:id", async (req, res) => {
   try {
     const project = await Projects.findById(req.params.id);
     if (!project) return res.status(404).json("Project not found");
-
     if (project.PublicId) {
-      try {
-        await cloudinary.uploader.destroy(project.PublicId, {
-          resource_type: "image",
-          invalidate: true,
-        });
-        console.log("Deleted Image:", project.PublicId);
-      } catch (e) {
-        console.log("DELETE FAILED:", e.message);
-      }
+      await cloudinary.uploader.destroy(project.PublicId);
     }
-
     await Projects.findByIdAndDelete(req.params.id);
-    res.status(200).json("Project Deleted");
+    res.status(200).json("Projects Deleted");
   } catch (err) {
-    console.log("DELETE ERROR:", err);
-    res.status(400).json({ error: err.message });
+    res.status(400).json(err);
   }
 });
 
-
-// ================= UPDATE PROJECT =================
 router.put("/update-projects/:id", upload.single("Image"), async (req, res) => {
   try {
-    const { ProjectName, Description, Link, Github, Tech, Year, Order } = req.body;
-
+    const { ProjectName, Description, Link, Github, Tech, Year, Order } =
+      req.body;
     const project = await Projects.findById(req.params.id);
-    if (!project) return res.status(404).json("Project not found");
+    if (!project) return res.status(404).json({ message: "Project not found" });
 
     let imageUrl = project.Image;
     let publicId = project.PublicId;
 
-    if (req.file && req.file.path) {
-
-      // SAFE DELETE OLD IMAGE
-      if (publicId && publicId.trim() !== "") {
-        try {
-          await cloudinary.uploader.destroy(publicId, {
-            resource_type: "image",
-            invalidate: true,
-          });
-          console.log("OLD IMAGE DELETED:", publicId);
-        } catch (e) {
-          console.log("DELETE FAILED:", e.message);
-        }
+    if (req.file) {
+      if (publicId) {
+        await cloudinary.uploader.destroy(publicId, {
+          resource_type: "image",
+        });
       }
 
-      // UPLOAD NEW COMPRESSED IMAGE
-      const result = await cloudinary.uploader.upload(req.file.path, {
+      const uploadResult = await cloudinary.uploader.upload(req.file.path, {
         folder: "project_details",
-        transformation: [
-          { width: 800, crop: "limit" },
-          { quality: "auto" },
-          { fetch_format: "auto" },
+        eager: [
+          { width: 800, crop: "limit", quality: "auto", fetch_format: "auto" },
         ],
+        eager_async: false,
       });
 
-      imageUrl = result.secure_url;
-      publicId = result.public_id;
-      console.log("NEW IMAGE UPLOADED:", publicId);
+      imageUrl = uploadResult.eager[0].secure_url;
+      publicId = uploadResult.eager[0].public_id;
+
+      await cloudinary.uploader.destroy(uploadResult.public_id, {
+        resource_type: "image",
+      });
     }
 
     await Projects.findByIdAndUpdate(
@@ -146,12 +118,10 @@ router.put("/update-projects/:id", upload.single("Image"), async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json("Project Updated");
+    res.status(200).json("Projects Updated");
   } catch (err) {
-    console.log("UPDATE PROJECT ERROR:", err);
-    res.status(400).json({ error: err.message });
+    res.status(400).json(err);
   }
 });
-
 
 module.exports = router;
