@@ -39,16 +39,16 @@ const Skils = () => {
   const Category = ["Frontend","Backend","Others"]
 
   return (
-    <div className="mt-10 w-[90%] sm:w-[90%] lg:w-[80%] mx-auto">
+    <div className="mt-10 w-[90%] sm:w-[90%] lg:w-[80%] mx-auto pb-5">
       <div className="text-center text-[2em] font-bold mt-3">Skills</div>
       <div className="text-center text-[1.2em] opacity-60 mt-5 mb-14 px-10">
         Here are some of my skills on which I have learnt.
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
         {Category.map((sk,key)=>(
         <section key={key} className="border border-[#b14fc4] bg-[#171721] rounded-2xl p-6 opacity-90 shadow-[0_0_10px_#d607ed] hover:shadow-[0_0_20px_#d607ed] transition-all duration-300">
-          <div className="text-center text-[1.6em] my-4 font-bold text-white">
+          <div className="text-center text-[1.6em] mb-4 font-bold text-white">
             {sk}
           </div>
           {loading ? (
