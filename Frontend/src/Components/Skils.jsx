@@ -2,26 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import axios from "axios";
 
-const Skils = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchskilldata = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/get-skills`
-      );
-      setData(response.data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      setLoading(true);
-    }
-  };
-
-  useEffect(() => {
-    fetchskilldata();
-  }, []);
+const Skils = ({data,loading}) => {
 
   const skeleton = () => {
     return (

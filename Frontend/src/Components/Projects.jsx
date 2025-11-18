@@ -5,27 +5,8 @@ import Dummy from "../assets/dummypic.jpg";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-const Projects = () => {
+const Projects = ({projectdata,loading}) => {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [projectdata, SetProjectData] = useState([]);
-  const [loading, setloading] = useState(true);
-
-  const FetchData = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/get-projects`
-      );
-      SetProjectData(response.data);
-      setloading(false);
-    } catch (err) {
-      console.log(err);
-      setloading(false);
-    }
-  };
-
-  useEffect(() => {
-    FetchData();
-  }, []);
 
   const click = (projects) => {
     setSelectedProject(projects);

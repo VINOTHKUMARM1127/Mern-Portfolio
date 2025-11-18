@@ -1,26 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const Education = () => {
-  const [eduData, setEduData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const FetchData = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/get-education`
-      );
-      setEduData(response.data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    FetchData();
-  }, []);
+const Education = ({eduData,loading}) => {
 
   const SkeletonLoading = ()=>{
     return Array.from({length:3}).map((item,i)=>(

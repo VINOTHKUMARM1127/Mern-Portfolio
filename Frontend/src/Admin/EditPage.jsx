@@ -6,9 +6,11 @@ import Skils from "../Components/Skils";
 import Education from "../Components/Education";
 import Projects from "../Components/Projects";
 import { TbEdit } from "react-icons/tb";
+import useDataFetch from "../Components/useDataFetch";
 
 const EditPage = () => {
   const navigate = useNavigate();
+    const { Details, data, eduData, projectdata, loading } =  useDataFetch();
   return (
     <section>
       <div className="bg-[#171721] text-[2.1em] text-center uppercase p-5 font-bold">
@@ -26,7 +28,7 @@ const EditPage = () => {
             </div>
           </div>
         <div id="home">
-          <Main />
+          <Main Details={Details} loading={loading} />
         </div>
         <div className="wap">
                     <div
@@ -38,7 +40,7 @@ const EditPage = () => {
             </div>
           </div>
           <div id="skills">
-            <Skils />
+            <Skils data={data} loading={loading} />
           </div>
           <div
             onClick={() => navigate("/Edit-Page/Education")}
@@ -49,7 +51,7 @@ const EditPage = () => {
             </div>
           </div>
           <div id="education">
-            <Education />
+            <Education eduData={eduData} loading={loading} />
           </div>
         </div>
         <div className="wapp" id="projects">
@@ -61,7 +63,7 @@ const EditPage = () => {
               <TbEdit className="text-[1.5em]  lg:text-[2em] mb-[2em]" />
             </div>
           </div>
-          <Projects />
+          <Projects projectdata={projectdata} loading={loading} />
         </div>
       </div>
     </section>

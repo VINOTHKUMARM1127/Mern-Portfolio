@@ -4,26 +4,7 @@ import axios from "axios";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-const Main = () => {
-  const [Details, setDetails] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const FetchData = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/get-details`
-      );
-      setDetails(response.data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    FetchData();
-  }, []);
+const Main = ({Details,loading}) => {
 
   return (
     <section className="bg-[#171721] cut flex justify-center py-[1em] md:py-[5em]">
@@ -78,11 +59,15 @@ const Main = () => {
             </div>
 
             <div>
-              <LazyLoadImage
-                src={item.Image}
+              <img
+                src={item.Image.replace(
+                  "/upload/",
+                  "/upload/f_auto,q_auto,w_600/"
+                )}
                 alt="Item"
-                effect="blur"
-                className="w-[300px] h-[300px] object-cover md:w-[350px] min-h-[300px] md:min-h-[350px] rounded-full border-2 border-violet-600 mt-5 md:mt-0  shadow-[0_0_40px_purple]"
+                fetchpriority="high"
+                decoding="sync"
+                className="w-[300px] h-[300px] object-cover md:w-[350px] min-h-[300px] md:min-h-[350px] rounded-full border-2 border-violet-600 mt-5 md:mt-0 shadow-[0_0_40px_purple]"
               />
             </div>
           </div>
