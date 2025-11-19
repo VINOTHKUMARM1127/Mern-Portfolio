@@ -4,8 +4,7 @@ import axios from "axios";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-const Main = ({Details,loading}) => {
-
+const Main = ({ Details, loading }) => {
   return (
     <section className="bg-[#171721] cut flex justify-center py-[1em] md:py-[5em]">
       {loading ? (
@@ -59,12 +58,13 @@ const Main = ({Details,loading}) => {
             </div>
 
             <div>
-              <img
+              <LazyLoadImage
                 src={item.Image.replace(
                   "/upload/",
                   "/upload/f_auto,q_auto,w_600/"
                 )}
                 alt="Item"
+                effect="blur"
                 fetchpriority="high"
                 decoding="sync"
                 className="w-[300px] h-[300px] object-cover md:w-[350px] min-h-[300px] md:min-h-[350px] rounded-full border-2 border-violet-600 mt-5 md:mt-0 shadow-[0_0_40px_purple]"
