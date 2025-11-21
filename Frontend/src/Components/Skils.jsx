@@ -20,9 +20,9 @@ const Skils = ({data,loading}) => {
   const Category = ["Frontend","Backend","Others"]
 
   return (
-    <div className="mt-10 w-[90%] sm:w-[90%] lg:w-[80%] mx-auto pb-5">
-      <div className="text-center text-[2em] font-bold mt-3">Skills</div>
-      <div className="text-center text-[1.2em] opacity-60 mt-5 mb-14 px-10">
+    <div className="mt-10 w-[90%] sm:w-[90%] lg:w-[80%] mx-auto pt-0 md:pt-[2em] pb-5 md:pb-[3em]">
+      <div className="text-center text-[2em] font-bold ">Skills</div>
+      <div className="text-center text-[1.2em] opacity-60 mt-2 mb-[4em] px-10">
         Here are some of my skills on which I have learnt.
       </div>
 
