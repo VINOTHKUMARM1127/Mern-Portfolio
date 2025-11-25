@@ -6,13 +6,25 @@ const Header = () => {
   const navigate = useNavigate();
   const [menuopen, setMenuopen] = useState(false);
 
-  const loginVerify = localStorage.getItem("loginVerify") === "true";
+  const [loginVerify, setLoginVerify] = useState(
+    localStorage.getItem("loginVerify") === "true"
+  );
 
   const HandleLogout = () => {
     localStorage.removeItem("loginVerify");
     localStorage.removeItem("loginExpiry");
-    window.location.href = "/";
+    setLoginVerify(false);
+    navigate("/");
   };
+
+  useEffect(() => {
+    const expiry = localStorage.getItem("loginExpiry");
+    if (expiry && Date.now() > Number(expiry)) {
+      localStorage.removeItem("loginVerify");
+      localStorage.removeItem("loginExpiry");
+      setLoginVerify(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (menuopen) {
