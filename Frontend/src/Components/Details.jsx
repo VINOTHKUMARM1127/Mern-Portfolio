@@ -52,13 +52,13 @@ const Details = ({ project, onClose }) => {
 
           <div className="flex justify-around">
             <button
-              onClick={() => window.open(project.Link)}
+              onClick={() => window.open(project.Github)}
               className="bg-violet-600 w-full mr-2 rounded-lg py-2 px-4 mt-2 hover:bg-slate-500 font-bold"
             >
               View Code
             </button>
             <button
-              onClick={() => window.open(project.Github)}
+              onClick={() => window.open(project.Link)}
               className="bg-violet-600 w-full ml-2 rounded-lg py-2 px-4 mt-2 hover:bg-slate-500 font-bold"
             >
               View LiveApp
