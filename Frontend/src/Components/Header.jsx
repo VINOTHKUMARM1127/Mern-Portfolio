@@ -6,32 +6,29 @@ const Header = () => {
   const navigate = useNavigate();
   const [menuopen, setMenuopen] = useState(false);
 
-  const [loginVerify, setLoginVerify] = useState(
-    localStorage.getItem("loginVerify") === "true"
-  );
+  const loginVerify = localStorage.getItem("loginVerify") === "true";
 
   const HandleLogout = () => {
     localStorage.removeItem("loginVerify");
     localStorage.removeItem("loginExpiry");
-    setLoginVerify(false);
-    navigate("/");
+    window.location.href = "/";
   };
 
-  useEffect(() => {
-    const expiry = localStorage.getItem("loginExpiry");
-    if (expiry && Date.now() > Number(expiry)) {
-      localStorage.removeItem("loginVerify");
-      localStorage.removeItem("loginExpiry");
-      setLoginVerify(false);
+  const handleMenuScroll = (e, id) => {
+  e.preventDefault();
+  
+  navigate("/");
+  
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  }, []);
-  useEffect(() => {
-    const checkLogin = () => {
-      setLoginVerify(localStorage.getItem("loginVerify") === "true");
-    };
-    window.addEventListener("storage", checkLogin);
-    return () => window.removeEventListener("storage", checkLogin);
-  }, []);
+  }, 50);
+
+  setMenuopen(false);
+};
+
 
   useEffect(() => {
     if (menuopen) {
@@ -62,40 +59,28 @@ const Header = () => {
           >
             <a
               href="#home"
-              onClick={() => {
-                navigate("/");
-                setMenuopen(false);
-              }}
+              onClick={(e) => handleMenuScroll(e, "home")}
               className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
             >
               About
             </a>
             <a
               href="#skills"
-              onClick={() => {
-                navigate("/");
-                setMenuopen(false);
-              }}
+              onClick={(e) => handleMenuScroll(e, "skills")}
               className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
             >
               Skills
             </a>
             <a
               href="#education"
-              onClick={() => {
-                navigate("/");
-                setMenuopen(false);
-              }}
+              onClick={(e) => handleMenuScroll(e, "education")}
               className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
             >
               Education
             </a>
             <a
               href="#projects"
-              onClick={() => {
-                navigate("/");
-                setMenuopen(false);
-              }}
+              onClick={(e) => handleMenuScroll(e, "projects")}
               className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
             >
               Projects

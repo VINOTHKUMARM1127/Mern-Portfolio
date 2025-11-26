@@ -9,13 +9,13 @@
 }
 
 
-
-
-
 html {
   scroll-behavior: smooth;
 }
 
+#home, #skills, #education, #projects {
+  scroll-margin-top: 100px; 
+}
 
 body{
   color: white;

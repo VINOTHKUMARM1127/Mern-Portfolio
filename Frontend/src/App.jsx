@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./Components/Header";
 import Home from "./Pages/Home";
@@ -11,7 +10,6 @@ import DetailsEdit from "./Admin/DetailsEdit";
 import SkillsEdit from "./Admin/SkillsEdit";
 
 const App = () => {
-  const [loginVerify, setLoginVerify] = useState(false);
 
   return (
     <BrowserRouter>
