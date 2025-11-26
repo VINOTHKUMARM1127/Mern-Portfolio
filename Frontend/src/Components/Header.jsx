@@ -15,20 +15,19 @@ const Header = () => {
   };
 
   const handleMenuScroll = (e, id) => {
-  e.preventDefault();
-  
-  navigate("/");
-  
-  setTimeout(() => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, 50);
+    e.preventDefault();
 
-  setMenuopen(false);
-};
+    navigate("/");
 
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 50);
+
+    setMenuopen(false);
+  };
 
   useEffect(() => {
     if (menuopen) {
