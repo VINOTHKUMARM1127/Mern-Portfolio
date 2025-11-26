@@ -60,28 +60,28 @@ const Header = () => {
             <a
               href="#home"
               onClick={(e) => handleMenuScroll(e, "home")}
-              className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
+              className="flex items-center md:px-[2em] px-[1em] hover:text-violet-600"
             >
               About
             </a>
             <a
               href="#skills"
               onClick={(e) => handleMenuScroll(e, "skills")}
-              className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
+              className="flex items-center md:px-[2em] px-[1em]  hover:text-violet-600"
             >
               Skills
             </a>
             <a
               href="#education"
               onClick={(e) => handleMenuScroll(e, "education")}
-              className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
+              className="flex items-center md:px-[2em] px-[1em]  hover:text-violet-600"
             >
               Education
             </a>
             <a
               href="#projects"
               onClick={(e) => handleMenuScroll(e, "projects")}
-              className="md:px-[2em] px-[1em] pt-2 hover:text-violet-600"
+              className="flex items-center md:px-[2em] px-[1em]  hover:text-violet-600"
             >
               Projects
             </a>
