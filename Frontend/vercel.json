@@ -1,9 +1,19 @@
 {
+  "headers": [
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml" }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain" }
+      ]
+    }
+  ],
   "rewrites": [
-    { "source": "/favicon.ico", "destination": "/favicon.ico" },
-    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
-    { "source": "/robots.txt", "destination": "/robots.txt" },
-    { "source": "/googlee8eb95c5b71ae30f.html", "destination": "/googlee8eb95c5b71ae30f.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
