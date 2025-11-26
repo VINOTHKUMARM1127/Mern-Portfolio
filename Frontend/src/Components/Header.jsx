@@ -25,6 +25,13 @@ const Header = () => {
       setLoginVerify(false);
     }
   }, []);
+  useEffect(() => {
+    const checkLogin = () => {
+      setLoginVerify(localStorage.getItem("loginVerify") === "true");
+    };
+    window.addEventListener("storage", checkLogin);
+    return () => window.removeEventListener("storage", checkLogin);
+  }, []);
 
   useEffect(() => {
     if (menuopen) {
