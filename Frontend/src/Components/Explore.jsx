@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const Explore = () => {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = visible ? "hidden" : "auto";

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../index.css";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import { motion } from "framer-motion";
 
 const Main = ({ Details, loading }) => {
@@ -87,7 +85,7 @@ const Main = ({ Details, loading }) => {
             </div>
 
             <motion.div variants={imageVariant}>
-              <LazyLoadImage
+              <img
                 src={item.Image.replace(
                   "/upload/",
                   "/upload/f_auto,q_auto,w_600/"
