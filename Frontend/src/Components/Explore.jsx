@@ -1,23 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const Explore = () => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const seen = sessionStorage.getItem("exploreSeen");
-    if (seen == "true") {
-      setVisible(false);
-    }
-    if (visible) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = visible ? "hidden" : "auto";
   }, [visible]);
 
   const handleExplore = () => {
     setVisible(false);
-    sessionStorage.setItem("exploreSeen", "true");
   };
   return (
     <div

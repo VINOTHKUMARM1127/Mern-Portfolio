@@ -1,10 +1,36 @@
 import React, { useEffect, useState } from "react";
 import "../index.css";
-import axios from "axios";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { motion } from "framer-motion";
 
 const Main = ({ Details, loading }) => {
+  const textVariant = {
+    hidden: { opacity: 0, y: 25 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  };
+
+  const imageVariant = {
+    hidden: { opacity: 0, scale: 0.8 },
+    show: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, type: "spring", stiffness: 120 },
+    },
+  };
+
+  const parentVariant = {
+  hidden: { opacity: 0 },
+  show: { 
+    opacity: 1, 
+    transition: { 
+      duration: 0.2,
+      staggerChildren: 0.20,
+    } 
+  },
+};
+
+
   return (
     <section className="bg-[#171721] cut flex justify-center pt-[1em] pb-[1em] md:pt-[5em] md:pb-[7em]">
       {loading ? (
@@ -30,34 +56,37 @@ const Main = ({ Details, loading }) => {
         </div>
       ) : (
         Details.map((item, key) => (
-          <div
+          <motion.div
             key={key}
+            initial="hidden"
+            animate="show"
+            variants={parentVariant}
             className="w-[100%] lg:w-[90%] mx-auto my-0 flex flex-col-reverse lg:flex-row justify-evenly items-center"
           >
             <div className="text-center lg:text-start w-[90vw] lg:w-[40vw]">
-              <div className="text-[1.6em] md:text-[3em] font-black mt-4 md:mt-0">
+              <motion.div variants={textVariant} className="text-[1.6em] md:text-[3em] font-black mt-4 md:mt-0">
                 <div className="text-[1.3em] md:text-[1em] ">
                   {item.Greetings}
                 </div>
                 <div className="text-[1.4em] md:text-[1em]">{item.Name}</div>
-              </div>
-              <div className="text-[1.8em] md:text-[2em]   ">
+              </motion.div>
+              <motion.div variants={textVariant} className="text-[1.8em] md:text-[2em]   ">
                 {item.Desigination}
-              </div>
-              <div className="text-[1em] md:text-[1.3em] opacity-70 mt-3 text-justify">
+              </motion.div>
+              <motion.div variants={textVariant} className="text-[1em] md:text-[1.3em] opacity-70 mt-3 text-justify">
                 {item.Description}
-              </div>
-              <div className="mt-8">
+              </motion.div>
+              <motion.div variants={textVariant} className="mt-8">
                 <a
                   className="text-[1.1em] bg-gradient-to-r from-purple-700 to-blue-700 w-fit px-8 py-4 rounded-lg mx-auto lg:mx-0 my-6 cursor-pointer hover:scale-105 "
                   href={item.ResumeLink}
                 >
                   Check Resume
                 </a>
-              </div>
+              </motion.div>
             </div>
 
-            <div>
+            <motion.div variants={imageVariant}>
               <LazyLoadImage
                 src={item.Image.replace(
                   "/upload/",
@@ -69,8 +98,8 @@ const Main = ({ Details, loading }) => {
                 decoding="sync"
                 className="w-[300px] h-[300px] object-cover md:w-[350px] min-h-[300px] md:min-h-[350px] rounded-full border-2 border-violet-600 mt-5 md:mt-0 shadow-[0_0_40px_purple]"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         ))
       )}
     </section>
