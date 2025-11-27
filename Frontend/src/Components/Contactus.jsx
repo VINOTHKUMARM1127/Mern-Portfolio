@@ -23,46 +23,50 @@ export const Contactus = () => {
       );
   };
 
-  const containerVariant = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05,
-        ease: "easeOut",
-        duration: 0.3,
-      },
+const containerVariant = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,       
+      duration: 0.6,
+      ease: "easeOut",
     },
-  };
+  },
+};
 
-  const listVariant = {
-    hidden: { opacity: 0, y: 15 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
+const listVariant = {
+  hidden: { opacity: 0, y: 25 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,              
+      ease: [0.25, 0.1, 0.25, 1],  
     },
-  };
+  },
+};
 
-  const cardVariant = {
-    hidden: { opacity: 0, y: 20, scale: 0.96 },
-    show: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.18, ease: "easeOut" },
+const cardVariant = {
+  hidden: { opacity: 0, y: 30, scale: 0.94 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.55,              
+      ease: [0.25, 0.1, 0.25, 1],   
     },
-  };
+  },
+};
+
 
   return (
     <motion.section
       variants={containerVariant}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: false, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.3 }}
     >
       <motion.div
         variants={listVariant}

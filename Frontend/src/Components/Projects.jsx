@@ -8,23 +8,30 @@ import { motion } from "framer-motion";
 const Projects = ({ projectdata, loading }) => {
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 },
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      ease: "easeOut"
     },
-  };
+  },
+};
 
-  const card = {
-    hidden: { opacity: 0, scale: 0.9, y: 20 },
-    show: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
+const card = {
+  hidden: { opacity: 0, scale: 0.85, y: 30 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.45, 
+      ease: [0.25, 0.1, 0.25, 1]
     },
-  };
+  },
+};
+
 
   const click = (projects) => {
     setSelectedProject(projects);
@@ -63,7 +70,7 @@ const Projects = ({ projectdata, loading }) => {
         variants={container}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: false, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.3 }}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-[100%] mx-auto my-0"
       >
         {loading

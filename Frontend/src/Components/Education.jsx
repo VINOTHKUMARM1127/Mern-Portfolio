@@ -1,25 +1,37 @@
 import { motion } from "framer-motion";
 
 const Education = ({ eduData, loading }) => {
-  
   const containerVariant = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.07 },
+      transition: {
+        staggerChildren: 0.12,
+        ease: "easeOut",
+      },
     },
   };
 
   const listVariant = {
     hidden: {},
     show: {
-      transition: { staggerChildren: 0.03 },
+      transition: {
+        staggerChildren: 0.1,
+        ease: "easeOut",
+      },
     },
   };
 
   const cardVariant = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.35 } },
+    hidden: { opacity: 0, y: 40 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.45,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+    },
   };
 
   const SkeletonLoading = () => {
@@ -44,7 +56,7 @@ const Education = ({ eduData, loading }) => {
       variants={containerVariant}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: false, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.3 }}
       className="mt-[5%] w-screen xl:w-[80%] mx-auto my-0"
     >
       <motion.div

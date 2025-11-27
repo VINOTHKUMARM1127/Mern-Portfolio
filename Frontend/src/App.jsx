@@ -8,8 +8,16 @@ import EducationEdit from "./Admin/EducationEdit";
 import LoginCheck from "./Admin/LoginCheck";
 import DetailsEdit from "./Admin/DetailsEdit";
 import SkillsEdit from "./Admin/SkillsEdit";
+import { useEffect } from "react";
 
 const App = () => {
+  useEffect(() => {
+  if ("scrollRestoration" in window.history) {
+    window.history.scrollRestoration = "manual";
+  }
+  window.scrollTo(0, 0);
+}, []);
+
 
   return (
     <BrowserRouter>

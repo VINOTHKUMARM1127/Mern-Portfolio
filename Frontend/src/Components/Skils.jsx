@@ -18,36 +18,47 @@ const Skils = ({ data, loading }) => {
 
   const Category = ["Frontend", "Backend", "Others"];
 
-  const containerVariant = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.07 },
+const containerVariant = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { 
+      staggerChildren: 0.12,
+      duration: 0.4,
+      ease: "easeOut"
     },
-  };
+  },
+};
 
-  const listVariant = {
-    hidden: {},
-    show: {
-      transition: { staggerChildren: 0.03 },
+const listVariant = {
+  hidden: {},
+  show: {
+    transition: { 
+      staggerChildren: 0.08, 
+      ease: "easeOut"
     },
-  };
+  },
+};
 
-  const itemVariant = {
-    hidden: { opacity: 0, y: 10 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.08, ease: "easeOut" },
+const itemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { 
+      duration: 0.25,  
+      ease: [0.25, 0.1, 0.25, 1.0], 
     },
-  };
+  },
+};
+
 
   return (
     <motion.div
       variants={containerVariant}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: false, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.3 }}
       className="mt-10 w-[90%] sm:w-[90%] lg:w-[80%] mx-auto pt-0 md:pt-[2em] pb-5 md:pb-[3em]"
     >
       <motion.div
