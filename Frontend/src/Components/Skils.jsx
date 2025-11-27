@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { motion } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
 
 const Skils = ({ data, loading }) => {
   const skeleton = () => {
@@ -29,26 +29,18 @@ const Skils = ({ data, loading }) => {
   const listVariant = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.12 },
+    transition: { staggerChildren: 0.05 },
   },
 };
 
 
-  const cardVariant = {
-    hidden: { opacity: 0, y: 40 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
 
   const itemVariant = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 10 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.35 },
+      transition: { duration: 0.18, ease: "easeOut" },
     },
   };
 
@@ -57,7 +49,7 @@ const Skils = ({ data, loading }) => {
       variants={containerVariant}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: false, amount: 0.3 }}
       className="mt-10 w-[90%] sm:w-[90%] lg:w-[80%] mx-auto pt-0 md:pt-[2em] pb-5 md:pb-[3em]"
     >
       <motion.div
@@ -75,11 +67,8 @@ const Skils = ({ data, loading }) => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
         {Category.map((sk, key) => (
-          <motion.section
+          <section
             key={key}
-            variants={cardVariant}
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 130 }}
             className="border border-[#b14fc4] bg-[#171721] rounded-2xl p-6 opacity-90 shadow-[0_0_10px_#d607ed] hover:shadow-[0_0_20px_#d607ed] transition-all duration-300"
           >
             <motion.div
@@ -112,7 +101,7 @@ const Skils = ({ data, loading }) => {
                   ))}
               </motion.div>
             )}
-          </motion.section>
+          </section>
         ))}
       </div>
     </motion.div>
