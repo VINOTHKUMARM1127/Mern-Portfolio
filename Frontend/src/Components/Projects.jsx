@@ -1,12 +1,30 @@
 import React, { useEffect, useState } from "react";
 import Details from "./Details";
-import axios from "axios";
 import Dummy from "../assets/dummypic.jpg";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { motion } from "framer-motion";
 
-const Projects = ({projectdata,loading}) => {
+const Projects = ({ projectdata, loading }) => {
   const [selectedProject, setSelectedProject] = useState(null);
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  };
+
+  const card = {
+    hidden: { opacity: 0, scale: 0.9, y: 20 },
+    show: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
+  };
 
   const click = (projects) => {
     setSelectedProject(projects);
@@ -41,13 +59,21 @@ const Projects = ({projectdata,loading}) => {
         Here are some of my projects.
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-[100%] mx-auto my-0">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.3 }}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-[100%] mx-auto my-0"
+      >
         {loading
           ? Skeletonloading()
           : projectdata
               .sort((b, a) => a.Order - b.Order)
               .map((item) => (
-                <div
+                <motion.div
+                  variants={card}
+                  whileHover={{ scale: 1.05 }}
                   key={item._id}
                   onClick={() => click(item)}
                   className="border border-[#1f1f1f] bg-[#171721] rounded-xl py-4 px-2 mx-auto my-0 opacity-80 shadow-[0_0_6px_#1f1f1f] mb-8 hover:bs hover:scale-105"
@@ -82,16 +108,23 @@ const Projects = ({projectdata,loading}) => {
                   <div className="px-4 text-[1em] mb-5 opacity-70 text-justify line-clamp-3">
                     {item.Description}
                   </div>
-                </div>
+                </motion.div>
               ))}
-      </div>
+      </motion.div>
 
-      {selectedProject && (
-        <Details
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ duration: 0.3 }}
+      >
+        {selectedProject && (
+          <Details
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
+      </motion.div>
     </div>
   );
 };

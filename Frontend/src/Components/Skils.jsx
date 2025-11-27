@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { easeInOut, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Skils = ({ data, loading }) => {
   const skeleton = () => {
@@ -22,25 +22,23 @@ const Skils = ({ data, loading }) => {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.18 },
+      transition: { staggerChildren: 0.07 },
     },
   };
 
   const listVariant = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.05 },
-  },
-};
-
-
+    hidden: {},
+    show: {
+      transition: { staggerChildren: 0.03 },
+    },
+  };
 
   const itemVariant = {
     hidden: { opacity: 0, y: 10 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.18, ease: "easeOut" },
+      transition: { duration: 0.08, ease: "easeOut" },
     },
   };
 
