@@ -53,7 +53,7 @@ const Header = () => {
           <div
             className={`${
               menuopen ? "flex" : "hidden"
-            } z-10 flex-col lg:flex-row lg:flex text-center cursor-pointer text-[1em] absolute top-[0] right-[0] lg:pt-0 pt-[100px] w-[80%] lg:min-h-full min-h-screen bg-[#191924] lg:static lg:w-auto lg:bg-transparent px-5 py-1 gap-7 lg:gap-3`}
+            } z-10 flex-col lg:flex-row lg:flex text-center cursor-pointer text-[1em] absolute top-[0] right-[0] lg:pt-0 pt-[100px] w-[80%] lg:min-h-full min-h-screen bg-[#191924]/80 backdrop-blur-md lg:static lg:w-auto lg:bg-transparent px-5 py-1 gap-7 lg:gap-3`}
           >
             <a
               href="#home"
