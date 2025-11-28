@@ -30,7 +30,7 @@ const Main = ({ Details, loading }) => {
 
 
   return (
-    <section className="bg-[#171721] cut flex justify-center pt-[1em] pb-[1em] md:pt-[5em] md:pb-[7em]">
+    <section className="bg-[#171721]  cut flex justify-center pt-[1em] pb-[1em] md:pt-[5em] md:pb-[7em]">
       {loading ? (
         <div className="w-[100%] lg:w-[90%]  mx-auto flex flex-col-reverse lg:flex-row justify-evenly items-center animate-pulse">
           <div className="text-center lg:text-start w-[90vw] lg:w-[40vw]">

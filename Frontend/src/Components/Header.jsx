@@ -38,8 +38,7 @@ const Header = () => {
   }, [menuopen]);
   return (
     <section
-      className="bg-[#171721] z-40 lg:px-[100px] 
-    py-5 sticky top-0"
+      className="bg-[#171721]/80 backdrop-blur-md z-40 lg:px-[100px] py-4 sticky top-0"
     >
       <div className="w-[90%] lg:w-[85%] flex justify-between mx-auto my-0">
         <button
