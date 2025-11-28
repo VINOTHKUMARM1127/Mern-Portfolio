@@ -37,9 +37,7 @@ const Header = () => {
     }
   }, [menuopen]);
   return (
-    <section
-      className="bg-[#171721]/80 backdrop-blur-md z-40 lg:px-[100px] py-4 sticky top-0"
-    >
+    <section className="bg-[#171721]/80 backdrop-blur-md z-40 lg:px-[100px] py-4 sticky top-0">
       <div className="w-[90%] lg:w-[85%] flex justify-between mx-auto my-0">
         <button
           onClick={() => {
@@ -53,33 +51,41 @@ const Header = () => {
           <div
             className={`${
               menuopen ? "flex" : "hidden"
-            } z-10 flex-col lg:flex-row lg:flex text-center cursor-pointer text-[1em] absolute top-[0] right-[0] lg:pt-0 pt-[100px] w-[80%] lg:min-h-full min-h-screen bg-[#191924]/80 backdrop-blur-md lg:static lg:w-auto lg:bg-transparent px-5 py-1 gap-7 lg:gap-3`}
+            } z-10 flex-col lg:flex-row lg:flex text-center cursor-pointer text-[1em] absolute top-[0] right-[0] lg:pt-0 pt-[100px] w-[80%] lg:min-h-full min-h-screen bg-[#191924]/90 lg:static lg:w-auto lg:bg-transparent px-5 py-1 gap-7 lg:gap-3`}
           >
             <a
               href="#home"
               onClick={(e) => handleMenuScroll(e, "home")}
-              className="flex items-center md:px-[2em] px-[1em] hover:text-violet-600"
+              className={`flex ${
+                menuopen ? "justify-center" : "items-center"
+              } md:px-[2em] px-[1em] hover:text-violet-600`}
             >
               About
             </a>
             <a
               href="#skills"
               onClick={(e) => handleMenuScroll(e, "skills")}
-              className="flex items-center md:px-[2em] px-[1em]  hover:text-violet-600"
+              className={`flex ${
+                menuopen ? "justify-center" : "items-center"
+              } md:px-[2em] px-[1em] hover:text-violet-600`}
             >
               Skills
             </a>
             <a
               href="#education"
               onClick={(e) => handleMenuScroll(e, "education")}
-              className="flex items-center md:px-[2em] px-[1em]  hover:text-violet-600"
+              className={`flex ${
+                menuopen ? "justify-center" : "items-center"
+              } md:px-[2em] px-[1em] hover:text-violet-600`}
             >
               Education
             </a>
             <a
               href="#projects"
               onClick={(e) => handleMenuScroll(e, "projects")}
-              className="flex items-center md:px-[2em] px-[1em]  hover:text-violet-600"
+              className={`flex ${
+                menuopen ? "justify-center" : "items-center"
+              } md:px-[2em] px-[1em] hover:text-violet-600`}
             >
               Projects
             </a>
