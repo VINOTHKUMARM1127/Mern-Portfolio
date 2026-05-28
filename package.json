@@ -1,0 +1,11 @@
+{
+  "name": "portfolio-monorepo",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix Frontend",
+    "dev:studio": "npm run dev --prefix studio",
+    "build": "npm run build --prefix Frontend",
+    "migrate:dry": "node scripts/migrate-mongo-to-sanity.js --dry-run",
+    "migrate": "node scripts/migrate-mongo-to-sanity.js --execute"
+  }
+}

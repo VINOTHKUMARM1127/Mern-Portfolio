@@ -1,39 +1,45 @@
-import React, { useEffect, useState } from "react";
-import Explore from "../Components/Explore";
-import Main from "../Components/Main";
-import Footer from "../Components/Footer";
-import Skils from "../Components/Skils";
-import Education from "../Components/Education";
-import ScrollProgress from "../Components/ScrollProgress";
-import Projects from "../Components/Projects";
-import { Contactus } from "../Components/Contactus";
-import useDataFetch from "../Components/useDataFetch";
+import { useEffect } from "react";
+import { usePortfolio } from "../context/PortfolioContext";
+import PageLayout from "../layouts/PageLayout";
+import HeroSection from "../sections/HeroSection";
+import SkillsSection from "../sections/SkillsSection";
+import ProjectsSection from "../sections/ProjectsSection";
+import ServicesSection from "../sections/ServicesSection";
+import TestimonialsSection from "../sections/TestimonialsSection";
+import ContactSection from "../sections/ContactSection";
+import { refreshScrollReveal } from "../animations/scrollReveal";
 
-const Home = () => {       
-  const { Details, data, eduData, projectdata, loading } =  useDataFetch();
+export default function Home() {
+  const { loading, error, sanityConfigured } = usePortfolio();
+
+  useEffect(() => {
+    if (!loading) {
+      const t = setTimeout(refreshScrollReveal, 100);
+      return () => clearTimeout(t);
+    }
+  }, [loading]);
 
   return (
-    <div>
-      <ScrollProgress />
-      <Explore />
-      <div id="home">
-        <Main Details={Details} loading={loading} />
-      </div>
-      <div className="wap">
-        <div id="skills">
-          <Skils data={data} loading={loading} />
+    <PageLayout>
+      {!sanityConfigured && (
+        <div className="fixed top-20 left-0 right-0 z-[60] bg-amber-500/90 text-black text-center py-2 text-sm px-4">
+          Set VITE_SANITY_PROJECT_ID in Frontend/.env — see SANITY_SETUP.md
         </div>
-        <div id="education">
-          <Education eduData={eduData} loading={loading} />
+      )}
+      {error && (
+        <div className="fixed top-20 left-0 right-0 z-[60] bg-red-500/90 text-white text-center py-2 text-sm px-4">
+          {error}
         </div>
-      </div>
-      <div className="wapp" id="projects">
-        <Projects projectdata={projectdata} loading={loading} />
-        <Contactus />
-      </div>
-      <Footer />
-    </div>
-  );
-};
+      )}
 
-export default Home;
+      <section id="home">
+        <HeroSection />
+      </section>
+      <SkillsSection />
+      <ProjectsSection />
+      <ServicesSection />
+      <TestimonialsSection />
+      <ContactSection />
+    </PageLayout>
+  );
+}

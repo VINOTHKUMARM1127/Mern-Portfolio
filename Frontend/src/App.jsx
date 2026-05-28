@@ -1,75 +1,23 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./Components/Header";
+import { Routes, Route } from "react-router-dom";
+import { PortfolioProvider } from "./context/PortfolioContext";
 import Home from "./Pages/Home";
-import Login from "./Admin/Login";
-import EditPage from "./Admin/EditPage";
-import ProjectsEdit from "./Admin/ProjectsEdit";
-import EducationEdit from "./Admin/EducationEdit";
-import LoginCheck from "./Admin/LoginCheck";
-import DetailsEdit from "./Admin/DetailsEdit";
-import SkillsEdit from "./Admin/SkillsEdit";
-import { useEffect } from "react";
+import About from "./Pages/About";
+import Projects from "./Pages/Projects";
+import Services from "./Pages/Services";
+import Contact from "./Pages/Contact";
 
-const App = () => {
-  useEffect(() => {
-  if ("scrollRestoration" in window.history) {
-    window.history.scrollRestoration = "manual";
-  }
-  window.scrollTo(0, 0);
-}, []);
-
-
+function App() {
   return (
-    <BrowserRouter>
-      <div>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/Edit-Page"
-            element={
-              <LoginCheck>
-                <EditPage />
-              </LoginCheck>
-            }
-          />
-          <Route
-            path="/Edit-Page/Projects"
-            element={
-              <LoginCheck>
-                <ProjectsEdit />
-              </LoginCheck>
-            }
-          />
-          <Route
-            path="/Edit-Page/Education"
-            element={
-              <LoginCheck>
-                <EducationEdit />
-              </LoginCheck>
-            }
-          />
-          <Route
-            path="/Edit-Page/details"
-            element={
-              <LoginCheck>
-                <DetailsEdit />
-              </LoginCheck>
-            }
-          />
-          <Route
-            path="/Edit-Page/skills"
-            element={
-              <LoginCheck>
-                <SkillsEdit />
-              </LoginCheck>
-            }
-          />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <PortfolioProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </PortfolioProvider>
   );
-};
+}
 
 export default App;
