@@ -62,7 +62,7 @@ function FooterSection() {
               <Sparkles className="text-violet-400" size={28} />
               {site?.logoText || "DEVFOLIO"}
             </h3>
-            <p className="text-white/50 text-sm leading-relaxed max-w-sm">
+            <p className="text-white/70 text-sm leading-relaxed max-w-sm">
               {site?.siteDescription || "Crafting premium Full Stack and MERN applications with custom designs, clean codebases, and seamless integrations. Let's build something amazing together."}
             </p>
             
@@ -75,7 +75,7 @@ function FooterSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ y: -4, scale: 1.05 }}
-                  className={`w-10 h-10 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-center text-white/40 transition-all duration-300 ${s.hoverClass}`}
+                  className={`w-10 h-10 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-center text-white/60 transition-all duration-300 ${s.hoverClass}`}
                   aria-label={s.label}
                 >
                   <s.icon size={20} />
@@ -86,15 +86,15 @@ function FooterSection() {
 
           {/* Column 2: Quick Links */}
           <div className="lg:col-span-2 lg:col-start-6 flex flex-col gap-6">
-            <h4 className="text-sm font-bold tracking-widest text-white uppercase">
+            <h3 className="text-sm font-bold tracking-widest text-white uppercase">
               Quick Links
-            </h4>
+            </h3>
             <div className="flex flex-col gap-3">
               {quickLinks.map((link) => (
                 <Link
                   key={link.label}
                   to={link.path}
-                  className="text-white/50 hover:text-violet-400 text-sm w-fit transition-all duration-300 flex items-center gap-2 group"
+                  className="text-white/70 hover:text-violet-400 text-sm w-fit transition-all duration-300 flex items-center gap-2 group"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-violet-500/50 scale-0 group-hover:scale-100 transition-transform duration-300" />
                   <span className="group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
@@ -105,15 +105,15 @@ function FooterSection() {
 
           {/* Column 3: Services */}
           <div className="lg:col-span-2 flex flex-col gap-6">
-            <h4 className="text-sm font-bold tracking-widest text-white uppercase">
+            <h3 className="text-sm font-bold tracking-widest text-white uppercase">
               Services
-            </h4>
+            </h3>
             <div className="flex flex-col gap-3">
               {servicesLinks.map((link) => (
                 <Link
                   key={link.label}
                   to={link.path}
-                  className="text-white/50 hover:text-cyan-400 text-sm w-fit transition-all duration-300 flex items-center gap-2 group"
+                  className="text-white/70 hover:text-cyan-400 text-sm w-fit transition-all duration-300 flex items-center gap-2 group"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/50 scale-0 group-hover:scale-100 transition-transform duration-300" />
                   <span className="group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
@@ -124,10 +124,10 @@ function FooterSection() {
 
           {/* Column 4: Contact Info */}
           <div className="lg:col-span-3 flex flex-col gap-6">
-            <h4 className="text-sm font-bold tracking-widest text-white uppercase">
+            <h3 className="text-sm font-bold tracking-widest text-white uppercase">
               Contact Info
-            </h4>
-            <div className="flex flex-col gap-4 text-sm text-white/50">
+            </h3>
+            <div className="flex flex-col gap-4 text-sm text-white/70">
               {contact?.email && (
                 <a
                   href={`mailto:${contact.email}`}
@@ -137,7 +137,7 @@ function FooterSection() {
                     <Mail size={18} className="text-violet-400" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-xs text-white/40 mb-1">Email Me</span>
+                    <span className="text-xs text-white/60 mb-1">Email Me</span>
                     <span className="font-medium text-white/80">{contact.email}</span>
                   </div>
                 </a>
@@ -148,7 +148,7 @@ function FooterSection() {
                     <MapPin size={18} className="text-cyan-400" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-xs text-white/40 mb-1">Location</span>
+                    <span className="text-xs text-white/60 mb-1">Location</span>
                     <span className="font-medium text-white/80">{contact.location}</span>
                   </div>
                 </div>
@@ -179,14 +179,14 @@ function FooterSection() {
 
         {/* Bottom row */}
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-white/5">
-          <p className="text-white/40 text-sm text-center sm:text-left">
+          <p className="text-white/60 text-sm text-center sm:text-left">
             © {new Date().getFullYear()} {site?.siteTitle || hero?.name || "Portfolio"}. All rights reserved.
           </p>
           <motion.button
             whileHover={{ y: -3 }}
             type="button"
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-white/40 hover:text-white text-sm font-semibold uppercase tracking-wider bg-white/5 hover:bg-white/10 border border-white/5 px-5 py-2.5 rounded-xl transition-all duration-300"
+            className="flex items-center gap-2 text-white/60 hover:text-white text-sm font-semibold uppercase tracking-wider bg-white/5 hover:bg-white/10 border border-white/5 px-5 py-2.5 rounded-xl transition-all duration-300"
           >
             Back to Top <ArrowUp size={16} className="animate-bounce" />
           </motion.button>

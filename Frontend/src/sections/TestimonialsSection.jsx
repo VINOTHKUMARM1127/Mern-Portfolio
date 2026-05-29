@@ -106,9 +106,9 @@ function TestimonialsSection() {
 
                   {/* Client name and role */}
                   <div>
-                    <h4 className="font-extrabold text-white text-base tracking-wide">
+                    <h3 className="font-extrabold text-white text-base tracking-wide">
                       {current.clientName}
-                    </h4>
+                    </h3>
                     <p className="text-xs uppercase font-bold tracking-widest text-cyan-400 mt-0.5">
                       {current.clientRole}
                     </p>

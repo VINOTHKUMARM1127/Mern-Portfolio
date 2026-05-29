@@ -1,21 +1,26 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { PortfolioProvider } from "./context/PortfolioContext";
-import Home from "./Pages/Home";
-import About from "./Pages/About";
-import Projects from "./Pages/Projects";
-import Services from "./Pages/Services";
-import Contact from "./Pages/Contact";
+import GlobalLoader from "./components/ui/GlobalLoader";
+
+const Home = lazy(() => import("./Pages/Home"));
+const About = lazy(() => import("./Pages/About"));
+const Projects = lazy(() => import("./Pages/Projects"));
+const Services = lazy(() => import("./Pages/Services"));
+const Contact = lazy(() => import("./Pages/Contact"));
 
 function App() {
   return (
     <PortfolioProvider>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <Suspense fallback={<GlobalLoader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Suspense>
     </PortfolioProvider>
   );
 }

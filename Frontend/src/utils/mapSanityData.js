@@ -24,7 +24,7 @@ export function mapPortfolioData(raw) {
   const hero = raw.hero
     ? {
         ...raw.hero,
-        profileImageUrl: getImageUrl(raw.hero.profileImage, { width: 800 }),
+        profileImageUrl: getImageUrl(raw.hero.profileImage, { width: 500 }),
       }
     : null;
 
