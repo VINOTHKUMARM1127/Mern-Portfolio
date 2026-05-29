@@ -78,6 +78,8 @@ function TestimonialsSection() {
                     <img
                       src={current.imageUrl}
                       alt={current.clientName}
+                      loading="lazy"
+                      decoding="async"
                       className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-2 border-violet-500/30 shadow-lg shadow-violet-500/20"
                     />
                   ) : (

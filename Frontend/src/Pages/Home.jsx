@@ -1,13 +1,14 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { usePortfolio } from "../context/PortfolioContext";
 import PageLayout from "../layouts/PageLayout";
 import HeroSection from "../sections/HeroSection";
-import SkillsSection from "../sections/SkillsSection";
-import ProjectsSection from "../sections/ProjectsSection";
-import ServicesSection from "../sections/ServicesSection";
-import TestimonialsSection from "../sections/TestimonialsSection";
-import ContactSection from "../sections/ContactSection";
 import { refreshScrollReveal } from "../animations/scrollReveal";
+
+const SkillsSection = lazy(() => import("../sections/SkillsSection"));
+const ProjectsSection = lazy(() => import("../sections/ProjectsSection"));
+const ServicesSection = lazy(() => import("../sections/ServicesSection"));
+const TestimonialsSection = lazy(() => import("../sections/TestimonialsSection"));
+const ContactSection = lazy(() => import("../sections/ContactSection"));
 
 export default function Home() {
   const { loading, error, sanityConfigured } = usePortfolio();
@@ -35,11 +36,13 @@ export default function Home() {
       <section id="home">
         <HeroSection />
       </section>
-      <SkillsSection />
-      <ProjectsSection />
-      <ServicesSection />
-      <TestimonialsSection />
-      <ContactSection />
+      <Suspense fallback={<div className="min-h-[50vh]" />}>
+        <SkillsSection />
+        <ProjectsSection />
+        <ServicesSection />
+        <TestimonialsSection />
+        <ContactSection />
+      </Suspense>
     </PageLayout>
   );
 }

@@ -223,6 +223,7 @@ export default function HeroSection() {
                     src={hero.profileImageUrl}
                     alt={hero.name}
                     fetchPriority="high"
+                    loading="eager"
                     decoding="async"
                     className="w-full h-full object-cover rounded-full border-4 border-white/10"
                   />

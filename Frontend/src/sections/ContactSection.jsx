@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef, useState, memo } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { TbMail, TbSend, TbLoader2, TbCheck } from "react-icons/tb";
 import { usePortfolio } from "../context/PortfolioContext";
 
-export default function ContactSection() {
+function ContactSection() {
   const form = useRef();
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -112,3 +112,5 @@ export default function ContactSection() {
     </section>
   );
 }
+
+export default memo(ContactSection);
