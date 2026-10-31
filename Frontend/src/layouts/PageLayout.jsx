@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import FloatingNav from "../components/layout/FloatingNav";
 import FooterSection from "../sections/FooterSection";
+import CTAFloating from "../components/ui/CTAFloating";
 import { initScrollReveal, refreshScrollReveal } from "../animations/scrollReveal";
 
 export default function PageLayout({ children }) {
@@ -21,10 +22,11 @@ export default function PageLayout({ children }) {
   return (
     <div className="bg-[#0a0a0f] min-h-screen text-white overflow-x-hidden flex flex-col">
       <FloatingNav />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1" role="main">
         {children}
       </main>
       <FooterSection />
+      <CTAFloating />
     </div>
   );
 }

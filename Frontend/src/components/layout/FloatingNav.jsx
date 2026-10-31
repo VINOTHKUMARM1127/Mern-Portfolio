@@ -49,6 +49,8 @@ export default function FloatingNav() {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
+        role="navigation"
+        aria-label="Main navigation"
         className={`fixed top-0 left-0 right-0 z-50 hidden lg:block transition-all duration-300 ${
           scrolled
             ? "bg-[#0a0a0f]/90 backdrop-blur-md py-3"
@@ -105,7 +107,7 @@ export default function FloatingNav() {
       </motion.nav>
 
       {/* Mobile Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 lg:hidden">
+      <nav className="fixed top-0 left-0 right-0 z-50 lg:hidden" role="navigation" aria-label="Mobile navigation">
         <div
           className={`flex items-center justify-between px-6 py-4 transition-colors duration-300 ${
             scrolled || menuOpen

@@ -1,7 +1,6 @@
 import { getImageUrl } from "../sanity/image";
 import {
   skillsData,
-  experienceData,
   servicesData,
   testimonialsData,
   educationData,
@@ -105,14 +104,22 @@ export function mapPortfolioData(raw) {
       }))
     : testimonialsData;
 
+  const experience = raw.experience && raw.experience.length > 0 
+    ? raw.experience 
+    : [];
+
+  const education = raw.education && raw.education.length > 0 
+    ? raw.education 
+    : educationData;
+
   return {
     hero,
     about,
     skills: skillsData,
     projects,
-    education: educationData,
+    education,
     certifications: certificationsData,
-    experience: experienceData,
+    experience,
     services: servicesData,
     testimonials,
     contact,

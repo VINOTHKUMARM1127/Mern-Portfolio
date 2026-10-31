@@ -2,31 +2,50 @@ import { motion } from "framer-motion";
 
 export default function GlobalLoader() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] flex flex-col pt-32 px-6 max-w-7xl mx-auto w-full">
-      {/* Hero Skeleton */}
-      <div className="flex flex-col-reverse lg:flex-row justify-between items-center gap-12 mb-24 animate-pulse">
-        <div className="flex-1 space-y-6 w-full">
-          <div className="h-8 w-48 bg-white/5 rounded-full" />
-          <div className="h-16 w-3/4 bg-white/10 rounded-xl" />
-          <div className="h-10 w-1/2 bg-white/5 rounded-xl" />
-          <div className="h-24 w-full bg-white/5 rounded-xl" />
-          <div className="flex gap-4 pt-4">
-            <div className="h-14 w-40 bg-white/10 rounded-xl" />
-            <div className="h-14 w-40 bg-white/5 rounded-xl" />
+    <div className="fixed inset-0 z-[200] bg-[#0a0a0f] flex flex-col items-center justify-center">
+      {/* Animated logo */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-col items-center gap-6"
+      >
+        {/* Logo mark */}
+        <motion.div
+          className="relative w-20 h-20"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+        >
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-500 opacity-20 blur-xl" />
+          <div className="relative w-full h-full rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center">
+            <span className="text-white text-2xl font-extrabold tracking-wider">V</span>
           </div>
-        </div>
-        <div className="w-[280px] h-[280px] md:w-[350px] md:h-[350px] bg-white/5 rounded-full flex-shrink-0" />
-      </div>
+        </motion.div>
 
-      {/* Content Skeletons */}
-      <div className="space-y-8 animate-pulse">
-        <div className="h-10 w-64 bg-white/10 rounded-xl mb-12 mx-auto" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-64 bg-white/5 rounded-2xl border border-white/5" />
-          ))}
+        {/* Loading bar */}
+        <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: "100%" }}
+            transition={{
+              duration: 1.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="w-full h-full bg-gradient-to-r from-violet-600 via-purple-500 to-cyan-500 rounded-full"
+          />
         </div>
-      </div>
+
+        {/* Text */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-white/40 text-sm font-medium tracking-wider uppercase"
+        >
+          Loading...
+        </motion.p>
+      </motion.div>
     </div>
   );
 }

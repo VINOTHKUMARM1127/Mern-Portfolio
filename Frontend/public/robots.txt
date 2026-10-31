@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /studio/
+
+Crawl-delay: 1
 
 Sitemap: https://vinothkumarm27.vercel.app/sitemap.xml

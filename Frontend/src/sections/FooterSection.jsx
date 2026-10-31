@@ -43,7 +43,7 @@ function FooterSection() {
   ].filter((l) => l.href);
 
   return (
-    <footer className="relative pt-32 pb-12 bg-[#0a0a0f] overflow-hidden">
+    <footer className="relative pt-20 pb-10 bg-[#0a0a0f] overflow-hidden" role="contentinfo">
       {/* Background ambient glows */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
@@ -53,6 +53,26 @@ function FooterSection() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
+        {/* CTA Banner (Moved to top of footer) */}
+        <div className="relative rounded-3xl bg-gradient-to-br from-violet-600/10 to-cyan-600/10 border border-white/10 p-8 md:p-12 mb-20 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 backdrop-blur-sm">
+          {/* Subtle noise pattern overlay */}
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20 pointer-events-none" />
+          
+          <div className="relative z-10 text-center md:text-left">
+            <h2 className="text-2xl md:text-4xl font-black text-white mb-3">Ready to start a project?</h2>
+            <p className="text-white/70 text-lg max-w-xl">Let's build something extraordinary together. Available for freelance opportunities and full-time roles.</p>
+          </div>
+          <Link to="/contact">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative z-10 flex items-center gap-3 px-8 py-4 rounded-xl bg-white text-black font-bold tracking-wide hover:bg-violet-50 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.15)] text-lg whitespace-nowrap"
+            >
+              Let's Talk <Send size={20} />
+            </motion.button>
+          </Link>
+        </div>
+
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16">
           
@@ -94,9 +114,10 @@ function FooterSection() {
                 <Link
                   key={link.label}
                   to={link.path}
+                  title={`Navigate to ${link.label} page`}
                   className="text-white/70 hover:text-violet-400 text-sm w-fit transition-all duration-300 flex items-center gap-2 group"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-violet-500/50 scale-0 group-hover:scale-100 transition-transform duration-300" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-violet-500/50 scale-0 group-hover:scale-100 transition-transform duration-300" aria-hidden="true" />
                   <span className="group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
                 </Link>
               ))}
@@ -157,30 +178,11 @@ function FooterSection() {
           </div>
         </div>
 
-        {/* Call to action card */}
-        <div className="relative rounded-3xl bg-gradient-to-br from-violet-600/10 to-cyan-600/10 border border-white/10 p-8 md:p-12 mb-16 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 backdrop-blur-sm">
-          {/* Subtle noise pattern overlay */}
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20 pointer-events-none" />
-          
-          <div className="relative z-10 text-center md:text-left">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Ready to start a project?</h2>
-            <p className="text-white/60">Let's build something extraordinary together. Available for freelance opportunities.</p>
-          </div>
-          <Link to="/contact">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative z-10 flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-black font-bold tracking-wide hover:bg-violet-50 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.2)]"
-            >
-              Let's Talk <Send size={18} />
-            </motion.button>
-          </Link>
-        </div>
-
         {/* Bottom row */}
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-white/5">
           <p className="text-white/60 text-sm text-center sm:text-left">
             © {new Date().getFullYear()} {site?.siteTitle || hero?.name || "Portfolio"}. All rights reserved.
+            <span className="hidden sm:inline"> · Built with React & ❤️</span>
           </p>
           <motion.button
             whileHover={{ y: -3 }}

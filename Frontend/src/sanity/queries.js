@@ -13,5 +13,11 @@ export const PORTFOLIO_QUERY = `{
   },
   "testimonials": *[_type == "testimonial"] | order(_createdAt desc){
     _id, clientName, clientRole, quote, rating, clientImage
+  },
+  "experience": *[_type == "experience"] | order(order asc, startDate desc){
+    _id, role, company, startDate, endDate, isCurrent, description, technologies, order
+  },
+  "education": *[_type == "education"] | order(order asc){
+    _id, institution, degree, year, description, order
   }
 }`;

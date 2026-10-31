@@ -23,6 +23,7 @@ export default defineConfig(({ mode }) => {
       proxy: sanityProxy,
     },
     build: {
+      cssCodeSplit: true,
       rollupOptions: {
         output: {
           manualChunks: {
@@ -31,9 +32,11 @@ export default defineConfig(({ mode }) => {
             gsap: ["gsap"],
             sanity: ["@sanity/client", "@sanity/image-url"],
             motion: ["framer-motion"],
+            icons: ["react-icons", "lucide-react"],
           },
         },
       },
+      chunkSizeWarningLimit: 250,
     },
   };
 });

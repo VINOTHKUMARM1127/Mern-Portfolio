@@ -41,6 +41,20 @@
   /* Blur */
   --blur-glass: 20px;
 
+  /* Spacing (8pt grid) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -75,8 +89,8 @@ body {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -96,6 +110,31 @@ body {
 ::selection {
   background: var(--color-primary);
   color: white;
+}
+
+/* ==========================================
+   ACCESSIBILITY — Focus Visible
+   ========================================== */
+
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ==========================================
+   REDUCED MOTION
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ==========================================
@@ -151,6 +190,22 @@ html.lenis body {
   border-radius: 1rem;
 }
 
+.glass-card-premium {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.25rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-premium:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+  box-shadow: 0 20px 40px -15px rgba(139, 92, 246, 0.15), 0 0 50px -10px rgba(139, 92, 246, 0.1);
+  transform: translateY(-4px);
+}
+
 /* ==========================================
    GRADIENT TEXT
    ========================================== */
@@ -193,7 +248,6 @@ html.lenis body {
   box-shadow: 0 0 60px -10px rgba(168, 85, 247, 0.3);
 }
 
-/* Text glow */
 .text-glow {
   text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
 }
@@ -207,9 +261,24 @@ html.lenis body {
   color: white;
   padding: 0.875rem 2rem;
   border-radius: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   transition: var(--transition-base);
   box-shadow: 0 4px 20px -5px rgba(139, 92, 246, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-primary:hover::after {
+  transform: translateX(100%);
 }
 
 .btn-primary:hover {
@@ -267,6 +336,7 @@ html.lenis body {
   color: white;
   width: 100%;
   transition: var(--transition-base);
+  font-size: 0.9375rem;
 }
 
 .input:focus {
@@ -284,51 +354,29 @@ html.lenis body {
    ========================================== */
 
 @keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes pulse-glow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-  }
-
-  50% {
-    box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
-  }
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.5); }
 }
 
 @keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .animate-float {
@@ -348,15 +396,20 @@ html.lenis body {
   animation: gradient-shift 4s ease infinite;
 }
 
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+
 /* ==========================================
    SECTION STYLES
    ========================================== */
 
 .section-title {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 800;
   color: white;
   margin-bottom: 1rem;
+  letter-spacing: -0.02em;
 }
 
 .section-subtitle {
@@ -364,6 +417,7 @@ html.lenis body {
   color: var(--color-text-muted);
   max-width: 600px;
   margin: 0 auto;
+  line-height: 1.7;
 }
 
 .section-badge {
@@ -375,7 +429,7 @@ html.lenis body {
   border: 1px solid rgba(139, 92, 246, 0.2);
   border-radius: 9999px;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-primary-light);
   margin-bottom: 1rem;
 }
@@ -417,42 +471,8 @@ html.lenis body {
 }
 
 /* ==========================================
-   LEGACY SUPPORT (from old design)
+   LINE CLAMP UTILITIES
    ========================================== */
-
-.wap {
-  background-color: #191924;
-  padding-top: 2em;
-  padding-bottom: 2em;
-}
-
-.wapp {
-  background-color: #191924;
-  padding-top: 2em;
-  padding-bottom: 2em;
-  clip-path: polygon(0 0, 100% 4%, 100% 100%, 0% 96%);
-}
-
-.cut {
-  clip-path: polygon(0 3%, 100% 0, 100% 97%, 0% 100%);
-}
-
-.bs:hover {
-  box-shadow: 0 0 15px #6536ff !important;
-}
-
-.sb::-webkit-scrollbar {
-  width: 5px;
-}
-
-.sb::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.sb::-webkit-scrollbar-thumb {
-  background: #6536ff;
-  border-radius: 4px;
-}
 
 .line-clamp-3 {
   overflow: hidden;
@@ -473,12 +493,8 @@ html.lenis body {
    ========================================== */
 
 @keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
 
 .animate-marquee {
@@ -490,26 +506,9 @@ html.lenis body {
 }
 
 /* ==========================================
-   PREMIUM GLOW AND CARD STYLES
+   SOCIAL ICON HOVER STYLES
    ========================================== */
 
-.glass-card-premium {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 1.25rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass-card-premium:hover {
-  border-color: rgba(139, 92, 246, 0.3);
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
-  box-shadow: 0 20px 40px -15px rgba(139, 92, 246, 0.15), 0 0 50px -10px rgba(139, 92, 246, 0.1);
-  transform: translateY(-4px);
-}
-
-/* Social Icon hover gradient border & shadow */
 .social-btn-glow {
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -538,7 +537,10 @@ html.lenis body {
   color: #ffffff;
 }
 
-/* Service Card Gradient Border hover effect */
+/* ==========================================
+   SERVICE CARD PREMIUM STYLES
+   ========================================== */
+
 .service-card-premium {
   border: 1px solid rgba(255, 255, 255, 0.05);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 100%);
@@ -550,4 +552,21 @@ html.lenis body {
   border-color: rgba(6, 182, 212, 0.3);
   box-shadow: 0 20px 40px -20px rgba(6, 182, 212, 0.2);
   transform: translateY(-6px);
+}
+
+/* ==========================================
+   NOISE TEXTURE OVERLAY
+   ========================================== */
+
+.noise-overlay {
+  position: relative;
+}
+
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
 }
