@@ -2,7 +2,7 @@ import { memo, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { TbBriefcase, TbStar, TbExternalLink, TbBrandGithub, TbArrowRight } from "react-icons/tb";
+import { TbBriefcase, TbStar, TbExternalLink, TbArrowRight } from "react-icons/tb";
 import SectionHeader from "../components/ui/SectionHeader";
 import ProjectModal from "../components/projects/ProjectModal";
 import { usePortfolio } from "../context/PortfolioContext";

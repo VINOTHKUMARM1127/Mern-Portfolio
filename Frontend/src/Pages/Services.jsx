@@ -3,7 +3,6 @@ import { Icon } from "@iconify/react";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import PageLayout from "../layouts/PageLayout";
-import SectionHeader from "../components/ui/SectionHeader";
 import { usePortfolio } from "../context/PortfolioContext";
 import WhyHireMeSection from "../sections/WhyHireMeSection";
 

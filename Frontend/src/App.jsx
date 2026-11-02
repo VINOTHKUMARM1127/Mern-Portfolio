@@ -10,6 +10,7 @@ const About = lazy(() => import("./Pages/About"));
 const Projects = lazy(() => import("./Pages/Projects"));
 const Services = lazy(() => import("./Pages/Services"));
 const Contact = lazy(() => import("./Pages/Contact"));
+const Review = lazy(() => import("./Pages/Review"));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -54,6 +55,14 @@ function AnimatedRoutes() {
           element={
             <PageTransition>
               <Contact />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/review"
+          element={
+            <PageTransition>
+              <Review />
             </PageTransition>
           }
         />

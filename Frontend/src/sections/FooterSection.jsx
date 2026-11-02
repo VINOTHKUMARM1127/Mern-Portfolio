@@ -9,8 +9,9 @@ import {
   TbBrandFacebook,
   TbBrandWhatsapp,
 } from "react-icons/tb";
-import { Mail, MapPin, ArrowUp, Sparkles, Send } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowUp, Sparkles, Send } from "lucide-react";
 import { usePortfolio } from "../context/PortfolioContext";
+import { getWhatsAppUrl } from "../utils/contactUtils";
 
 function FooterSection() {
   const { site, social, contact, hero } = usePortfolio();
@@ -39,7 +40,7 @@ function FooterSection() {
     { icon: TbBrandFacebook, href: social?.facebook, label: "Facebook", hoverClass: "hover:text-[#1877F2] hover:bg-[#1877F2]/10 hover:border-[#1877F2]/30 hover:shadow-[0_0_15px_rgba(24,119,242,0.2)]" },
     { icon: TbBrandInstagram, href: social?.instagram, label: "Instagram", hoverClass: "hover:text-[#E1306C] hover:bg-[#E1306C]/10 hover:border-[#E1306C]/30 hover:shadow-[0_0_15px_rgba(225,48,108,0.2)]" },
     { icon: TbBrandTwitter, href: social?.twitter, label: "Twitter", hoverClass: "hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10 hover:border-[#1DA1F2]/30 hover:shadow-[0_0_15px_rgba(29,161,242,0.2)]" },
-    { icon: TbBrandWhatsapp, href: social?.whatsapp ? `https://wa.me/${social.whatsapp}` : null, label: "WhatsApp", hoverClass: "hover:text-[#25D366] hover:bg-[#25D366]/10 hover:border-[#25D366]/30 hover:shadow-[0_0_15px_rgba(37,211,102,0.2)]" },
+    { icon: TbBrandWhatsapp, href: getWhatsAppUrl(social?.whatsapp || contact?.phone || "+919344842329", ""), label: "WhatsApp", hoverClass: "hover:text-[#25D366] hover:bg-[#25D366]/10 hover:border-[#25D366]/30 hover:shadow-[0_0_15px_rgba(37,211,102,0.2)]" },
   ].filter((l) => l.href);
 
   return (
@@ -160,6 +161,21 @@ function FooterSection() {
                   <div className="flex flex-col">
                     <span className="text-xs text-white/60 mb-1">Email Me</span>
                     <span className="font-medium text-white/80">{contact.email}</span>
+                  </div>
+                </a>
+              )}
+              {contact?.phone && (
+                <a
+                  href={`tel:${contact.phone.replace(/\s+/g, "")}`}
+                  className="flex items-start gap-3 hover:text-white transition-colors group p-3 -ml-3 rounded-xl hover:bg-white/[0.02] border border-transparent hover:border-white/5"
+                  title={`Call ${contact.phone}`}
+                >
+                  <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 group-hover:bg-emerald-500/20 group-hover:scale-110 transition-all duration-300">
+                    <Phone size={18} className="text-emerald-400" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-white/60 mb-1">Phone / WhatsApp</span>
+                    <span className="font-medium text-white/80">{contact.phone}</span>
                   </div>
                 </a>
               )}

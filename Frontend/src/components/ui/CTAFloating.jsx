@@ -1,7 +1,8 @@
 import { useState, useEffect, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TbBrandWhatsapp, TbMail, TbX } from "react-icons/tb";
+import { TbBrandWhatsapp, TbMail, TbPhone, TbX } from "react-icons/tb";
 import { usePortfolio } from "../../context/PortfolioContext";
+import { getWhatsAppUrl } from "../../utils/contactUtils";
 
 function CTAFloating() {
   const [visible, setVisible] = useState(false);
@@ -10,19 +11,25 @@ function CTAFloating() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > 600);
+      setVisible(window.scrollY > 150);
     };
+    // Check initial scroll
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   if (!visible) return null;
 
-  const whatsappUrl = social?.whatsapp
-    ? `https://wa.me/${social.whatsapp}?text=Hi%20Vinoth!%20I'm%20interested%20in%20your%20web%20development%20services.`
-    : null;
+  const whatsappUrl = getWhatsAppUrl(
+    social?.whatsapp || contact?.whatsapp || "+919344842329",
+    "Hi Vinoth! I'm interested in your web development services."
+  );
 
-  const emailUrl = contact?.email ? `mailto:${contact.email}` : null;
+  const email = contact?.email || "vinothkumarm1127@gmail.com";
+  const emailUrl = `mailto:${email}?subject=${encodeURIComponent("Hiring Inquiry - Full Stack Developer")}`;
+  const phone = contact?.phone || "+919344842329";
+  const phoneUrl = `tel:${phone.replace(/\s+/g, "")}`;
 
   return (
     <AnimatePresence>
@@ -46,11 +53,29 @@ function CTAFloating() {
                   href={emailUrl}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 rounded-full bg-violet-600 text-white flex items-center justify-center shadow-lg shadow-violet-600/30 hover:shadow-violet-600/50 transition-shadow"
-                  aria-label="Send email"
-                  title="Send Email"
+                  className="w-12 h-12 rounded-full bg-violet-600 text-white flex items-center justify-center shadow-lg shadow-violet-600/30 hover:shadow-violet-600/50 transition-all group relative"
+                  aria-label="Send email to hire"
+                  title={`Email: ${email}`}
                 >
                   <TbMail size={22} />
+                  <span className="absolute right-14 px-3 py-1 bg-[#121218] text-white text-xs rounded-lg border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">
+                    Email: {email}
+                  </span>
+                </motion.a>
+              )}
+              {phoneUrl && (
+                <motion.a
+                  href={phoneUrl}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-12 h-12 rounded-full bg-cyan-600 text-white flex items-center justify-center shadow-lg shadow-cyan-600/30 hover:shadow-cyan-600/50 transition-all group relative"
+                  aria-label="Call phone number"
+                  title={`Call: ${phone}`}
+                >
+                  <TbPhone size={22} />
+                  <span className="absolute right-14 px-3 py-1 bg-[#121218] text-white text-xs rounded-lg border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">
+                    Call: {phone}
+                  </span>
                 </motion.a>
               )}
               {whatsappUrl && (
@@ -60,11 +85,14 @@ function CTAFloating() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg shadow-[#25D366]/30 hover:shadow-[#25D366]/50 transition-shadow"
+                  className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg shadow-[#25D366]/30 hover:shadow-[#25D366]/50 transition-all group relative"
                   aria-label="Chat on WhatsApp"
-                  title="Chat on WhatsApp"
+                  title="WhatsApp: +91 93448 42329"
                 >
                   <TbBrandWhatsapp size={22} />
+                  <span className="absolute right-14 px-3 py-1 bg-[#121218] text-white text-xs rounded-lg border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">
+                    WhatsApp Chat
+                  </span>
                 </motion.a>
               )}
             </motion.div>

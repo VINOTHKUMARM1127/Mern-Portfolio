@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Briefcase, GraduationCap, MapPin, Calendar, Code2, Rocket } from "lucide-react";
+import { Briefcase, GraduationCap, MapPin, Code2, Rocket, Mail } from "lucide-react";
 import PageLayout from "../layouts/PageLayout";
 import SkillsSection from "../sections/SkillsSection";
 import SectionHeader from "../components/ui/SectionHeader";
@@ -99,19 +99,23 @@ export default function About() {
                     </div>
                     <div>
                       <p className="text-xs text-white/40 uppercase tracking-wider font-semibold mb-0.5">Specialty</p>
-                      <p className="text-sm text-white/90 font-medium">MERN Stack & Next.js</p>
+                      <p className="text-sm text-white/90 font-medium">MERN Stack</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
-                    <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 shrink-0">
-                      <Calendar size={20} />
+                  <a
+                    href={`mailto:${contact?.email || "vinothkumarm1127@gmail.com"}?subject=${encodeURIComponent("Hiring Inquiry - Full Stack Developer")}`}
+                    className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-violet-500/30 hover:bg-white/[0.04] transition-all group"
+                    title="Send Email"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-400 shrink-0 group-hover:scale-110 group-hover:bg-violet-500/20 transition-all">
+                      <Mail size={20} />
                     </div>
-                    <div>
-                      <p className="text-xs text-white/40 uppercase tracking-wider font-semibold mb-0.5">Experience</p>
-                      <p className="text-sm text-white/90 font-medium">3+ Years</p>
+                    <div className="min-w-0">
+                      <p className="text-xs text-white/40 uppercase tracking-wider font-semibold mb-0.5">Direct Email</p>
+                      <p className="text-sm text-white/90 font-medium truncate">{contact?.email || "vinothkumarm1127@gmail.com"}</p>
                     </div>
-                  </div>
+                  </a>
 
                   <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
                     <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 shrink-0">

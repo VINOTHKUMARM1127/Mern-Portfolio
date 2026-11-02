@@ -1,4 +1,5 @@
 import { useState, useEffect, memo } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   TbMessageCircle,
@@ -6,6 +7,7 @@ import {
   TbChevronRight,
   TbStarFilled,
   TbQuote,
+  TbArrowRight,
 } from "react-icons/tb";
 import SectionHeader from "../components/ui/SectionHeader";
 import { usePortfolio } from "../context/PortfolioContext";
@@ -21,9 +23,16 @@ function TestimonialsSection() {
       setIndex((p) => (p + 1) % testimonials.length);
     }, 8000);
     return () => clearInterval(t);
-  }, [testimonials]);
+  }, [testimonials.length]);
 
-  // Inject Review schema
+  // Keep index within bounds if testimonials list changes
+  useEffect(() => {
+    if (index >= testimonials.length && testimonials.length > 0) {
+      setIndex(testimonials.length - 1);
+    }
+  }, [testimonials.length, index]);
+
+  // Inject Review schema for approved reviews only
   useEffect(() => {
     if (testimonials.length === 0) return;
 
@@ -44,7 +53,7 @@ function TestimonialsSection() {
         },
         reviewRating: {
           "@type": "Rating",
-          ratingValue: t.rating || 5,
+          ratingValue: Math.max(1, Math.min(5, Math.round(Number(t.rating) || 5))),
           bestRating: 5,
         },
         reviewBody: t.quote || t.reviewText,
@@ -73,7 +82,22 @@ function TestimonialsSection() {
 
   if (testimonials.length === 0) return null;
 
-  const current = testimonials[index];
+  // Safe index and rating clamping
+  const safeIndex = Math.min(Math.max(0, index), testimonials.length - 1);
+  const current = testimonials[safeIndex];
+  const safeRating = Math.max(1, Math.min(5, Math.round(Number(current?.rating) || 5)));
+
+  // Calculate average rating
+  const reviewCount = testimonials.length;
+  const avgRating =
+    reviewCount > 0
+      ? (
+          testimonials.reduce(
+            (acc, t) => acc + Math.max(1, Math.min(5, Number(t.rating) || 5)),
+            0
+          ) / reviewCount
+        ).toFixed(1)
+      : "5.0";
 
   const getInitials = (name) => {
     if (!name) return "U";
@@ -102,10 +126,27 @@ function TestimonialsSection() {
           subtitle="Feedback from clients who trusted me with their MERN stack and freelance projects."
         />
 
+        {/* Average Rating + Count summary (shown when 2+ reviews exist) */}
+        {reviewCount >= 2 && (
+          <div className="flex items-center justify-center -mt-6 mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/10 text-xs text-white/80 backdrop-blur-md shadow-sm">
+              <div className="flex items-center gap-1 text-amber-400">
+                <TbStarFilled size={13} />
+                <span className="font-bold text-white text-xs">{avgRating}</span>
+                <span className="text-white/40">/ 5.0</span>
+              </div>
+              <span className="text-white/30">·</span>
+              <span className="text-white/70 font-medium">
+                Based on {reviewCount} client reviews
+              </span>
+            </div>
+          </div>
+        )}
+
         <div className="relative min-h-[280px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
-              key={current._id || index}
+              key={current?._id || safeIndex}
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -15 }}
@@ -120,7 +161,7 @@ function TestimonialsSection() {
 
                 {/* Client image / Initials fallback */}
                 <div className="shrink-0 relative">
-                  {current.imageUrl ? (
+                  {current?.imageUrl ? (
                     <img
                       src={current.imageUrl}
                       alt={current.clientName}
@@ -130,7 +171,7 @@ function TestimonialsSection() {
                     />
                   ) : (
                     <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-tr from-violet-600 to-cyan-500 flex items-center justify-center font-bold text-white text-2xl border-2 border-violet-500/30 shadow-lg shadow-violet-500/20">
-                      {getInitials(current.clientName)}
+                      {getInitials(current?.clientName)}
                     </div>
                   )}
                   <div
@@ -143,28 +184,28 @@ function TestimonialsSection() {
 
                 {/* Testimonial body */}
                 <div className="flex-1 text-center md:text-left">
-                  {/* Rating Stars */}
+                  {/* Rating Stars (clamped 1-5 safely) */}
                   <div
                     className="flex justify-center md:justify-start gap-1 text-amber-400 mb-4"
-                    aria-label={`Rating: ${current.rating || 5} out of 5 stars`}
+                    aria-label={`Rating: ${safeRating} out of 5 stars`}
                   >
-                    {Array.from({ length: current.rating || 5 }).map((_, i) => (
+                    {Array.from({ length: safeRating }).map((_, i) => (
                       <TbStarFilled key={i} size={16} />
                     ))}
                   </div>
 
                   {/* Review Text */}
                   <blockquote className="text-base md:text-lg text-white/80 italic mb-6 leading-relaxed">
-                    &ldquo;{current.quote || current.reviewText}&rdquo;
+                    &ldquo;{current?.quote || current?.reviewText}&rdquo;
                   </blockquote>
 
                   {/* Client name and role */}
                   <div>
                     <h3 className="font-extrabold text-white text-base tracking-wide">
-                      {current.clientName}
+                      {current?.clientName}
                     </h3>
                     <p className="text-xs uppercase font-bold tracking-widest text-cyan-400 mt-0.5">
-                      {current.clientRole}
+                      {current?.clientRole}
                     </p>
                   </div>
                 </div>
@@ -200,7 +241,7 @@ function TestimonialsSection() {
                   type="button"
                   onClick={() => setIndex(i)}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    i === index
+                    i === safeIndex
                       ? "bg-violet-500 w-6"
                       : "bg-white/20 hover:bg-white/40"
                   }`}
@@ -223,9 +264,23 @@ function TestimonialsSection() {
             </motion.button>
           </div>
         )}
+
+        {/* Subtle "Leave a review" link */}
+        <div className="flex justify-center mt-10">
+          <Link
+            to="/review"
+            className="group inline-flex items-center gap-2 text-xs font-medium text-white/50 hover:text-cyan-400 transition-all duration-300 py-1.5 px-4 rounded-full border border-white/5 hover:border-cyan-500/30 hover:bg-white/[0.02]"
+          >
+            <span>Worked with me on a project?</span>
+            <span className="font-semibold text-white/70 group-hover:text-cyan-300 inline-flex items-center gap-1 underline underline-offset-4 decoration-white/20 group-hover:decoration-cyan-400/50">
+              Leave a review <TbArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+            </span>
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
 
 export default memo(TestimonialsSection);
+

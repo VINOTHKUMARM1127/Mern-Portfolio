@@ -11,7 +11,7 @@ export const PORTFOLIO_QUERY = `{
     _id, title, description, image, techStack, githubUrl, liveUrl,
     category, featured, completedAt, order
   },
-  "testimonials": *[_type == "testimonial"] | order(_createdAt desc){
+  "testimonials": *[_type == "testimonial" && !(_id in path("drafts.**"))] | order(_createdAt desc){
     _id, clientName, clientRole, quote, rating, clientImage
   },
   "experience": *[_type == "experience"] | order(order asc, startDate desc){

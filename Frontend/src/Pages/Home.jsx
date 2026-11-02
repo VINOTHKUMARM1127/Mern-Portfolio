@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect } from "react";
 import { usePortfolio } from "../context/PortfolioContext";
 import PageLayout from "../layouts/PageLayout";
 import HeroSection from "../sections/HeroSection";
-import StatsSection from "../sections/StatsSection";
 import { refreshScrollReveal } from "../animations/scrollReveal";
 
 const SkillsSection = lazy(() => import("../sections/SkillsSection"));

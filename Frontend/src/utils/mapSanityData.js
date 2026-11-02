@@ -7,6 +7,10 @@ import {
   certificationsData,
   contactDefaultData
 } from "../data/staticData";
+import {
+  normalizeWhatsAppNumber,
+  normalizeEmail,
+} from "./contactUtils";
 
 function formatDate(dateStr) {
   if (!dateStr) return "";
@@ -31,11 +35,6 @@ export function mapPortfolioData(raw) {
   const about = null;
 
   // Derive resumeUrl from hero's resumeUrl or resumeFile
-  // Wait, resumeFile is a Sanity file reference. Our query just fetches `resumeFile`, but we need its URL.
-  // We didn't fetch `resumeFile.asset->url` in queries.js!
-  // I should update queries.js to fetch `resumeFile.asset->url`.
-  // Wait, I can just do it here or update queries.js. I'll assume the URL is needed, so I'll also patch queries.js later or adjust mapping.
-  // Wait, let's just use `hero.resumeUrl` or whatever is passed.
   const resumeUrl = hero?.resumeUrl || null;
 
   const projects = (raw.projects || []).map((p) => ({
@@ -53,21 +52,29 @@ export function mapPortfolioData(raw) {
     order: p.order ?? 0,
   }));
 
-  // Assign social and contact from hero
+  // Normalize email - prioritize vinothkumarm1127@gmail.com over legacy email
+  const resolvedEmail = normalizeEmail(hero?.email || contactDefaultData.email);
+
+  // Normalize WhatsApp number - ensure +919344842329 with no typos and valid international digits
+  const resolvedWhatsApp = normalizeWhatsAppNumber(
+    hero?.whatsapp || contactDefaultData.whatsapp || contactDefaultData.phone
+  );
+
+  // Assign social and contact from hero with sanitized values
   const social = {
-    github: hero?.github,
-    linkedin: hero?.linkedin,
+    github: hero?.github || contactDefaultData.github,
+    linkedin: hero?.linkedin || contactDefaultData.linkedin,
     twitter: hero?.twitter,
     instagram: hero?.instagram,
     facebook: hero?.facebook,
-    whatsapp: hero?.whatsapp,
+    whatsapp: resolvedWhatsApp,
   };
 
   const contact = {
-    email: hero?.email || contactDefaultData.email,
+    email: resolvedEmail,
     phone: contactDefaultData.phone,
     location: contactDefaultData.location,
-    whatsapp: hero?.whatsapp,
+    whatsapp: resolvedWhatsApp,
   };
 
   const site = {
@@ -88,6 +95,7 @@ export function mapPortfolioData(raw) {
     facebook: social.facebook,
     whatsapp: contact.whatsapp,
     email: contact.email,
+    phone: contact.phone,
     logoText: site.logoText,
     siteDescription: site.siteDescription,
     siteTitle: site.siteTitle,

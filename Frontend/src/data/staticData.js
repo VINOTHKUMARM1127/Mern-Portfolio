@@ -1,5 +1,6 @@
 // ============================================================
-// SKILLS DATA
+// SKILLS DATA  (matches resume: React.js, Tailwind CSS, Node.js,
+// Express.js, HTML, CSS, JavaScript, MongoDB, Supabase, Git)
 // ============================================================
 export const skillsData = [
   // Frontend
@@ -7,25 +8,18 @@ export const skillsData = [
   { _id: "css", title: "CSS3", category: "Frontend", icon: "logos:css-3" },
   { _id: "js", title: "JavaScript", category: "Frontend", icon: "logos:javascript" },
   { _id: "react", title: "React.js", category: "Frontend", icon: "logos:react" },
-  { _id: "nextjs", title: "Next.js", category: "Frontend", icon: "logos:nextjs-icon" },
   { _id: "tailwind", title: "Tailwind CSS", category: "Frontend", icon: "logos:tailwindcss-icon" },
-  { _id: "framer", title: "Framer Motion", category: "Frontend", icon: "logos:framer" },
-  // Backend
+  // Backend & Database
   { _id: "node", title: "Node.js", category: "Backend", icon: "logos:nodejs-icon" },
   { _id: "express", title: "Express.js", category: "Backend", icon: "simple-icons:express" },
   { _id: "mongo", title: "MongoDB", category: "Backend", icon: "logos:mongodb-icon" },
-  { _id: "sql", title: "SQL", category: "Backend", icon: "logos:mysql" },
-  { _id: "firebase", title: "Firebase", category: "Backend", icon: "logos:firebase" },
   { _id: "supabase", title: "Supabase", category: "Backend", icon: "logos:supabase-icon" },
-  // Tools & Platforms
+  { _id: "postgres", title: "PostgreSQL", category: "Backend", icon: "logos:postgresql" },
+  // CMS, Tools & Platforms
+  { _id: "sanity", title: "Sanity CMS", category: "Tools & Platforms", icon: "simple-icons:sanity" },
+  { _id: "git", title: "Git", category: "Tools & Platforms", icon: "logos:git-icon" },
   { _id: "github", title: "GitHub", category: "Tools & Platforms", icon: "logos:github-icon" },
   { _id: "vercel", title: "Vercel", category: "Tools & Platforms", icon: "logos:vercel-icon" },
-  { _id: "postman", title: "Postman", category: "Tools & Platforms", icon: "logos:postman-icon" },
-  { _id: "npm", title: "npm", category: "Tools & Platforms", icon: "logos:npm-icon" },
-  { _id: "figma", title: "Figma", category: "Tools & Platforms", icon: "logos:figma" },
-  // Programming Languages
-  { _id: "java", title: "Java", category: "Programming Languages", icon: "logos:java" },
-  { _id: "python", title: "Python", category: "Programming Languages", icon: "logos:python" },
 ];
 
 // ============================================================
@@ -34,135 +28,90 @@ export const skillsData = [
 export const servicesData = [
   {
     _id: "srv-1",
-    title: "Full Stack Web Development",
+    title: "Frontend Development",
     description:
-      "End-to-end web applications engineered for scale. From secure backend APIs to stunning, interactive frontends — I deliver complete solutions that drive real business results.",
-    icon: "fluent:window-dev-tools-24-filled",
+      "Clean, responsive interfaces built with React.js and Tailwind CSS. I focus on reusable components, consistent design and a smooth experience across desktop, tablet and mobile.",
+    icon: "fluent:window-sparkle-24-filled",
     price: "Custom Quote",
     features: [
-      "Node.js & Express APIs",
-      "MongoDB / SQL databases",
-      "Secure Authentication & JWT",
-      "Cloud Deployment & Scaling",
+      "React.js Component Architecture",
+      "Tailwind CSS Styling",
+      "Responsive Mobile-First UI",
+      "Cross-Browser Compatibility",
     ],
     isPopular: true,
   },
   {
     _id: "srv-2",
-    title: "Frontend Development",
+    title: "CMS-Powered Business Websites",
     description:
-      "Pixel-perfect interfaces that users love. Built with React, Next.js, and modern CSS — every interaction is crafted for maximum engagement and conversion.",
-    icon: "fluent:window-sparkle-24-filled",
+      "Professional websites for small businesses where you can update text, images and projects yourself. Built with React and Sanity CMS, as delivered for Habile and SNK Build Fabric Solutions.",
+    icon: "fluent:board-24-filled",
     price: "Custom Quote",
     features: [
-      "React & Next.js",
-      "Tailwind & Vanilla CSS",
-      "Framer Motion Animations",
-      "Responsive Mobile-First UI",
+      "Sanity CMS Integration",
+      "Easy Content Updates, No Code Needed",
+      "Services, Projects & Testimonials Sections",
+      "Deployment on Vercel",
     ],
     isPopular: false,
   },
   {
     _id: "srv-3",
-    title: "MERN Stack Applications",
+    title: "Full Stack Web Applications",
     description:
-      "High-performance database-driven applications built on the MERN stack. From real-time dashboards to complex SaaS products — I build apps that handle millions of requests.",
-    icon: "fluent:database-link-24-regular",
+      "Database-driven web apps with authentication and user data, built using Supabase and PostgreSQL or the Node.js, Express.js and MongoDB stack.",
+    icon: "fluent:window-dev-tools-24-filled",
     price: "Custom Quote",
     features: [
-      "Custom MongoDB Schema Design",
-      "RESTful API Architecture",
-      "State Management (Redux/Context)",
-      "Seamless CRUD Operations",
+      "Supabase Auth & PostgreSQL",
+      "Node.js & Express.js REST APIs",
+      "MongoDB Data Modeling",
+      "CRUD Operations & Data Dashboards",
     ],
     isPopular: false,
   },
   {
     _id: "srv-4",
-    title: "Admin Dashboard Development",
-    description:
-      "Custom admin portals and analytics dashboards that put you in control. Track metrics, manage users, and make data-driven decisions with beautiful, intuitive interfaces.",
-    icon: "fluent:board-24-filled",
-    price: "Custom Quote",
-    features: [
-      "Data Visualizations & Charts",
-      "User Roles & Permissions",
-      "Bulk Data Operations",
-      "Responsive Grid Layouts",
-    ],
-    isPopular: false,
-  },
-  {
-    _id: "srv-5",
-    title: "API Integration",
-    description:
-      "Seamless connections to payment processors, CRMs, social platforms, and any third-party service your application needs. I make your tools work together flawlessly.",
-    icon: "fluent:plug-connected-24-filled",
-    price: "Custom Quote",
-    features: [
-      "Stripe / PayPal Gateway",
-      "Firebase & Auth0 Auth",
-      "Third-Party REST/GraphQL APIs",
-      "Webhooks & Realtime Sync",
-    ],
-    isPopular: false,
-  },
-  {
-    _id: "srv-6",
     title: "Responsive Website Design",
     description:
-      "Fluid, dynamic layouts engineered to look stunning on every screen — from 27-inch monitors to the smallest smartphones. Performance-optimized for instant loading.",
+      "Layouts that look right on every screen, from large monitors to small smartphones, built with performance and clean code in mind.",
     icon: "fluent:phone-laptop-24-filled",
     price: "Custom Quote",
     features: [
       "Flexbox & Grid Layouts",
       "Media Query Optimization",
-      "Cross-Browser Compatibility",
       "Fast Loading Assets",
+      "Accessible, Semantic HTML",
     ],
     isPopular: false,
   },
   {
-    _id: "srv-7",
+    _id: "srv-5",
     title: "Portfolio Websites",
     description:
-      "Personal brand showcases designed to win clients and impress recruiters. High-fidelity visuals, compelling case studies, and modern interactions that set you apart.",
+      "Personal portfolio sites for students, freelancers and professionals that present projects, skills and contact details clearly.",
     icon: "fluent:person-board-24-filled",
     price: "Custom Quote",
     features: [
-      "Tailored Brand Aesthetic",
-      "SEO Optimization",
-      "Contact Forms Integration",
-      "Dynamic Project Showcases",
+      "Tailored Design & Layout",
+      "Project Showcase Sections",
+      "Contact Form Integration",
+      "Basic SEO Setup",
     ],
     isPopular: false,
   },
   {
-    _id: "srv-8",
-    title: "Final Year Projects",
-    description:
-      "Comprehensive guidance and custom-built web applications for academic projects. Complete with documentation, deployment support, and clean, well-structured codebases.",
-    icon: "fluent:hat-graduation-24-filled",
-    price: "Custom Quote",
-    features: [
-      "Well-Structured Code",
-      "Database Schema Documentation",
-      "Walkthrough Support",
-      "Clean Coding Standards",
-    ],
-    isPopular: false,
-  },
-  {
-    _id: "srv-9",
+    _id: "srv-6",
     title: "Freelance Web Solutions",
     description:
-      "Full-cycle contract development with fast turnaround, premium quality, and transparent communication. From concept to launch — I've got you covered.",
+      "Flexible contract web development with clear communication, realistic timelines and support after launch for small fixes and updates.",
     icon: "fluent:handshake-24-filled",
     price: "Custom Quote",
     features: [
       "Flexible Requirements",
-      "On-Time Delivery",
-      "SEO & Performance Focus",
+      "Regular Progress Updates",
+      "Bug Fixes After Launch",
       "Long-Term Collaboration",
     ],
     isPopular: false,
@@ -171,33 +120,11 @@ export const servicesData = [
 
 // ============================================================
 // TESTIMONIALS DATA
+// The earlier entries were placeholder names and are removed.
+// Add real feedback from Habile / SNK Build Fabric Solutions here
+// once you have it, and hide the testimonials section until then.
 // ============================================================
-export const testimonialsData = [
-  {
-    _id: "test-1",
-    clientName: "Alex Morgan",
-    clientRole: "Startup Founder",
-    quote:
-      "Exceptional MERN stack skills. Vinoth delivered the project ahead of schedule with incredibly clean code and a flawless user interface. He understood our vision perfectly and translated it into a product that exceeded expectations.",
-    rating: 5,
-  },
-  {
-    _id: "test-2",
-    clientName: "Sarah Chen",
-    clientRole: "Creative Director",
-    quote:
-      "Translated our complex Figma designs into pixel-perfect React components. The attention to detail on the hover animations and micro-interactions is exactly what we envisioned. A true frontend craftsman.",
-    rating: 5,
-  },
-  {
-    _id: "test-3",
-    clientName: "David Miller",
-    clientRole: "Product Manager",
-    quote:
-      "Incredibly reliable freelance partner. Outstanding communication throughout the entire development process, solid API integration work, and he proactively suggested improvements we hadn't even considered.",
-    rating: 5,
-  },
-];
+export const testimonialsData = [];
 
 // ============================================================
 // EDUCATION DATA
@@ -205,44 +132,50 @@ export const testimonialsData = [
 export const educationData = [
   {
     _id: "edu-1",
-    institution: "PPG College of Arts & Science",
+    institution: "PPG College of Arts & Science, Coimbatore",
     degree: "Bachelor of Science - Computer Science",
-    year: "2022 - Present",
+    year: "2022 - 2025",
+    cgpa: "8.9 / 10",
     description:
-      "As a Computer Science graduate, I possess strong problem-solving and analytical skills. My academic journey has strengthened my foundation in programming, web development, databases, and software engineering. Combining technical expertise with a passion for innovation, I continuously explore modern technologies and build practical solutions that bridge creativity and technology.",
+      "Graduated with a CGPA of 8.9/10. Built a strong foundation in programming, web development, databases and software engineering, and applied it through client and personal projects using React, Tailwind CSS, Sanity CMS and Supabase.",
   },
   {
     _id: "edu-2",
-    institution: "KVK Government Boys Higher Secondary School",
+    institution: "KVK Government Boys Higher Secondary School, P. Puliampatti",
     degree: "HSC - XII Standard (Computer Science)",
     year: "2021 - 2022",
+    cgpa: "6.1 / 10",
     description:
-      "Completed Higher Secondary Education with a focus on Computer Science. Developed critical thinking, logical reasoning, and problem-solving abilities while gaining foundational knowledge in computing concepts and technology.",
+      "Completed higher secondary education with Computer Science, gaining foundational knowledge of computing concepts and logical problem solving.",
   },
   {
     _id: "edu-3",
-    institution: "KVK Government Boys Higher Secondary School",
+    institution: "KVK Government Boys Higher Secondary School, P. Puliampatti",
     degree: "SSLC - X Standard",
     year: "2019 - 2020",
+    cgpa: "6.8 / 10",
     description:
-      "Successfully completed Secondary School Education, building a strong academic foundation across core subjects. This stage helped develop discipline, time management, and a commitment to continuous learning and personal growth.",
+      "Completed secondary school education, building a solid academic base and good habits of discipline and time management.",
   },
 ];
+
 // ============================================================
 // CERTIFICATIONS DATA
+// Dates are left blank because the resume does not state them.
+// Fill them in from your Udemy certificates (or hide the date in the UI).
 // ============================================================
 export const certificationsData = [
   {
     _id: "cert-1",
-    name: "Advanced React Patterns",
-    issuer: "Frontend Masters",
-    date: "2023-03-15",
+    name: "React - All You Need to Know with Practical Projects",
+    issuer: "Udemy",
+    date: "",
   },
   {
     _id: "cert-2",
-    name: "MongoDB Node.js Developer",
-    issuer: "MongoDB University",
-    date: "2022-08-20",
+    name: "JavaScript - Creating 10 Practical Projects",
+    issuer: "Udemy",
+    date: "",
   },
 ];
 
@@ -250,81 +183,85 @@ export const certificationsData = [
 // CONTACT DEFAULT DATA
 // ============================================================
 export const contactDefaultData = {
-  email: "hello@devfolio.com",
-  phone: "+1 (555) 123-4567",
-  location: "Remote / Worldwide",
+  email: "vinothkumarm1127@gmail.com",
+  phone: "+919344842329",
+  whatsapp: "+919344842329",
+  location: "Tamil Nadu, India (Open to OnSite/Remote)",
+  linkedin: "https://www.linkedin.com/in/vinothkumarm27",
+  github: "https://github.com/vinothkumarm1127",
+  portfolio: "https://vinothkumarm27.vercel.app",
 };
 
 // ============================================================
-// STATS DATA — for StatsSection
+// STATS DATA - for StatsSection
 // ============================================================
 export const statsData = [
   {
     _id: "stat-1",
-    label: "Projects Delivered",
-    value: 25,
-    suffix: "+",
+    label: "Projects Completed",
+    value: 3,
+    suffix: "",
     icon: "briefcase",
   },
   {
     _id: "stat-2",
-    label: "Happy Clients",
-    value: 15,
-    suffix: "+",
+    label: "Client Websites Delivered",
+    value: 2,
+    suffix: "",
     icon: "users",
   },
   {
     _id: "stat-3",
-    label: "Years Experience",
-    value: 3,
-    suffix: "+",
+    label: "Udemy Certifications",
+    value: 2,
+    suffix: "",
     icon: "calendar",
   },
   {
     _id: "stat-4",
     label: "Technologies",
-    value: 20,
+    value: 10,
     suffix: "+",
     icon: "code",
   },
 ];
 
 // ============================================================
-// WHY HIRE ME DATA — for WhyHireMeSection
+// WHY HIRE ME DATA - for WhyHireMeSection
 // ============================================================
 export const whyHireMeData = [
   {
     _id: "why-1",
-    title: "Clean, Scalable Code",
+    title: "Clean, Maintainable Code",
     description:
-      "Every line of code I write is production-ready, well-documented, and built to scale. No shortcuts, no technical debt.",
+      "I write well-structured, reusable components and keep my code readable so it is easy to understand, update and extend.",
     icon: "code",
   },
   {
     _id: "why-2",
-    title: "On-Time Delivery",
+    title: "Real Project Experience",
     description:
-      "I respect deadlines. Projects are delivered on schedule with clear milestones and transparent progress tracking throughout.",
+      "I have built and deployed live client websites and a full-stack app, so I understand real requirements, feedback and deadlines.",
     icon: "clock",
   },
   {
     _id: "why-3",
-    title: "24/7 Communication",
+    title: "Clear Communication",
     description:
-      "Stay informed at every stage. I provide regular updates, respond quickly, and ensure you're never left guessing.",
+      "You get regular updates and quick replies, so you always know where your project stands.",
     icon: "message",
   },
   {
     _id: "why-4",
-    title: "Post-Launch Support",
+    title: "Fast Learner",
     description:
-      "My relationship with clients doesn't end at launch. I provide ongoing maintenance, bug fixes, and feature updates.",
+      "I enjoy picking up new tools and technologies, and I take ownership of fixing bugs and improving my work after launch.",
     icon: "shield",
   },
 ];
 
 // ============================================================
-// PROCESS DATA — for ProcessSection
+// PROCESS DATA - for ProcessSection
 // ============================================================
 export const processData = [
   {
@@ -332,81 +269,81 @@ export const processData = [
     step: 1,
     title: "Discovery",
     description:
-      "We start with a deep-dive into your requirements, goals, target audience, and technical constraints.",
+      "We start by discussing your requirements, goals, target audience and any technical constraints.",
   },
   {
     _id: "proc-2",
     step: 2,
     title: "Design",
     description:
-      "I create wireframes and high-fidelity mockups, iterating with your feedback until the design is perfect.",
+      "I plan the layout and structure of the site, sharing it with you and refining it based on your feedback.",
   },
   {
     _id: "proc-3",
     step: 3,
     title: "Develop",
     description:
-      "Clean, tested code is written with regular demos and progress updates so you're always in the loop.",
+      "I build the site with clean, well-structured code and share regular progress updates so you stay in the loop.",
   },
   {
     _id: "proc-4",
     step: 4,
     title: "Deploy & Support",
     description:
-      "Your application goes live with optimized performance, and I provide ongoing support post-launch.",
+      "Your site goes live on a fast hosting platform, and I help with fixes and updates after launch.",
   },
 ];
 
 // ============================================================
-// FAQ DATA — for FAQSection (AEO optimized)
+// FAQ DATA - for FAQSection (AEO optimized)
 // ============================================================
 export const faqData = [
   {
     _id: "faq-1",
     question: "Who is Vinoth Kumar M?",
     answer:
-      "Vinoth Kumar M is a Full Stack Web Developer and MERN Stack specialist with 3+ years of experience building high-performance web applications. He specializes in React.js, Node.js, Express.js, MongoDB, Next.js, and Tailwind CSS. Based in India and available for remote freelance projects worldwide.",
+      "Vinoth Kumar M is a B.Sc. Computer Science graduate (2025, PPG College of Arts & Science, Coimbatore) and React.js developer based in Tamil Nadu, India. He has built and deployed responsive websites and web apps for clients and personal projects using React.js, Tailwind CSS, Sanity CMS and Supabase, and is open to full-time roles and freelance work.",
   },
   {
     _id: "faq-2",
     question: "What services do you offer?",
     answer:
-      "I offer full stack web development, MERN stack application development, frontend React development, admin dashboard creation, API integrations, responsive website design, portfolio websites, and freelance web solutions. I work with startups, businesses, and individuals to deliver custom, high-quality web products.",
+      "I offer frontend development with React.js and Tailwind CSS, CMS-powered business websites using Sanity, full stack web applications with Supabase or the Node.js, Express.js and MongoDB stack, responsive website design, and portfolio websites.",
   },
   {
     _id: "faq-3",
     question: "What is your tech stack?",
     answer:
-      "My primary tech stack is the MERN Stack — MongoDB, Express.js, React.js, and Node.js. I also work extensively with Next.js, Tailwind CSS, Framer Motion, Firebase, Supabase, and various third-party APIs. For version control and deployment, I use Git, GitHub, Vercel, and cloud platforms.",
+      "My main skills are React.js, JavaScript, HTML, CSS and Tailwind CSS on the frontend, and Node.js, Express.js, MongoDB, Supabase and PostgreSQL on the backend. I also work with Sanity CMS, and use Git, GitHub and Vercel for version control and deployment.",
   },
   {
     _id: "faq-4",
-    question: "How much does a website cost?",
+    question: "What projects have you worked on?",
     answer:
-      "Project costs vary based on complexity, features, and timeline. A simple landing page starts from a few hundred dollars, while a full-stack web application with authentication, database, and admin panel can range higher. I provide detailed, transparent quotes after understanding your specific requirements.",
+      "I have built client websites for Habile and SNK Build Fabric Solutions (a Bangalore-based fabrication company) using React.js, Tailwind CSS and Sanity CMS, and a workout tracking platform called RepTrack using React.js, Supabase and PostgreSQL. All three are live and linked in my portfolio.",
   },
   {
     _id: "faq-5",
-    question: "Why should I hire Vinoth Kumar M?",
+    question: "Are you open to job opportunities?",
     answer:
-      "I combine strong technical expertise in the MERN stack with a keen eye for design and user experience. I deliver clean, scalable code on time, maintain clear communication throughout the project, and provide post-launch support. My clients consistently rate me 5 stars for quality and professionalism.",
+      "Yes. I am looking for React.js and frontend or full stack developer roles where I can contribute to real-world projects and keep growing as a developer. I am also available for freelance projects.",
   },
   {
     _id: "faq-6",
-    question: "How do I start a project with you?",
+    question: "How much does a website cost?",
     answer:
-      "Getting started is simple: reach out via the contact form on this website, send me an email, or message me on WhatsApp. We'll schedule a free discovery call to discuss your requirements, timeline, and budget. I'll then provide a detailed proposal and we can kick off development immediately.",
+      "The cost depends on the number of pages, features and timeline. A simple business or portfolio site costs far less than a full-stack app with login and a database. Share your requirements and I will give you a clear, fair quote.",
   },
   {
     _id: "faq-7",
-    question: "Do you work with international clients?",
+    question: "How do I start a project with you?",
     answer:
-      "Absolutely! I work with clients from around the world and am experienced with remote collaboration across different time zones. I use tools like Slack, Google Meet, and GitHub for seamless communication and project management regardless of location.",
+      "Reach out through the contact form on this website, by email or by phone. We will discuss your requirements, timeline and budget, and I will then send a proposal before starting development.",
   },
   {
     _id: "faq-8",
     question: "What is your typical project timeline?",
     answer:
-      "A simple landing page typically takes 1-2 weeks, a multi-page business website takes 2-4 weeks, and a full-stack web application with backend, database, and admin panel takes 4-8 weeks depending on complexity. I always provide realistic timelines and stick to deadlines.",
+      "A simple landing page usually takes 1-2 weeks, a multi-page business website 2-4 weeks, and a full-stack web app with a backend and database 4-8 weeks, depending on complexity. I will always confirm a realistic timeline before we begin.",
   },
 ];

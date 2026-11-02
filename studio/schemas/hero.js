@@ -47,8 +47,19 @@ export default {
     { name: "twitter", title: "Twitter / X URL", type: "url" },
     { name: "instagram", title: "Instagram URL", type: "url" },
     { name: "facebook", title: "Facebook URL", type: "url" },
-    { name: "whatsapp", title: "WhatsApp Number", type: "string", description: "Format: 1234567890 (with country code, no space or symbols)" },
-    { name: "email", title: "Email Address", type: "string" },
+    {
+      name: "whatsapp",
+      title: "WhatsApp Number",
+      type: "string",
+      description: "Format: 919344842329 (with country code, digits only, no + or spaces)",
+      initialValue: "919344842329",
+    },
+    {
+      name: "email",
+      title: "Email Address",
+      type: "string",
+      initialValue: "vinothkumarm1127@gmail.com",
+    },
   ],
   preview: {
     select: { title: "name", subtitle: "designation", media: "profileImage" },

@@ -13,6 +13,7 @@ import {
 } from "react-icons/tb";
 import { usePortfolio } from "../context/PortfolioContext";
 import MagneticButton from "../components/ui/MagneticButton";
+import { getWhatsAppUrl } from "../utils/contactUtils";
 
 const HeroScene = lazy(() => import("../components/hero/HeroScene"));
 
@@ -75,7 +76,13 @@ function SkeletonHero() {
 
 /* ── Social link config ── */
 const socialConfig = [
-  { key: "whatsapp", icon: TbBrandWhatsapp, getHref: (v) => `https://wa.me/${v}`, label: "WhatsApp", color: "#25D366" },
+  {
+    key: "whatsapp",
+    icon: TbBrandWhatsapp,
+    getHref: (v) => getWhatsAppUrl(v, "Hi Vinoth! I'm interested in your web development services."),
+    label: "WhatsApp",
+    color: "#25D366"
+  },
   { key: "linkedin", icon: TbBrandLinkedin, getHref: (v) => v, label: "LinkedIn", color: "#0A66C2" },
   { key: "facebook", icon: TbBrandFacebook, getHref: (v) => v, label: "Facebook", color: "#1877F2" },
   { key: "github", icon: TbBrandGithub, getHref: (v) => v, label: "GitHub", color: "#ffffff" },
@@ -164,7 +171,7 @@ export default function HeroSection() {
               {hero.description && (
                 <motion.p
                   variants={fadeUp}
-                  className="text-base md:text-lg text-white/70 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0"
+                  className="text-base text-justify md:text-lg text-white/70 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0"
                 >
                   {hero.description}
                 </motion.p>
@@ -174,13 +181,27 @@ export default function HeroSection() {
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8">
                 <MagneticButton
                   as="a"
-                  href={settings?.primaryCtaLink || "#contact"}
+                  href={`mailto:${settings?.email || "vinothkumarm1127@gmail.com"}?subject=${encodeURIComponent("Hiring Inquiry - Full Stack Developer")}`}
                   strength={0.2}
                   className="flex items-center gap-2 px-7 py-4 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 text-white font-semibold shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-shadow duration-300"
+                  title="Hire via Email"
                 >
                   <TbMail size={20} aria-hidden="true" />
                   {settings?.primaryCtaText || "Hire Me"}
                   <TbArrowRight size={18} aria-hidden="true" />
+                </MagneticButton>
+
+                <MagneticButton
+                  as="a"
+                  href={getWhatsAppUrl(socialData?.whatsapp || "919344842329", "Hi Vinoth! I'm interested in hiring you / collaborating on a web project.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  strength={0.2}
+                  className="flex items-center gap-2 px-7 py-4 rounded-xl bg-[#25D366]/15 text-[#25D366] hover:bg-[#25D366] hover:text-white font-semibold border border-[#25D366]/30 transition-all duration-300 shadow-lg shadow-[#25D366]/10"
+                  title="Chat on WhatsApp: +91 93448 42329"
+                >
+                  <TbBrandWhatsapp size={20} aria-hidden="true" />
+                  WhatsApp
                 </MagneticButton>
 
                 {resumeUrl && (

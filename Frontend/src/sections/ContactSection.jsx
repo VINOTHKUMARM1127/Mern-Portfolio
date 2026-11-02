@@ -8,9 +8,11 @@ import {
   TbCheck,
   TbBrandWhatsapp,
   TbMapPin,
+  TbPhone,
 } from "react-icons/tb";
 import { usePortfolio } from "../context/PortfolioContext";
 import SectionHeader from "../components/ui/SectionHeader";
+import { getWhatsAppUrl } from "../utils/contactUtils";
 
 function ContactSection() {
   const form = useRef();
@@ -40,9 +42,13 @@ function ContactSection() {
       );
   };
 
-  const whatsappUrl = social?.whatsapp
-    ? `https://wa.me/${social.whatsapp}?text=Hi%20Vinoth!%20I'm%20interested%20in%20your%20web%20development%20services.`
-    : null;
+  const whatsappUrl = getWhatsAppUrl(
+    social?.whatsapp || contact?.whatsapp || "+919344842329",
+    "Hi Vinoth! I'm interested in your web development services."
+  );
+
+  const emailAddress = contact?.email || "vinothkumarm1127@gmail.com";
+  const phoneNumber = contact?.phone || "+919344842329";
 
   return (
     <section
@@ -71,10 +77,11 @@ function ContactSection() {
             viewport={{ once: true }}
             className="lg:col-span-2 flex flex-col gap-4"
           >
-            {contact?.email && (
+            {emailAddress && (
               <a
-                href={`mailto:${contact.email}`}
+                href={`mailto:${emailAddress}?subject=${encodeURIComponent("Hiring Inquiry - Full Stack Developer")}`}
                 className="group flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-violet-500/30 hover:bg-white/[0.04] transition-all duration-300"
+                title={`Send email to ${emailAddress}`}
               >
                 <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 group-hover:scale-110 group-hover:bg-violet-500/20 transition-all duration-300">
                   <TbMail size={22} />
@@ -83,8 +90,8 @@ function ContactSection() {
                   <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-0.5">
                     Email
                   </p>
-                  <p className="text-sm text-white/80 font-semibold">
-                    {contact.email}
+                  <p className="text-sm text-white/80 font-semibold break-all">
+                    {emailAddress}
                   </p>
                 </div>
               </a>
@@ -96,6 +103,7 @@ function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#25D366]/30 hover:bg-white/[0.04] transition-all duration-300"
+                title="Chat on WhatsApp: +91 93448 42329"
               >
                 <div className="w-12 h-12 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 flex items-center justify-center text-[#25D366] group-hover:scale-110 group-hover:bg-[#25D366]/20 transition-all duration-300">
                   <TbBrandWhatsapp size={22} />
@@ -105,7 +113,27 @@ function ContactSection() {
                     WhatsApp
                   </p>
                   <p className="text-sm text-white/80 font-semibold">
-                    Quick Chat
+                    Quick Chat · +91 93448 42329
+                  </p>
+                </div>
+              </a>
+            )}
+
+            {phoneNumber && (
+              <a
+                href={`tel:${phoneNumber.replace(/\s+/g, "")}`}
+                className="group flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-cyan-500/30 hover:bg-white/[0.04] transition-all duration-300"
+                title={`Call ${phoneNumber}`}
+              >
+                <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300">
+                  <TbPhone size={22} />
+                </div>
+                <div>
+                  <p className="text-xs text-white/40 font-medium uppercase tracking-wider mb-0.5">
+                    Phone / Call
+                  </p>
+                  <p className="text-sm text-white/80 font-semibold">
+                    {phoneNumber}
                   </p>
                 </div>
               </a>
@@ -113,7 +141,7 @@ function ContactSection() {
 
             {contact?.location && (
               <div className="flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
-                <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+                <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400">
                   <TbMapPin size={22} />
                 </div>
                 <div>
