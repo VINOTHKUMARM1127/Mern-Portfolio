@@ -326,7 +326,7 @@ export default async function handler(req, res) {
     try {
       const [globalCount, visitorCount] = await Promise.all([
         client.fetch(
-          `count(*[(_type == "reviewRateLimit" || (_type == "testimonial" && source == "public-form")) && submittedAt > $oneHourAgo])`,
+          `count(*[_type == "reviewRateLimit" && submittedAt > $oneHourAgo])`,
           { oneHourAgo },
           { perspective: "raw" }
         ),

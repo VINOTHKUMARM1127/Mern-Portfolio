@@ -8,8 +8,6 @@
     "build": "npm run build --prefix Frontend",
     "migrate:testimonials:dry": "node scripts/migrate-testimonials.js",
     "migrate:testimonials": "node scripts/migrate-testimonials.js --execute",
-    "migrate:testimonials:unpublish": "node scripts/migrate-testimonials.js --unpublish-legacy-public --execute",
-    "migrate:dry": "node scripts/migrate-mongo-to-sanity.js --dry-run",
-    "migrate": "node scripts/migrate-mongo-to-sanity.js --execute"
+    "migrate:testimonials:unpublish": "node scripts/migrate-testimonials.js --unpublish-legacy-public --execute"
   }
 }

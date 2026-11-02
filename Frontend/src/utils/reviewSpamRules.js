@@ -5,7 +5,7 @@
 
 // Detect URLs/links ONLY in the review body text
 export const URL_IN_QUOTE_REGEX =
-  /(?:https?:\/\/|www\.)[^\s]+|[a-zA-Z0-9-]+\.(?:com|net|org|io|xyz|ru|cn|biz|top|info|site|online|tech|edu|gov|app|co)\b(?:\/[^\s]*)?/i;
+  /(?:https?:\/\/|www\.)[^\s]+|\b[a-z0-9-]+\.(?:com|net|org|biz|ru|cn|xyz)\b(?:\/[^\s]*)?/i;
 
 // Obvious spam, gambling, illicit drugs, solicitation spam, or abusive language.
 // Notice: "crypto" and "forex" are intentionally NOT rejected to support legitimate tech/fintech clients.

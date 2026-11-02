@@ -61,7 +61,7 @@ export default function ReviewForm() {
   // Turnstile state
   const [turnstileToken, setTurnstileToken] = useState("");
   const [turnstileError, setTurnstileError] = useState(false);
-  const turnstileContainerRef = useRef(null);
+  const [turnstileEl, setTurnstileEl] = useState(null);
   const turnstileWidgetIdRef = useRef(null);
 
   // Character counter for quote
@@ -88,19 +88,19 @@ export default function ReviewForm() {
     (import.meta.env.DEV ? "1x00000000000000000000AA" : "");
 
   useEffect(() => {
-    if (!siteKey || !turnstileContainerRef.current) return;
+    if (!siteKey || !turnstileEl) return;
 
     let isMounted = true;
 
     function renderWidget() {
       if (
         window.turnstile &&
-        turnstileContainerRef.current &&
+        turnstileEl &&
         turnstileWidgetIdRef.current === null
       ) {
         try {
           turnstileWidgetIdRef.current = window.turnstile.render(
-            turnstileContainerRef.current,
+            turnstileEl,
             {
               sitekey: siteKey,
               theme: "dark",
@@ -170,8 +170,9 @@ export default function ReviewForm() {
           // Ignore cleanup errors
         }
       }
+      setTurnstileToken("");
     };
-  }, [siteKey, success]);
+  }, [siteKey, turnstileEl]);
 
   // Client-side validation matching server rules
   const validate = useCallback(() => {
@@ -580,7 +581,7 @@ export default function ReviewForm() {
                   <p className="text-xs text-red-300/80 mt-0.5 leading-relaxed">
                     {serverError}
                   </p>
-                  {isTimeoutOrNetworkError && (
+                  {isTimeoutOrNetworkError && (!siteKey || Boolean(turnstileToken)) && (
                     <button
                       type="button"
                       onClick={() => handleSubmit()}
@@ -832,7 +833,7 @@ export default function ReviewForm() {
                 {/* Cloudflare Turnstile Bot Challenge Container */}
                 {siteKey && (
                   <div className="pt-1 flex flex-col items-center justify-center space-y-2">
-                    <div ref={turnstileContainerRef} />
+                    <div ref={setTurnstileEl} />
                     {turnstileError && (
                       <p className="text-xs text-amber-400 text-center leading-relaxed">
                         Security verification widget could not load. Please check your network connection or disable ad-blockers and refresh the page.
