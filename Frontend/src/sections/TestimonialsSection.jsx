@@ -72,7 +72,7 @@ function TestimonialsSection() {
 
   if (loading) {
     return (
-      <section className="min-h-screen flex flex-col justify-center py-24 relative bg-surface">
+      <section className="section-block relative">
         <div className="max-w-4xl mx-auto px-6">
           <div className="h-[250px] glass-card animate-pulse rounded-2xl" />
         </div>
@@ -112,12 +112,10 @@ function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="min-h-screen flex flex-col justify-center py-24 relative overflow-hidden bg-surface"
+      className="section-block relative"
       aria-label="Client testimonials"
     >
       {/* Background glow */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
-      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-violet-600/10 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         <SectionHeader

@@ -30,8 +30,6 @@ export default function Services() {
     <PageLayout>
       <div className="pt-32 pb-12 bg-surface relative overflow-hidden">
         {/* Ambient Background Glows */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[150px] pointer-events-none" />
-        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">

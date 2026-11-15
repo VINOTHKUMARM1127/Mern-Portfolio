@@ -20,10 +20,6 @@ export default function Review() {
     <PageLayout>
       <div className="pt-28 pb-20 relative overflow-hidden min-h-screen flex flex-col justify-center">
         {/* Ambient atmospheric background glows */}
-        <div
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-violet-600/10 via-cyan-500/10 to-transparent rounded-full blur-[120px] pointer-events-none"
-          aria-hidden="true"
-        />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 w-full">
           <SectionHeader

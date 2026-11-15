@@ -4,7 +4,7 @@ import ContactSection from "../sections/ContactSection";
 export default function Contact() {
   return (
     <PageLayout>
-      <div className="pt-24 pb-12">
+      <div className="contact-page">
         <ContactSection standalone />
       </div>
     </PageLayout>

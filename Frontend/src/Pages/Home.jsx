@@ -17,6 +17,7 @@ export default function Home() {
 
   return (
     <PageLayout>
+      <div className="home-content">
       {error && <p role="status" className="mx-auto max-w-5xl px-6 pt-24 text-sm text-ink/60">{error}</p>}
 
       {/* Conversion Funnel: Awareness → Trust → Proof → Action */}
@@ -53,6 +54,7 @@ export default function Home() {
         {/* 10. Action: Get in touch */}
         <ContactSection />
       </Suspense>
+      </div>
     </PageLayout>
   );
 }

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.4.0 — 2026-11-15
+
+- Removed oversized homepage section gaps and separate colored background layers.
+- Added a consistent spacing scale, compact process cards and proper service buttons.
+- Corrected footer CTA hover/focus contrast and click target.
+- Replaced the contact form with direct Email, WhatsApp and Call links at the owner’s request.
+- Positioned copy controls beside the matching email/phone value; service enquiry context is preserved.
+
 ## 2.3.0 — 2026-11-15
 
 - Restored fourteen local technology logos without runtime icon APIs.

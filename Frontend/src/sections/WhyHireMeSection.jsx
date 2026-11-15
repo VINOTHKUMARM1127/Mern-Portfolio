@@ -32,7 +32,7 @@ function WhyHireMeSection() {
   return (
     <section
       id="why-hire-me"
-      className="py-24 relative overflow-hidden"
+      className="section-block relative overflow-hidden"
       aria-label="Why hire me"
     >
       {/* Background */}

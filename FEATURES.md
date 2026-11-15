@@ -1,4 +1,4 @@
-# Requested feature checklist — v2.3.0
+# Requested feature checklist — v2.4.0
 
 Implemented or retained:
 - Page skeleton, real initial HTML, route-based JS splitting and streaming build-time rendering.
@@ -20,3 +20,5 @@ Not needed at current scale: search/autocomplete and their debounce, API paginat
 Notes: Static content is a build snapshot; live Sanity reads refresh after hydration/focus. Removing a published review from all static HTML requires a rebuild and updating the local snapshot as well. Vercel measurement reporting depends on visitor consent and project availability. Tests simulate slow mobile conditions; they do not replace physical-device or real-user measurements.
 
 Version 2.3 removes theme switching, restores real local skill logos, adds a real RepTrack thumbnail, removes the visible details CTA and uses card-wide detail opening with separate Live Site/GitHub buttons. CMS link updates and explicit clears are respected.
+
+Version 2.4 replaces the visitor contact form with direct Email/WhatsApp/Call links by owner choice, aligns copy controls within their value rows, removes full-screen homepage section heights, unifies section backgrounds and fixes service/footer CTA hover contrast. The review submission form remains unchanged.

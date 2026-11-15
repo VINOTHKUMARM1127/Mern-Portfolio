@@ -84,12 +84,10 @@ function FAQSection() {
   return (
     <section
       id="faq"
-      className="py-24 relative overflow-hidden bg-surface"
+      className="section-block relative"
       aria-label="Frequently asked questions"
     >
       {/* Background */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet-600/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-3xl mx-auto px-6 relative z-10">
         <SectionHeader

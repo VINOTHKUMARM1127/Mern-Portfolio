@@ -16,7 +16,7 @@ export default function SectionHeader({
       initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className={`text-center mb-16 scroll-reveal ${className}`}
+      className={`section-heading text-center scroll-reveal ${className}`}
     >
       {badge && (
         <motion.span

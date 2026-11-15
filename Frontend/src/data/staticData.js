@@ -338,7 +338,7 @@ export const faqData = [
     _id: "faq-7",
     question: "How do I start a project with you?",
     answer:
-      "Reach out through the contact form on this website, by email or by phone. We will discuss your requirements, timeline and budget, and I will then send a proposal before starting development.",
+      "Email me, start a WhatsApp chat, or call using the contact buttons on this website. We will discuss your requirements, timeline and budget, and I will then send a proposal before starting development.",
   },
   {
     _id: "faq-8",

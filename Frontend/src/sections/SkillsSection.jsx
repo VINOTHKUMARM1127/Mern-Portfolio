@@ -29,9 +29,7 @@ const itemVariants = {
 
 function SkillsSection() {
   return (
-    <section id="skills" className="min-h-screen flex flex-col justify-center py-24 relative overflow-hidden bg-surface" aria-label="Technical skills">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
+    <section id="skills" className="section-block relative" aria-label="Technical skills">
 
       <div className="max-w-4xl mx-auto px-6 relative z-10 w-full">
         <SectionHeader

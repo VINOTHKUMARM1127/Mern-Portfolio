@@ -26,3 +26,14 @@ Real EmailJS delivery, human CAPTCHA completion and real client review submissio
 - External GitHub link opens separately without also opening the dialog.
 - CMS data mapping checked for new URL values, explicit empty/null clears, unsafe URL rejection and RepTrack deduplication.
 - Real RepTrack thumbnail captured from its public landing page; no account data or review records changed.
+
+
+## Version 2.4 layout/contact checks
+- Lint and prerendered production build passed.
+- 28 route/viewport checks across 360, 390, 768 and 1440px: no page errors or horizontal overflow.
+- Measured desktop spacing: 32px from hero section boundary to Portfolio badge; 84px from project CTA bottom to Skills badge; no full-screen project/skills minimum height or per-section glow layers.
+- Service CTA navigates to the matching service anchor; selecting a service carries context into the direct email link.
+- Footer Let's Talk remains white on a darkened purple hover background and navigates to Contact.
+- Contact contains no form or Send Message control. Email/WhatsApp/Call hrefs checked; no real email or calls initiated.
+- Email and phone clipboard controls copied their exact corresponding values, with controls aligned in each value row.
+- Visual review of project spacing, process cards and contact cards completed.

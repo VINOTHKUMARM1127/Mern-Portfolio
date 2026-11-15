@@ -44,10 +44,8 @@ function FooterSection() {
   ].filter((l) => l.href);
 
   return (
-    <footer className="relative pt-20 pb-10 bg-surface overflow-hidden" role="contentinfo">
+    <footer className="portfolio-footer relative pt-10 pb-8" role="contentinfo">
       {/* Background ambient glows */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet-600/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
       
       {/* Top divider */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -55,7 +53,7 @@ function FooterSection() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* CTA Banner (Moved to top of footer) */}
-        <div className="relative rounded-3xl bg-gradient-to-br from-violet-600/10 to-cyan-600/10 border border-ink/10 p-8 md:p-12 mb-20 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 backdrop-blur-sm">
+        <div className="footer-cta relative flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Subtle noise pattern overlay */}
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20 pointer-events-none" />
           
@@ -63,19 +61,11 @@ function FooterSection() {
             <h2 className="text-2xl md:text-4xl font-black text-ink mb-3">Ready to start a project?</h2>
             <p className="text-ink/70 text-lg max-w-xl">Have a website or application in mind? Let's discuss the scope and timeline.</p>
           </div>
-          <Link to="/contact" className="inline-block">
-            <motion.span
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative z-10 flex items-center gap-3 px-8 py-4 rounded-xl bg-ink text-surface font-bold tracking-wide hover:bg-violet-50 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.15)] text-lg whitespace-nowrap"
-            >
-              Let's Talk <Send size={20} />
-            </motion.span>
-          </Link>
+          <Link to="/contact" className="site-button site-button--primary footer-talk">Let's Talk <Send size={18} aria-hidden="true"/></Link>
         </div>
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-10">
           
           {/* Column 1: Brand Info */}
           <div className="lg:col-span-4 flex flex-col items-start gap-6">

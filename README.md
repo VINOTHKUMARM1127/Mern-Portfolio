@@ -1,4 +1,4 @@
-# Vinoth Kumar — portfolio v2.3.0
+# Vinoth Kumar — portfolio v2.4.0
 
 Source for the revised portfolio. Run it locally with the instructions below. Production releases are published only when requested by the owner.
 
@@ -25,8 +25,8 @@ The public Sanity project/dataset settings are prefilled. Public reads use a dev
 - Resume download: the existing public Sanity-hosted CV URL in portfolioSnapshot.json. The PDF itself is not included in GitHub.
 No TCS employment or invented experience dates were added.
 
-## Contact form
-EmailJS public identifiers are provided as existing defaults and can be overridden by the VITE_EMAILJS_* variables. Actual delivery depends on your EmailJS account, template field names (name, email, subject, message), allowed origins and quota. Local browser checks intercept delivery rather than send real mail.
+## Contact options
+The message form has been replaced with direct Email, WhatsApp and Call links, as requested. No EmailJS configuration is needed. Email opens the visitor's email app with an enquiry subject; WhatsApp opens a chat. A message is sent only when the visitor sends it in that app. Copy controls sit beside the email address and phone number. Service enquiries retain their context through the /contact?service=... URL.
 
 ## Review submissions
 Previewing reviews requires no private credentials. Submitting to Sanity requires your own SANITY_WRITE_TOKEN (write access) and REVIEW_HASH_SECRET in Frontend/.env.local. Obtain these from your existing dashboards; never commit the file. The Vite server runs /api/submit-review locally. With no Turnstile key, development uses Cloudflare's public test widget; no private test secret is required locally. In production configure the matching VITE_TURNSTILE_SITE_KEY and TURNSTILE_SECRET_KEY plus ALLOWED_ORIGIN. The server intentionally rejects submissions if required credentials are missing. There is no fake success or silent demo submission.
@@ -50,7 +50,7 @@ npm run preview
 Manual checks: each navigation route, 404, project filters, keyboard Enter/Escape and focus return, resume download, mobile menu, service enquiry prefill, form validation and published review carousel.
 
 ## Deployment after approval only
-Keep Frontend as the portfolio Vercel root and studio as the Studio project's root. Production variables already in Vercel are separate from this ZIP and must remain there. The owner has authorized publication of version 2.3.0. Keep credentials in Vercel and local .env files, never in Git.
+Keep Frontend as the portfolio Vercel root and studio as the Studio project's root. Production variables already in Vercel are separate from this ZIP and must remain there. The owner has authorized publication of version 2.4.0. Keep credentials in Vercel and local .env files, never in Git.
 
 ## Changes
 - Evidence-focused copy; six curated projects including RepTrack; local images and the existing CV link.
@@ -83,3 +83,7 @@ Skill logos are real, locally bundled SVG brand marks, with source notices under
 Project cards use a stretched native button: clicking the card opens the existing details dialog, and keyboard users can use Enter/Space. The explicit visible details link has been removed. Live Site and GitHub are separate native links above that hit area; opening one does not open the dialog. A single available link fills the action row; two links share it. Empty or invalid URLs hide the respective action.
 
 For published Sanity project records, githubUrl and liveUrl take precedence over snapshot links, including explicit nulls. Other curated copy remains in the source snapshot. A future RepTrack CMS record is matched to the local fallback by title so it can supply links without creating a duplicate card. Set optional GitHub/Live Site URLs in Sanity Studio → Projects. The known obsolete SNK URL retains its verified replacement until its CMS field is updated. No CMS records were modified automatically.
+
+
+## Version 2.4 layout refinements
+Homepage sections use content-driven height instead of full-screen minimums. One shared background and a common spacing scale prevent large gaps and abrupt color changes. Process steps use compact cards, service links are full buttons, and the footer CTA has an explicit accessible hover/focus style. The Contact page contains aligned direct contact cards with inline copy controls; no contact form or delivery success claim remains.

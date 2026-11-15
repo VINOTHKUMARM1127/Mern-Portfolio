@@ -46,10 +46,8 @@ function ProjectsSection({ preview = false }) {
   }, [projects, tab]);
 
   return (
-    <section id="projects" className="min-h-screen flex flex-col justify-center py-32 relative overflow-hidden">
+    <section id="projects" className="section-block relative">
       {/* Ambient backgrounds */}
-      <div className="absolute top-1/4 right-0 w-[800px] h-[800px] bg-violet-600/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
         <SectionHeader
@@ -60,7 +58,7 @@ function ProjectsSection({ preview = false }) {
           subtitle="Client websites and personal applications, with the tools and responsibilities behind each delivery."
         />
 
-        <div className="flex flex-wrap justify-center gap-3 mb-16 scroll-reveal">
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
           {TABS.map((t) => (
             <button
               key={t.key}
@@ -111,7 +109,7 @@ function ProjectsSection({ preview = false }) {
         )}
       </div>
 
-      {preview && <div className="text-center mt-10"><Link className="inline-block px-7 py-3 rounded-xl bg-violet-600 font-semibold" to="/projects">Explore all projects →</Link></div>}
+      {preview && <div className="text-center mt-8"><Link className="site-button site-button--secondary" to="/projects">Explore all projects →</Link></div>}
       <ProjectModal project={selected} onClose={closeModal} />
     </section>
   );
