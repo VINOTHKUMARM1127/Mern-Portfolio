@@ -1,10 +1,12 @@
+import PerformanceConsent from "./components/ui/PerformanceConsent";
 import { lazy, Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, MotionConfig } from "framer-motion";
 import { PortfolioProvider } from "./context/PortfolioContext";
 import GlobalLoader from "./components/ui/GlobalLoader";
 import PageTransition from "./components/ui/PageTransition";
 
+const NotFound = lazy(() => import("./Pages/NotFound"));
 const Home = lazy(() => import("./Pages/Home"));
 const About = lazy(() => import("./Pages/About"));
 const Projects = lazy(() => import("./Pages/Projects"));
@@ -66,6 +68,7 @@ function AnimatedRoutes() {
             </PageTransition>
           }
         />
+        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>
   );
@@ -73,11 +76,12 @@ function AnimatedRoutes() {
 
 function App() {
   return (
-    <PortfolioProvider>
+    <MotionConfig reducedMotion="user"><PortfolioProvider>
       <Suspense fallback={<GlobalLoader />}>
         <AnimatedRoutes />
       </Suspense>
-    </PortfolioProvider>
+      <PerformanceConsent />
+    </PortfolioProvider></MotionConfig>
   );
 }
 

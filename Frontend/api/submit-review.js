@@ -174,6 +174,7 @@ export default async function handler(req, res) {
         const verifyRes = await fetch(
           "https://challenges.cloudflare.com/turnstile/v0/siteverify",
           {
+            signal: AbortSignal.timeout(10000),
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({
@@ -216,7 +217,7 @@ export default async function handler(req, res) {
     }
 
     const elapsedMs = Number(body.elapsedMs);
-    if (isNaN(elapsedMs) || elapsedMs <= 0) {
+    if (!Number.isFinite(elapsedMs) || elapsedMs <= 0) {
       return res.status(400).json({
         error: "Invalid submission metadata: invalid elapsed time value.",
       });
@@ -316,6 +317,8 @@ export default async function handler(req, res) {
       token,
       useCdn: false,
       perspective: "raw",
+      timeout: 10000,
+      maxRetries: 0,
     });
 
     // Best-effort cleanup of rate limit records older than 24 hours (non-blocking)

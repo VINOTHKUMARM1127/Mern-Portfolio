@@ -1,38 +1,6 @@
 import { motion } from "framer-motion";
 
-const wordVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.04,
-      duration: 0.4,
-      ease: "easeOut",
-    },
-  }),
-};
-
-function AnimatedTitle({ text, className = "" }) {
-  const words = text.split(" ");
-  return (
-    <span className={className}>
-      {words.map((word, i) => (
-        <motion.span
-          key={`${word}-${i}`}
-          custom={i}
-          variants={wordVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="inline-block mr-[0.3em]"
-        >
-          {word}
-        </motion.span>
-      ))}
-    </span>
-  );
-}
+function AnimatedTitle({ text, className = "" }) { return <span className={className}>{text}</span>; }
 
 export default function SectionHeader({
   badge,
@@ -40,17 +8,19 @@ export default function SectionHeader({
   title,
   subtitle,
   className = "",
+  headingLevel = "h2",
 }) {
+  const Heading = headingLevel;
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       className={`text-center mb-16 scroll-reveal ${className}`}
     >
       {badge && (
         <motion.span
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={false}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className="section-badge flex items-center gap-2 mx-auto w-fit"
@@ -59,12 +29,12 @@ export default function SectionHeader({
           {badge}
         </motion.span>
       )}
-      <h2 className="section-title">
+      <Heading className="section-title">
         <AnimatedTitle text={title} />
-      </h2>
+      </Heading>
       {subtitle && (
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}

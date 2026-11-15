@@ -28,6 +28,16 @@ function injectLocalEnv(dir) {
 function devApiPlugin() {
   return {
     name: "dev-api-plugin",
+    configurePreviewServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const pathname = new URL(req.url, "http://localhost").pathname;
+        const pages = ["/", "/about", "/projects", "/services", "/contact", "/review"];
+        const route = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+        if (pages.includes(route)) req.url = route === "/" ? "/index.html" : `${route}/index.html`;
+        else if (!pathname.includes(".")) { req.url = "/404.html"; res.statusCode = 404; }
+        next();
+      });
+    },
     configureServer(server) {
       server.middlewares.use("/api/submit-review", async (req, res, next) => {
         if (req.method !== "POST") return next();
@@ -85,7 +95,7 @@ function devApiPlugin() {
   };
 }
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, isSsrBuild }) => {
   injectLocalEnv(process.cwd());
   const env = loadEnv(mode, process.cwd(), "");
   for (const [key, val] of Object.entries(env)) {
@@ -120,10 +130,7 @@ export default defineConfig(({ mode }) => {
       cssCodeSplit: true,
       rollupOptions: {
         output: {
-          manualChunks: {
-            three: ["three"],
-            r3f: ["@react-three/fiber", "@react-three/drei"],
-            gsap: ["gsap"],
+          manualChunks: isSsrBuild ? undefined : {
             sanity: ["@sanity/client", "@sanity/image-url"],
             motion: ["framer-motion"],
             icons: ["react-icons", "lucide-react"],

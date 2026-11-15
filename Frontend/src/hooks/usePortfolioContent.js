@@ -1,50 +1,33 @@
 import { useCallback, useEffect, useState } from "react";
-import { CorsOriginError } from "@sanity/client";
-import { sanityClient, sanityConfigured } from "../sanity/client";
-import { PORTFOLIO_QUERY } from "../sanity/queries";
+import { sanityConfigured } from "../sanity/client";
+import { readPortfolio } from "../utils/portfolioResource";
 import { mapPortfolioData } from "../utils/mapSanityData";
-
+import snapshot from "../data/portfolioSnapshot.json";
+const initialContent = mapPortfolioData(snapshot);
 export default function usePortfolioContent() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const fetchContent = useCallback(async () => {
-    if (!sanityConfigured) {
-      setError("Sanity is not configured. Set VITE_SANITY_PROJECT_ID in .env");
-      setLoading(false);
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const raw = await sanityClient.fetch(PORTFOLIO_QUERY);
-      setData(mapPortfolioData(raw));
-    } catch (err) {
-      console.error("Sanity fetch failed:", err);
-      if (err instanceof CorsOriginError) {
-        setError(
-          "Sanity CORS: restart npm run dev (uses Vite proxy), or add http://localhost:5173 in Sanity Manage → API → CORS origins."
-        );
-      } else {
-        setError(err.message || "Failed to load portfolio content");
-      }
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchContent();
-  }, [fetchContent]);
-
-  return {
-    ...data,
-    loading,
-    error,
-    refetch: fetchContent,
-    sanityConfigured,
-  };
+ const [data, setData] = useState(initialContent);
+ const [error, setError] = useState(null);
+ const refetch = useCallback(async () => {
+   if (!sanityConfigured) return;
+   try { setData(mapPortfolioData(await readPortfolio({force:true}))); setError(null); }
+   catch { setError("Live content is temporarily unavailable. Saved portfolio content is shown."); }
+ }, []);
+ useEffect(() => {
+   if (!sanityConfigured) return;
+   let active = true;
+   const refresh = () => {
+     if (document.hidden) return;
+     readPortfolio().then(raw => { if(active) { setData(previous => {
+       const next = mapPortfolioData(raw);
+       return JSON.stringify(previous) === JSON.stringify(next) ? previous : next;
+     }); setError(null); } }).catch(() => {
+       if(active) setError("Live content is temporarily unavailable. Saved portfolio content is shown.");
+     });
+   };
+   refresh();
+   window.addEventListener("focus", refresh);
+   document.addEventListener("visibilitychange", refresh);
+   return () => { active=false; window.removeEventListener("focus", refresh); document.removeEventListener("visibilitychange", refresh); };
+ }, []);
+ return {...data, loading:false, error, refetch, sanityConfigured};
 }

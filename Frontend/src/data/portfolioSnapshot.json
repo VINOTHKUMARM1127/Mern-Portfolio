@@ -1,0 +1,148 @@
+{
+  "education": [],
+  "experience": [],
+  "hero": {
+    "_id": "ffdd04f3-ff8d-448d-a4a9-7bd9f222321b",
+    "availabilityText": "Open for Freelance",
+    "badgeOne": "React & CMS",
+    "badgeTwo": "Client websites",
+    "description": "I'm Vinoth Kumar M, a 2025 Computer Science graduate and freelance web developer based in Tamil Nadu. I build responsive business websites with React and Sanity CMS, and database-driven applications with Supabase and PostgreSQL.",
+    "designation": "Full Stack Web Developer",
+    "email": "vinothkumarm1127@gmail.com",
+    "facebook": null,
+    "github": "https://github.com/VINOTHKUMARM1127",
+    "greetings": "Hello, I'm",
+    "instagram": null,
+    "isAvailable": true,
+    "linkedin": "https://www.linkedin.com/in/vinothkumarm27/",
+    "name": "Vinoth Kumar M",
+    "primaryCtaLink": "/contact",
+    "primaryCtaText": "Discuss a project",
+    "profileImage": "/images/432824469ed99466e3241efa26ec8ccd4d316249-864x1184.webp",
+    "resumeUrl": "https://cdn.sanity.io/files/n2y8hmqi/production/52be4d0764a8d852e5a2b3758e980bfac97d27b0.pdf",
+    "secondaryCtaLink": "#projects",
+    "secondaryCtaText": "View Projects",
+    "twitter": null,
+    "whatsapp": "+91 9344842329"
+  },
+  "projects": [
+    {
+      "_id": "bc69929a-2545-4f07-b22d-bd83a62384a4",
+      "category": "personal",
+      "completedAt": null,
+      "description": "A personal movie discovery application powered by the TMDb API.\nBuilt interfaces to search and explore movies, TV shows and people, with responsive layouts and API-driven content.",
+      "featured": false,
+      "githubUrl": "https://github.com/VINOTHKUMARM1127/LotHub",
+      "image": "/images/fefd75de0153c899dd3ba53c9cd1b511f9ee74b7-800x382.webp",
+      "liveUrl": "https://lothub.netlify.app/",
+      "order": 4,
+      "techStack": [
+        "React.js",
+        "CSS",
+        "TMDb API"
+      ],
+      "title": "LotHub \u2014 Movie Discovery"
+    },
+    {
+      "_id": "4f14ccf2-9cab-46d6-921a-2c6bc83ea4ac",
+      "category": "freelancing",
+      "completedAt": null,
+      "description": "A business website for a tax consultancy in Tirupur.\nBuilt responsive React interfaces and integrated Sanity CMS so the team can maintain website content without editing code.\nDelivered service pages, business information and contact options for prospective clients.",
+      "featured": true,
+      "githubUrl": null,
+      "image": "/images/92dac9f8d250e8b6b978aba934b0ecb8ea70c179-1920x1080.webp",
+      "liveUrl": "https://habiletax.vercel.app/",
+      "order": 0,
+      "techStack": [
+        "React.js",
+        "Tailwind CSS",
+        "Sanity CMS"
+      ],
+      "title": "Habile \u2014 Auditing & Tax Consultancy"
+    },
+    {
+      "_id": "7336c02a-6295-42fd-a36f-57c476b04071",
+      "category": "freelancing",
+      "completedAt": null,
+      "description": "A business website for a Bangalore-based fabrication company.\nBuilt service showcases, project galleries and inquiry options with React and Tailwind CSS. Integrated Sanity CMS for content and project updates.",
+      "featured": true,
+      "githubUrl": null,
+      "image": "/images/4e50f3a492d66a94e5d0dedb0d1f739021ff3f40-1920x1080.webp",
+      "liveUrl": "https://snkbuildfabricsolutions.vercel.app",
+      "order": 1,
+      "techStack": [
+        "React.js",
+        "Tailwind CSS",
+        "Sanity CMS"
+      ],
+      "title": "SNK \u2014 Build Fabric Solutions"
+    },
+    {
+      "_id": "dece3cd3-8307-4034-a021-da46cf12aed7",
+      "category": "freelancing",
+      "completedAt": null,
+      "description": "A client website presenting real estate photo and video editing services.\nBuilt responsive service sections, a portfolio with before-and-after comparisons, pricing information and contact options.",
+      "featured": false,
+      "githubUrl": null,
+      "image": "/images/e64335d7675d44851daeb138990a8863b1c98fa3-1920x1080.webp",
+      "liveUrl": "https://www.piclite.space/",
+      "order": 3,
+      "techStack": [
+        "React.js",
+        "Tailwind CSS",
+        "JavaScript"
+      ],
+      "title": "PicLite \u2014 Real Estate Editing Services"
+    },
+    {
+      "_id": "0e086d47-ab42-4a79-bd02-cba55cccb50f",
+      "category": "personal",
+      "completedAt": null,
+      "description": "A personal game discovery application using the RAWG API.\nBuilt interfaces to explore games, creators and stores, and practise API integration and responsive UI development.",
+      "featured": false,
+      "githubUrl": "https://github.com/VINOTHKUMARM1127/LotGames",
+      "image": "/images/f6bc4486094928846210640c8d77d5d1f29fc052-1339x648.webp",
+      "liveUrl": "https://lotgames.netlify.app/",
+      "order": 5,
+      "techStack": [
+        "React.js",
+        "Tailwind CSS",
+        "RAWG API"
+      ],
+      "title": "LotGames \u2014 Game Discovery"
+    },
+    {
+      "_id": "local-reptrack",
+      "title": "RepTrack \u2014 Workout Tracking",
+      "description": "A personal full-stack application for recording workouts and tracking progress.\nBuilt workout libraries, exercise details, a calendar and progress dashboards with React.\nIntegrated Supabase Auth and PostgreSQL for user profiles, workout history, sets and repetitions, with Supabase Storage for images.",
+      "techStack": [
+        "React.js",
+        "Tailwind CSS",
+        "Supabase",
+        "PostgreSQL"
+      ],
+      "liveUrl": "https://reptrack-dun.vercel.app",
+      "category": "personal",
+      "order": 2,
+      "featured": true
+    }
+  ],
+  "testimonials": [
+    {
+      "_id": "review-062cac78b8f17e923fc9fd2b8fb6ed69",
+      "clientImage": null,
+      "clientName": "Ashok",
+      "clientRole": "Ceo",
+      "quote": "Very Supportive",
+      "rating": 5
+    },
+    {
+      "_id": "review-bf7acd13304b2b8af9a2ad1c018f5566",
+      "clientImage": null,
+      "clientName": "Vinoth Kumar",
+      "clientRole": "Shop Owner",
+      "quote": "Good Support. One time delivery",
+      "rating": 4
+    }
+  ]
+}

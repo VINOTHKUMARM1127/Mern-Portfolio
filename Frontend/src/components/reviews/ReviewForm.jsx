@@ -26,6 +26,8 @@ const MAX_CHARS = 800;
 
 export default function ReviewForm() {
   const shouldReduceMotion = useReducedMotion();
+  const [hydrated,setHydrated]=useState(false);
+  useEffect(()=>setHydrated(true),[]);
   const mountTime = useRef(Date.now());
   const isSubmittingRef = useRef(false);
   const isTouchRef = useRef(false);
@@ -103,7 +105,7 @@ export default function ReviewForm() {
             turnstileEl,
             {
               sitekey: siteKey,
-              theme: "dark",
+              theme: "auto",
               callback: (token) => {
                 if (isMounted) {
                   setTurnstileToken(token);
@@ -144,7 +146,8 @@ export default function ReviewForm() {
         script.onerror = () => {
           if (isMounted) setTurnstileError(true);
         };
-        document.head.appendChild(script);
+        const idle = window.requestIdleCallback || ((callback) => setTimeout(callback, 100));
+        idle(() => { if(isMounted) document.head.appendChild(script); }, { timeout: 1500 });
       } else {
         existingScript.addEventListener("load", () => {
           if (isMounted) renderWidget();
@@ -350,12 +353,11 @@ export default function ReviewForm() {
         signal: controller.signal,
       });
 
+      const data = await res.json().catch((error) => { if (error.name === "AbortError") throw error; return {}; });
       clearTimeout(timeoutId);
       if (progressTimerRef.current) clearTimeout(progressTimerRef.current);
 
-      const data = await res.json().catch(() => ({}));
-
-      if (!res.ok) {
+      if (!res.ok || data.ok !== true) {
         throw new Error(data.error || "Failed to submit review. Please try again.");
       }
 
@@ -429,11 +431,11 @@ export default function ReviewForm() {
         {success ? (
           <motion.div
             key="success-card"
-            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 12 }}
+            initial={false}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96 }}
             transition={{ duration: shouldReduceMotion ? 0.2 : 0.4 }}
-            className="glass-card-premium p-6 sm:p-10 md:p-12 text-center border border-white/10 relative overflow-hidden"
+            className="glass-card-premium p-6 sm:p-10 md:p-12 text-center border border-ink/10 relative overflow-hidden"
           >
             {/* Soft atmospheric ambient glow */}
             <div
@@ -457,13 +459,13 @@ export default function ReviewForm() {
                   cx="12"
                   cy="12"
                   r="10"
-                  initial={shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }}
+                  initial={false}
                   animate={{ pathLength: 1, opacity: 1 }}
                   transition={{ duration: shouldReduceMotion ? 0 : 0.4, ease: "easeInOut" }}
                 />
                 <motion.path
                   d="m8 12 3 3 5-5"
-                  initial={shouldReduceMotion ? false : { pathLength: 0, opacity: 0 }}
+                  initial={false}
                   animate={{ pathLength: 1, opacity: 1 }}
                   transition={{
                     delay: shouldReduceMotion ? 0 : 0.35,
@@ -477,22 +479,22 @@ export default function ReviewForm() {
             <h2
               ref={successHeadingRef}
               tabIndex={-1}
-              className="text-2xl sm:text-3xl font-extrabold text-white mb-3 outline-none"
+              className="text-2xl sm:text-3xl font-extrabold text-ink mb-3 outline-none"
             >
               Thank You for Your Feedback!
             </h2>
 
-            <p className="text-white/70 max-w-md mx-auto mb-6 text-sm sm:text-base leading-relaxed">
+            <p className="text-ink/70 max-w-md mx-auto mb-6 text-sm sm:text-base leading-relaxed">
               Thank you! Your review is on its way and will appear after a quick check.
             </p>
 
             {/* Compact summary of what was submitted */}
             {submittedSummary && (
               <motion.div
-                initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: shouldReduceMotion ? 0 : 0.2 }}
-                className="max-w-md mx-auto mb-8 p-4 rounded-xl bg-white/[0.03] border border-white/10 text-left"
+                className="max-w-md mx-auto mb-8 p-4 rounded-xl bg-ink/[0.03] border border-ink/10 text-left"
               >
                 <p className="text-xs uppercase tracking-wider text-cyan-400 font-semibold mb-2">
                   Submission Summary
@@ -504,18 +506,18 @@ export default function ReviewForm() {
                         {star <= submittedSummary.rating ? (
                           <TbStarFilled size={18} />
                         ) : (
-                          <TbStar size={18} className="text-white/20" />
+                          <TbStar size={18} className="text-ink/20" />
                         )}
                       </span>
                     ))}
                   </div>
-                  <span className="text-xs font-semibold text-white/90">
+                  <span className="text-xs font-semibold text-ink/90">
                     {RATING_LABELS[submittedSummary.rating]}
                   </span>
                 </div>
-                <p className="text-sm font-medium text-white">
+                <p className="text-sm font-medium text-ink">
                   {submittedSummary.name}
-                  <span className="text-white/40 font-normal ml-2">
+                  <span className="text-ink/40 font-normal ml-2">
                     · {submittedSummary.role}
                   </span>
                 </p>
@@ -525,7 +527,7 @@ export default function ReviewForm() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 shadow-lg shadow-violet-500/25 transition-all duration-300"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-ink bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 shadow-lg shadow-violet-500/25 transition-all duration-300"
               >
                 <TbArrowLeft size={18} /> Back to Portfolio
               </Link>
@@ -536,7 +538,7 @@ export default function ReviewForm() {
                   setSubmittedSummary(null);
                   mountTime.current = Date.now();
                 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl font-medium text-white/80 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl font-medium text-ink/80 hover:text-ink bg-ink/5 hover:bg-ink/10 border border-ink/10 transition-all duration-300 cursor-pointer"
               >
                 Submit Another Review
               </button>
@@ -545,19 +547,19 @@ export default function ReviewForm() {
         ) : (
           <motion.div
             key="review-form-card"
-            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 15 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: shouldReduceMotion ? 0.2 : 0.3 }}
-            className="glass-card-premium p-6 sm:p-8 md:p-10 border border-white/10 relative"
+            className="glass-card-premium p-6 sm:p-8 md:p-10 border border-ink/10 relative"
           >
             {/* Top decorative badge */}
-            <div className="mb-6 pb-6 border-b border-white/5 flex items-center justify-between flex-wrap gap-2">
+            <div className="mb-6 pb-6 border-b border-ink/5 flex items-center justify-between flex-wrap gap-2">
               <div>
                 <p className="text-xs uppercase tracking-widest font-semibold text-cyan-400">
                   Public Feedback Form
                 </p>
-                <p className="text-xs text-white/40 mt-0.5">
+                <p className="text-xs text-ink/40 mt-0.5">
                   Your feedback helps me deliver better web experiences.
                 </p>
               </div>
@@ -569,7 +571,7 @@ export default function ReviewForm() {
             {/* Server Error Alert Banner */}
             {serverError && (
               <motion.div
-                initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-start gap-3 text-red-300 text-sm"
                 role="alert"
@@ -585,7 +587,7 @@ export default function ReviewForm() {
                     <button
                       type="button"
                       onClick={() => handleSubmit()}
-                      className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-red-500/30 hover:bg-red-500/40 border border-red-500/40 transition-colors cursor-pointer"
+                      className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-ink bg-red-500/30 hover:bg-red-500/40 border border-red-500/40 transition-colors cursor-pointer"
                     >
                       <TbRefresh size={14} /> Retry Submission
                     </button>
@@ -594,7 +596,7 @@ export default function ReviewForm() {
               </motion.div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            <form method="post" onSubmit={handleSubmit} className="space-y-6" noValidate>
               {/* Autofill-safe Honeypot field (hidden from real users, tricks spam bots) */}
               <div
                 style={{
@@ -631,7 +633,7 @@ export default function ReviewForm() {
                   <div className="space-y-2">
                     <label
                       htmlFor="review-name"
-                      className="block text-sm font-medium text-white/80"
+                      className="block text-sm font-medium text-ink/80"
                     >
                       Full Name <span className="text-violet-400">*</span>
                     </label>
@@ -668,7 +670,7 @@ export default function ReviewForm() {
                   <div className="space-y-2">
                     <label
                       htmlFor="review-role"
-                      className="block text-sm font-medium text-white/80"
+                      className="block text-sm font-medium text-ink/80"
                     >
                       Designation / Company <span className="text-violet-400">*</span>
                     </label>
@@ -707,7 +709,7 @@ export default function ReviewForm() {
                   <div className="flex items-center justify-between">
                     <label
                       id="rating-group-label"
-                      className="block text-sm font-medium text-white/80"
+                      className="block text-sm font-medium text-ink/80"
                     >
                       Rating <span className="text-violet-400">*</span>
                     </label>
@@ -724,10 +726,10 @@ export default function ReviewForm() {
                     aria-describedby={errors.rating ? "rating-error" : undefined}
                     tabIndex={0}
                     onKeyDown={handleRatingKeyDown}
-                    className={`flex items-center gap-2 p-2 rounded-xl bg-white/[0.02] border transition-all ${
+                    className={`flex items-center gap-2 p-2 rounded-xl bg-ink/[0.02] border transition-all ${
                       errors.rating
                         ? "border-red-500/80 shadow-[0_0_0_2px_rgba(239,68,68,0.2)] animate-shake"
-                        : "border-white/5 focus-within:border-violet-500/50"
+                        : "border-ink/5 focus-within:border-violet-500/50"
                     }`}
                   >
                     {[1, 2, 3, 4, 5].map((star) => {
@@ -757,12 +759,12 @@ export default function ReviewForm() {
                             setHoverRating(0);
                             isTouchRef.current = false;
                           }}
-                          className="p-2 rounded-lg text-amber-400 transition-all duration-150 hover:bg-white/5 hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 cursor-pointer disabled:cursor-not-allowed"
+                          className="p-2 rounded-lg text-amber-400 transition-all duration-150 hover:bg-ink/5 hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 cursor-pointer disabled:cursor-not-allowed"
                         >
                           {isFilled ? (
                             <TbStarFilled size={30} />
                           ) : (
-                            <TbStar size={30} className="text-white/25" />
+                            <TbStar size={30} className="text-ink/25" />
                           )}
                         </button>
                       );
@@ -785,7 +787,7 @@ export default function ReviewForm() {
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="review-quote"
-                      className="block text-sm font-medium text-white/80"
+                      className="block text-sm font-medium text-ink/80"
                     >
                       Your Review <span className="text-violet-400">*</span>
                     </label>
@@ -795,7 +797,7 @@ export default function ReviewForm() {
                           ? "text-red-400 font-bold"
                           : charCount >= 750
                           ? "text-amber-400"
-                          : "text-white/40"
+                          : "text-ink/40"
                       }`}
                     >
                       {charCount}/{MAX_CHARS}
@@ -846,18 +848,18 @@ export default function ReviewForm() {
               {/* Submit Button with Disabled State until challenge solved */}
               <button
                 type="submit"
-                disabled={submitting || isTurnstilePending}
-                className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-semibold text-white bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-600 shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 hover:from-violet-500 hover:to-cyan-500 active:scale-[0.99] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                disabled={!hydrated || submitting || isTurnstilePending}
+                className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-semibold text-ink bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-600 shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 hover:from-violet-500 hover:to-cyan-500 active:scale-[0.99] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {submitting ? (
                   <>
-                    <TbLoader2 size={20} className="animate-spin text-white" />
+                    <TbLoader2 size={20} className="animate-spin text-ink" />
                     <span className="text-sm font-medium">{submitProgressText}</span>
                   </>
                 ) : isTurnstilePending ? (
                   <>
                     <TbShieldCheck size={20} className="text-cyan-400" />
-                    <span className="text-sm font-medium text-white/90">
+                    <span className="text-sm font-medium text-ink/90">
                       Verifying you're human...
                     </span>
                   </>
@@ -869,7 +871,7 @@ export default function ReviewForm() {
                 )}
               </button>
 
-              <p className="text-center text-xs text-white/40 leading-relaxed">
+              <p className="text-center text-xs text-ink/40 leading-relaxed">
                 Reviews are moderated to prevent automated spam before being displayed.
               </p>
             </form>

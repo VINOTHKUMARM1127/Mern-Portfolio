@@ -1,4 +1,3 @@
-import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import {
   TbBrandGithub,
@@ -11,11 +10,10 @@ import {
   TbArrowRight,
   TbDownload,
 } from "react-icons/tb";
-import { usePortfolio } from "../context/PortfolioContext";
+import { usePortfolio } from "../hooks/usePortfolio";
 import MagneticButton from "../components/ui/MagneticButton";
 import { getWhatsAppUrl } from "../utils/contactUtils";
 
-const HeroScene = lazy(() => import("../components/hero/HeroScene"));
 
 /* ── Animation variants ── */
 const charVariant = {
@@ -47,7 +45,7 @@ function AnimatedName({ text }) {
           key={`${char}-${i}`}
           custom={i}
           variants={charVariant}
-          initial="hidden"
+          initial={false}
           animate="show"
           className="inline-block"
           style={{ whiteSpace: char === " " ? "pre" : "normal" }}
@@ -99,9 +97,7 @@ export default function HeroSection() {
       className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden"
       aria-label="Hero introduction"
     >
-      <Suspense fallback={null}>
-        <HeroScene />
-      </Suspense>
+
 
       {/* Background ambient */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -122,7 +118,7 @@ export default function HeroSection() {
           <SkeletonHero />
         ) : hero ? (
           <motion.div
-            initial="hidden"
+            initial={false}
             animate="show"
             variants={parentVariant}
             className="flex flex-col-reverse lg:flex-row justify-between items-center gap-12"
@@ -150,12 +146,12 @@ export default function HeroSection() {
               </motion.div>
 
               {/* Greeting */}
-              <motion.p variants={fadeUp} className="text-lg text-white/60 mb-2">
+              <motion.p variants={fadeUp} className="text-lg text-ink/60 mb-2">
                 {hero.greetings}
               </motion.p>
 
               {/* Name with character animation */}
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 tracking-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-ink mb-4 tracking-tight">
                 <AnimatedName text={hero.name || "Vinoth Kumar M"} />
               </h1>
 
@@ -171,7 +167,7 @@ export default function HeroSection() {
               {hero.description && (
                 <motion.p
                   variants={fadeUp}
-                  className="text-base text-justify md:text-lg text-white/70 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0"
+                  className="text-base text-left md:text-lg text-ink/70 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0"
                 >
                   {hero.description}
                 </motion.p>
@@ -181,10 +177,10 @@ export default function HeroSection() {
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8">
                 <MagneticButton
                   as="a"
-                  href={`mailto:${settings?.email || "vinothkumarm1127@gmail.com"}?subject=${encodeURIComponent("Hiring Inquiry - Full Stack Developer")}`}
+                  href={settings?.primaryCtaLink || "/contact"}
                   strength={0.2}
-                  className="flex items-center gap-2 px-7 py-4 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 text-white font-semibold shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-shadow duration-300"
-                  title="Hire via Email"
+                  className="flex items-center gap-2 px-7 py-4 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 text-ink font-semibold shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-shadow duration-300"
+                  title="Discuss a project"
                 >
                   <TbMail size={20} aria-hidden="true" />
                   {settings?.primaryCtaText || "Hire Me"}
@@ -197,7 +193,7 @@ export default function HeroSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   strength={0.2}
-                  className="flex items-center gap-2 px-7 py-4 rounded-xl bg-[#25D366]/15 text-[#25D366] hover:bg-[#25D366] hover:text-white font-semibold border border-[#25D366]/30 transition-all duration-300 shadow-lg shadow-[#25D366]/10"
+                  className="flex items-center gap-2 px-7 py-4 rounded-xl bg-[#25D366]/15 text-[#25D366] hover:bg-[#25D366] hover:text-ink font-semibold border border-[#25D366]/30 transition-all duration-300 shadow-lg shadow-[#25D366]/10"
                   title="Chat on WhatsApp: +91 93448 42329"
                 >
                   <TbBrandWhatsapp size={20} aria-hidden="true" />
@@ -211,7 +207,7 @@ export default function HeroSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     strength={0.2}
-                    className="flex items-center gap-2 px-7 py-4 rounded-xl bg-white/5 text-white/80 font-semibold border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                    className="flex items-center gap-2 px-7 py-4 rounded-xl bg-ink/5 text-ink/80 font-semibold border border-ink/10 hover:bg-ink/10 hover:border-ink/20 transition-all duration-300"
                   >
                     <TbDownload size={20} aria-hidden="true" />
                     Download CV
@@ -221,7 +217,7 @@ export default function HeroSection() {
 
               {/* Social Links */}
               <motion.div variants={fadeUp} className="flex flex-wrap gap-3 justify-center lg:justify-start items-center">
-                <span className="text-white/40 text-sm font-semibold tracking-wider uppercase mr-2 hidden sm:block">
+                <span className="text-ink/40 text-sm font-semibold tracking-wider uppercase mr-2 hidden sm:block">
                   Connect:
                 </span>
                 {socialConfig.map(({ key, icon: Icon, getHref, label, color }) => {
@@ -238,7 +234,7 @@ export default function HeroSection() {
                       rel={key === "email" ? undefined : "noopener noreferrer"}
                       whileHover={{ scale: 1.15, y: -4 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 transition-all duration-300"
+                      className="w-11 h-11 rounded-full bg-ink/5 border border-ink/10 flex items-center justify-center text-ink/60 transition-all duration-300"
                       style={{
                         "--hover-color": color,
                       }}
@@ -264,7 +260,7 @@ export default function HeroSection() {
                     href={`mailto:${settings.email}`}
                     whileHover={{ scale: 1.15, y: -4 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-[#8B5CF6] hover:border-[#8B5CF6]/40 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all duration-300"
+                    className="w-11 h-11 rounded-full bg-ink/5 border border-ink/10 flex items-center justify-center text-ink/60 hover:text-[#8B5CF6] hover:border-[#8B5CF6]/40 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all duration-300"
                     aria-label="Email"
                     title="Email"
                   >
@@ -285,10 +281,10 @@ export default function HeroSection() {
                   <img
                     src={hero.profileImageUrl}
                     alt={`${hero.name} — Full Stack Developer`}
-                    fetchPriority="high"
+                    fetchpriority="high"
                     loading="eager"
                     decoding="async"
-                    className="w-full h-full object-cover rounded-full border-4 border-white/10"
+                    className="w-full h-full object-cover rounded-full border-4 border-ink/10"
                   />
                   <div
                     className="absolute inset-0 rounded-full border-2 border-dashed border-violet-500/30 animate-spin-slow"
@@ -301,7 +297,7 @@ export default function HeroSection() {
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity }}
-                  className="absolute -top-4 -right-4 px-4 py-2 rounded-xl bg-violet-600/90 backdrop-blur-sm text-white text-sm font-medium shadow-lg shadow-violet-600/25"
+                  className="absolute -top-4 -right-4 px-4 py-2 rounded-xl bg-violet-600/90 backdrop-blur-sm text-ink text-sm font-medium shadow-lg shadow-violet-600/25"
                 >
                   {hero.badgeOne}
                 </motion.div>
@@ -310,7 +306,7 @@ export default function HeroSection() {
                 <motion.div
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 3.5, repeat: Infinity }}
-                  className="absolute -bottom-4 -left-4 px-4 py-2 rounded-xl bg-cyan-500/90 backdrop-blur-sm text-white text-sm font-medium shadow-lg shadow-cyan-500/25"
+                  className="absolute -bottom-4 -left-4 px-4 py-2 rounded-xl bg-cyan-500/90 backdrop-blur-sm text-ink text-sm font-medium shadow-lg shadow-cyan-500/25"
                 >
                   {hero.badgeTwo}
                 </motion.div>
@@ -318,7 +314,7 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
         ) : (
-          <p className="text-center text-white/60">
+          <p className="text-center text-ink/60">
             Configure Sanity CMS to load hero content.
           </p>
         )}

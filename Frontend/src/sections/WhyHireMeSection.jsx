@@ -49,7 +49,7 @@ function WhyHireMeSection() {
 
         <motion.div
           variants={containerVariants}
-          initial="hidden"
+          initial={false}
           whileInView="show"
           viewport={{ once: true, amount: 0.15 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
@@ -61,7 +61,7 @@ function WhyHireMeSection() {
                 key={item._id}
                 variants={cardVariants}
                 whileHover={{ y: -8 }}
-                className="group relative flex flex-col p-7 rounded-2xl border border-white/[0.06] bg-white/[0.02] hover:border-violet-500/30 hover:bg-white/[0.04] transition-all duration-500 overflow-hidden"
+                className="group relative flex flex-col p-7 rounded-2xl border border-ink/[0.06] bg-ink/[0.02] hover:border-violet-500/30 hover:bg-ink/[0.04] transition-all duration-500 overflow-hidden"
               >
                 {/* Hover glow */}
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-500/0 via-transparent to-transparent group-hover:from-violet-500/5 transition-colors duration-500 pointer-events-none" />
@@ -71,11 +71,11 @@ function WhyHireMeSection() {
                     <IconComp size={26} strokeWidth={1.5} />
                   </div>
 
-                  <h3 className="text-lg font-bold text-white mb-3 group-hover:text-violet-300 transition-colors duration-300">
+                  <h3 className="text-lg font-bold text-ink mb-3 group-hover:text-violet-300 transition-colors duration-300">
                     {item.title}
                   </h3>
 
-                  <p className="text-sm text-white/50 leading-relaxed">
+                  <p className="text-sm text-ink/50 leading-relaxed">
                     {item.description}
                   </p>
                 </div>

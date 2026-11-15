@@ -1,3 +1,4 @@
+import snapshot from "../data/portfolioSnapshot.json";
 import { getImageUrl } from "../sanity/image";
 import {
   skillsData,
@@ -22,7 +23,14 @@ function formatDate(dateStr) {
 }
 
 export function mapPortfolioData(raw) {
-  if (!raw) return null;
+  raw = raw || snapshot;
+  raw = { ...snapshot, ...raw, hero: { ...snapshot.hero, ...raw.hero, profileImage: raw.hero?.profileImage?.asset?._ref?.includes(snapshot.hero.profileImage.split("/").pop().split("-")[0]) ? snapshot.hero.profileImage : (raw.hero?.profileImage || snapshot.hero.profileImage), description: snapshot.hero.description, designation: snapshot.hero.designation, resumeUrl: snapshot.hero.resumeUrl, primaryCtaText: snapshot.hero.primaryCtaText, primaryCtaLink: snapshot.hero.primaryCtaLink } };
+  const liveProjects = raw.projects || [];
+  const mergedProjects = snapshot.projects.map((p) => {
+    const live = liveProjects.find((item) => item._id === p._id);
+    return { ...live, ...p };
+  });
+  raw.projects = [...mergedProjects, ...liveProjects.filter(p => !mergedProjects.some(item => item._id === p._id))];
 
   const hero = raw.hero
     ? {
@@ -40,7 +48,7 @@ export function mapPortfolioData(raw) {
   const projects = (raw.projects || []).map((p) => ({
     _id: p._id,
     title: p.title,
-    description: p.description,
+    description: p.description || "Project details will be available soon.",
     imageUrl: getImageUrl(p.image, { width: 800 }),
     techStack: p.techStack || [],
     githubUrl: p.githubUrl,
@@ -80,7 +88,7 @@ export function mapPortfolioData(raw) {
   const site = {
     logoText: hero?.name ? hero.name.split(" ")[0] : "Devfolio",
     siteTitle: hero?.name ? `${hero.name} | Portfolio` : "Developer Portfolio",
-    siteDescription: hero?.description || "Professional Developer Portfolio",
+    siteDescription: "React websites, Sanity CMS and full-stack web applications by Vinoth Kumar M.",
   };
 
   const settings = {
@@ -118,7 +126,7 @@ export function mapPortfolioData(raw) {
 
   const education = raw.education && raw.education.length > 0 
     ? raw.education 
-    : educationData;
+    : educationData.slice(0, 1);
 
   return {
     hero,

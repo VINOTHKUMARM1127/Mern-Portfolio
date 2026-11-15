@@ -39,7 +39,7 @@ export const servicesData = [
       "Responsive Mobile-First UI",
       "Cross-Browser Compatibility",
     ],
-    isPopular: true,
+    isPopular: false,
   },
   {
     _id: "srv-2",
@@ -302,7 +302,7 @@ export const faqData = [
     _id: "faq-1",
     question: "Who is Vinoth Kumar M?",
     answer:
-      "Vinoth Kumar M is a B.Sc. Computer Science graduate (2025, PPG College of Arts & Science, Coimbatore) and React.js developer based in Tamil Nadu, India. He has built and deployed responsive websites and web apps for clients and personal projects using React.js, Tailwind CSS, Sanity CMS and Supabase, and is open to full-time roles and freelance work.",
+      "Vinoth Kumar M is a B.Sc. Computer Science graduate (2025, PPG College of Arts & Science, Coimbatore) and React.js developer based in Tamil Nadu, India. He has built and deployed responsive websites and web apps for clients and personal projects using React.js, Tailwind CSS, Sanity CMS and Supabase, and is available to discuss freelance projects.",
   },
   {
     _id: "faq-2",
@@ -326,7 +326,7 @@ export const faqData = [
     _id: "faq-5",
     question: "Are you open to job opportunities?",
     answer:
-      "Yes. I am looking for React.js and frontend or full stack developer roles where I can contribute to real-world projects and keep growing as a developer. I am also available for freelance projects.",
+      "I am available to discuss suitable web development projects. Contact me to confirm my current availability and timeline.",
   },
   {
     _id: "faq-6",

@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Icon } from "@iconify/react";
+import { Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { TbCode } from "react-icons/tb";
 import SectionHeader from "../components/ui/SectionHeader";
@@ -30,7 +30,7 @@ const itemVariants = {
 
 function SkillsSection() {
   return (
-    <section id="skills" className="min-h-screen flex flex-col justify-center py-24 relative overflow-hidden bg-[#0a0a0f]" aria-label="Technical skills">
+    <section id="skills" className="min-h-screen flex flex-col justify-center py-24 relative overflow-hidden bg-surface" aria-label="Technical skills">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
 
@@ -44,7 +44,7 @@ function SkillsSection() {
 
         <motion.div
           variants={containerVariants}
-          initial="hidden"
+          initial={false}
           whileInView="show"
           viewport={{ once: true, amount: 0.15 }}
           className="flex flex-wrap gap-4 justify-center"
@@ -54,18 +54,18 @@ function SkillsSection() {
               key={skill._id}
               variants={itemVariants}
               whileHover={{ scale: 1.05, y: -2 }}
-              className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-white/[0.03] border border-white/[0.06] hover:border-violet-500/30 hover:bg-violet-500/5 transition-all duration-300 cursor-default group"
+              className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-ink/[0.03] border border-ink/[0.06] hover:border-violet-500/30 hover:bg-violet-500/5 transition-all duration-300 cursor-default group"
             >
               {skill.icon ? (
                 <div className="w-5 h-5 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <Icon icon={skill.icon} className="max-w-full max-h-full text-xl" />
+                  <Code2 aria-hidden="true" className="max-w-full max-h-full text-xl" />
                 </div>
               ) : (
                 <div className="w-5 h-5 flex items-center justify-center shrink-0">
                   <TbCode className="text-xl text-violet-400" aria-hidden="true" />
                 </div>
               )}
-              <span className="font-medium text-sm text-white/80">{skill.title}</span>
+              <span className="font-medium text-sm text-ink/80">{skill.title}</span>
             </motion.div>
           ))}
         </motion.div>

@@ -5,7 +5,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: { colors: { ink: "rgb(var(--theme-ink) / <alpha-value>)", surface: "rgb(var(--theme-surface) / <alpha-value>)", panel: "rgb(var(--theme-panel) / <alpha-value>)" } },
   },
   plugins: [],
 }

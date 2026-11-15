@@ -27,6 +27,7 @@ export default function Review() {
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 w-full">
           <SectionHeader
+            headingLevel="h1"
             badge="Share Feedback"
             badgeIcon={TbMessageStar}
             title="Leave a Review"
@@ -34,7 +35,7 @@ export default function Review() {
           />
 
           <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: shouldReduceMotion ? 0.2 : 0.45,

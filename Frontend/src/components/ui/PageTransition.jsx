@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
 const pageVariants = {
@@ -26,14 +26,15 @@ const pageVariants = {
 
 export default function PageTransition({ children }) {
   const location = useLocation();
+  const reduced = useReducedMotion();
 
   return (
     <motion.div
       key={location.pathname}
       variants={pageVariants}
-      initial="initial"
+      initial={false}
       animate="animate"
-      exit="exit"
+      exit={reduced ? { opacity: 0 } : "exit"}
     >
       {children}
     </motion.div>

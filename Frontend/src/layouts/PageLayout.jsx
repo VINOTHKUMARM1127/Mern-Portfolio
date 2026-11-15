@@ -1,28 +1,27 @@
+import ScrollProgress from "../components/ui/ScrollProgress";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import FloatingNav from "../components/layout/FloatingNav";
 import FooterSection from "../sections/FooterSection";
 import CTAFloating from "../components/ui/CTAFloating";
-import { initScrollReveal, refreshScrollReveal } from "../animations/scrollReveal";
+import PageMeta from "../components/layout/PageMeta";
 
 export default function PageLayout({ children }) {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
     // Scroll to top on route change
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) { requestAnimationFrame(() => document.getElementById(hash.slice(1))?.scrollIntoView()); }
+    else window.scrollTo(0, 0);
+  }, [pathname, hash]);
 
-  useEffect(() => {
-    initScrollReveal();
-    const t = setTimeout(refreshScrollReveal, 500);
-    return () => clearTimeout(t);
-  }, [pathname]); // Refresh scroll reveal animations on route change
 
   return (
-    <div className="bg-[#0a0a0f] min-h-screen text-white overflow-x-hidden flex flex-col">
+    <div className="bg-surface min-h-screen text-ink overflow-x-hidden flex flex-col">
+      <PageMeta />
+      <ScrollProgress />
       <FloatingNav />
-      <main id="main-content" className="flex-1" role="main">
+      <main tabIndex={-1} id="main-content" className="flex-1" role="main">
         {children}
       </main>
       <FooterSection />

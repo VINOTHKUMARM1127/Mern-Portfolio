@@ -5,7 +5,7 @@ export default function Contact() {
   return (
     <PageLayout>
       <div className="pt-24 pb-12">
-        <ContactSection />
+        <ContactSection standalone />
       </div>
     </PageLayout>
   );

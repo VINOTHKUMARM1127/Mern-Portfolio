@@ -10,7 +10,7 @@ import {
   TbBrandWhatsapp,
 } from "react-icons/tb";
 import { Mail, Phone, MapPin, ArrowUp, Sparkles, Send } from "lucide-react";
-import { usePortfolio } from "../context/PortfolioContext";
+import { usePortfolio } from "../hooks/usePortfolio";
 import { getWhatsAppUrl } from "../utils/contactUtils";
 
 function FooterSection() {
@@ -29,13 +29,13 @@ function FooterSection() {
   const servicesLinks = [
     { label: "Web Development", path: "/services" },
     { label: "MERN Stack", path: "/services" },
-    { label: "UI/UX Design", path: "/services" },
+    { label: "CMS Websites", path: "/services" },
     { label: "API Integration", path: "/services" },
     { label: "Freelance Services", path: "/services" },
   ];
 
   const socialLinks = [
-    { icon: TbBrandGithub, href: social?.github, label: "GitHub", hoverClass: "hover:text-white hover:bg-white/10 hover:border-white/30 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)]" },
+    { icon: TbBrandGithub, href: social?.github, label: "GitHub", hoverClass: "hover:text-ink hover:bg-ink/10 hover:border-ink/30 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)]" },
     { icon: TbBrandLinkedin, href: social?.linkedin, label: "LinkedIn", hoverClass: "hover:text-[#0A66C2] hover:bg-[#0A66C2]/10 hover:border-[#0A66C2]/30 hover:shadow-[0_0_15px_rgba(10,102,194,0.2)]" },
     { icon: TbBrandFacebook, href: social?.facebook, label: "Facebook", hoverClass: "hover:text-[#1877F2] hover:bg-[#1877F2]/10 hover:border-[#1877F2]/30 hover:shadow-[0_0_15px_rgba(24,119,242,0.2)]" },
     { icon: TbBrandInstagram, href: social?.instagram, label: "Instagram", hoverClass: "hover:text-[#E1306C] hover:bg-[#E1306C]/10 hover:border-[#E1306C]/30 hover:shadow-[0_0_15px_rgba(225,48,108,0.2)]" },
@@ -44,7 +44,7 @@ function FooterSection() {
   ].filter((l) => l.href);
 
   return (
-    <footer className="relative pt-20 pb-10 bg-[#0a0a0f] overflow-hidden" role="contentinfo">
+    <footer className="relative pt-20 pb-10 bg-surface overflow-hidden" role="contentinfo">
       {/* Background ambient glows */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
@@ -55,22 +55,22 @@ function FooterSection() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* CTA Banner (Moved to top of footer) */}
-        <div className="relative rounded-3xl bg-gradient-to-br from-violet-600/10 to-cyan-600/10 border border-white/10 p-8 md:p-12 mb-20 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 backdrop-blur-sm">
+        <div className="relative rounded-3xl bg-gradient-to-br from-violet-600/10 to-cyan-600/10 border border-ink/10 p-8 md:p-12 mb-20 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 backdrop-blur-sm">
           {/* Subtle noise pattern overlay */}
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20 pointer-events-none" />
           
           <div className="relative z-10 text-center md:text-left">
-            <h2 className="text-2xl md:text-4xl font-black text-white mb-3">Ready to start a project?</h2>
-            <p className="text-white/70 text-lg max-w-xl">Let's build something extraordinary together. Available for freelance opportunities and full-time roles.</p>
+            <h2 className="text-2xl md:text-4xl font-black text-ink mb-3">Ready to start a project?</h2>
+            <p className="text-ink/70 text-lg max-w-xl">Have a website or application in mind? Let's discuss the scope and timeline.</p>
           </div>
-          <Link to="/contact">
-            <motion.button
+          <Link to="/contact" className="inline-block">
+            <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative z-10 flex items-center gap-3 px-8 py-4 rounded-xl bg-white text-black font-bold tracking-wide hover:bg-violet-50 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.15)] text-lg whitespace-nowrap"
+              className="relative z-10 flex items-center gap-3 px-8 py-4 rounded-xl bg-ink text-surface font-bold tracking-wide hover:bg-violet-50 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.15)] text-lg whitespace-nowrap"
             >
               Let's Talk <Send size={20} />
-            </motion.button>
+            </motion.span>
           </Link>
         </div>
 
@@ -79,11 +79,11 @@ function FooterSection() {
           
           {/* Column 1: Brand Info */}
           <div className="lg:col-span-4 flex flex-col items-start gap-6">
-            <h3 className="text-3xl font-black text-white tracking-widest bg-gradient-to-r from-white to-white/70 bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-violet-400 hover:to-cyan-400 transition-all duration-300 flex items-center gap-2">
+            <h3 className="text-3xl font-black text-ink tracking-widest bg-gradient-to-r from-ink to-ink/70 bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-violet-400 hover:to-cyan-400 transition-all duration-300 flex items-center gap-2">
               <Sparkles className="text-violet-400" size={28} />
               {site?.logoText || "DEVFOLIO"}
             </h3>
-            <p className="text-white/70 text-sm leading-relaxed max-w-sm">
+            <p className="text-ink/70 text-sm leading-relaxed max-w-sm">
               {site?.siteDescription || "Crafting premium Full Stack and MERN applications with custom designs, clean codebases, and seamless integrations. Let's build something amazing together."}
             </p>
             
@@ -96,7 +96,7 @@ function FooterSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ y: -4, scale: 1.05 }}
-                  className={`w-10 h-10 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-center text-white/60 transition-all duration-300 ${s.hoverClass}`}
+                  className={`w-10 h-10 rounded-xl bg-ink/[0.02] border border-ink/5 flex items-center justify-center text-ink/60 transition-all duration-300 ${s.hoverClass}`}
                   aria-label={s.label}
                 >
                   <s.icon size={20} />
@@ -107,7 +107,7 @@ function FooterSection() {
 
           {/* Column 2: Quick Links */}
           <div className="lg:col-span-2 lg:col-start-6 flex flex-col gap-6">
-            <h3 className="text-sm font-bold tracking-widest text-white uppercase">
+            <h3 className="text-sm font-bold tracking-widest text-ink uppercase">
               Quick Links
             </h3>
             <div className="flex flex-col gap-3">
@@ -116,7 +116,7 @@ function FooterSection() {
                   key={link.label}
                   to={link.path}
                   title={`Navigate to ${link.label} page`}
-                  className="text-white/70 hover:text-violet-400 text-sm w-fit transition-all duration-300 flex items-center gap-2 group"
+                  className="text-ink/70 hover:text-violet-400 text-sm w-fit transition-all duration-300 flex items-center gap-2 group"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-violet-500/50 scale-0 group-hover:scale-100 transition-transform duration-300" aria-hidden="true" />
                   <span className="group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
@@ -127,7 +127,7 @@ function FooterSection() {
 
           {/* Column 3: Services */}
           <div className="lg:col-span-2 flex flex-col gap-6">
-            <h3 className="text-sm font-bold tracking-widest text-white uppercase">
+            <h3 className="text-sm font-bold tracking-widest text-ink uppercase">
               Services
             </h3>
             <div className="flex flex-col gap-3">
@@ -135,7 +135,7 @@ function FooterSection() {
                 <Link
                   key={link.label}
                   to={link.path}
-                  className="text-white/70 hover:text-cyan-400 text-sm w-fit transition-all duration-300 flex items-center gap-2 group"
+                  className="text-ink/70 hover:text-cyan-400 text-sm w-fit transition-all duration-300 flex items-center gap-2 group"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/50 scale-0 group-hover:scale-100 transition-transform duration-300" />
                   <span className="group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
@@ -146,36 +146,36 @@ function FooterSection() {
 
           {/* Column 4: Contact Info */}
           <div className="lg:col-span-3 flex flex-col gap-6">
-            <h3 className="text-sm font-bold tracking-widest text-white uppercase">
+            <h3 className="text-sm font-bold tracking-widest text-ink uppercase">
               Contact Info
             </h3>
-            <div className="flex flex-col gap-4 text-sm text-white/70">
+            <div className="flex flex-col gap-4 text-sm text-ink/70">
               {contact?.email && (
                 <a
                   href={`mailto:${contact.email}`}
-                  className="flex items-start gap-3 hover:text-white transition-colors group p-3 -ml-3 rounded-xl hover:bg-white/[0.02] border border-transparent hover:border-white/5"
+                  className="flex items-start gap-3 hover:text-ink transition-colors group p-3 -ml-3 rounded-xl hover:bg-ink/[0.02] border border-transparent hover:border-ink/5"
                 >
                   <div className="w-10 h-10 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center shrink-0 group-hover:bg-violet-500/20 group-hover:scale-110 transition-all duration-300">
                     <Mail size={18} className="text-violet-400" />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-white/60 mb-1">Email Me</span>
-                    <span className="font-medium text-white/80">{contact.email}</span>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-xs text-ink/60 mb-1">Email Me</span>
+                    <span className="font-medium text-ink/80 break-words">{contact.email}</span>
                   </div>
                 </a>
               )}
               {contact?.phone && (
                 <a
                   href={`tel:${contact.phone.replace(/\s+/g, "")}`}
-                  className="flex items-start gap-3 hover:text-white transition-colors group p-3 -ml-3 rounded-xl hover:bg-white/[0.02] border border-transparent hover:border-white/5"
+                  className="flex items-start gap-3 hover:text-ink transition-colors group p-3 -ml-3 rounded-xl hover:bg-ink/[0.02] border border-transparent hover:border-ink/5"
                   title={`Call ${contact.phone}`}
                 >
                   <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 group-hover:bg-emerald-500/20 group-hover:scale-110 transition-all duration-300">
                     <Phone size={18} className="text-emerald-400" />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-white/60 mb-1">Phone / WhatsApp</span>
-                    <span className="font-medium text-white/80">{contact.phone}</span>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-xs text-ink/60 mb-1">Phone / WhatsApp</span>
+                    <span className="font-medium text-ink/80 break-words">{contact.phone}</span>
                   </div>
                 </a>
               )}
@@ -184,9 +184,9 @@ function FooterSection() {
                   <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center shrink-0">
                     <MapPin size={18} className="text-cyan-400" />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-white/60 mb-1">Location</span>
-                    <span className="font-medium text-white/80">{contact.location}</span>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-xs text-ink/60 mb-1">Location</span>
+                    <span className="font-medium text-ink/80 break-words">{contact.location}</span>
                   </div>
                 </div>
               )}
@@ -195,8 +195,8 @@ function FooterSection() {
         </div>
 
         {/* Bottom row */}
-        <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-white/5">
-          <p className="text-white/60 text-sm text-center sm:text-left">
+        <div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-ink/5">
+          <p className="text-ink/60 text-sm text-center sm:text-left">
             © {new Date().getFullYear()} {site?.siteTitle || hero?.name || "Portfolio"}. All rights reserved.
             <span className="hidden sm:inline"> · Built with React & ❤️</span>
           </p>
@@ -204,7 +204,7 @@ function FooterSection() {
             whileHover={{ y: -3 }}
             type="button"
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-white/60 hover:text-white text-sm font-semibold uppercase tracking-wider bg-white/5 hover:bg-white/10 border border-white/5 px-5 py-2.5 rounded-xl transition-all duration-300"
+            className="flex items-center gap-2 text-ink/60 hover:text-ink text-sm font-semibold uppercase tracking-wider bg-ink/5 hover:bg-ink/10 border border-ink/5 px-5 py-2.5 rounded-xl transition-all duration-300"
           >
             Back to Top <ArrowUp size={16} className="animate-bounce" />
           </motion.button>

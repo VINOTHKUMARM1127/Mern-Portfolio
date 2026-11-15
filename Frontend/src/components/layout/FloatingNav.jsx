@@ -1,7 +1,8 @@
+import ThemeToggle from "../ui/ThemeToggle";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePortfolio } from "../../context/PortfolioContext";
+import { usePortfolio } from "../../hooks/usePortfolio";
 import {
   TbMenu2,
   TbX,
@@ -38,6 +39,28 @@ export default function FloatingNav() {
     return () => { document.body.style.overflow = "auto"; };
   }, [menuOpen]);
 
+  useEffect(() => {
+    const query=window.matchMedia("(min-width: 1024px)");
+    const resize=()=>{if(query.matches)setMenuOpen(false);};
+    query.addEventListener("change",resize);
+    return()=>query.removeEventListener("change",resize);
+  },[]);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const toggle=document.querySelector('[aria-controls="mobile-menu"]');
+    const items=()=>[toggle,...document.querySelectorAll('#mobile-menu a[href]')].filter(Boolean);
+    items()[1]?.focus();
+    const keydown = event => {
+      if (event.key === "Escape") {event.preventDefault();setMenuOpen(false);}
+      if (event.key === "Tab") {
+        const list=items();const first=list[0],last=list.at(-1);
+        if(event.shiftKey && document.activeElement===first){event.preventDefault();last?.focus();}
+        else if(!event.shiftKey && document.activeElement===last){event.preventDefault();first?.focus();}
+      }
+    };
+    window.addEventListener("keydown",keydown);
+    return()=>{window.removeEventListener("keydown",keydown);if(toggle?.isConnected)toggle.focus();};
+  }, [menuOpen]);
   const handleNavClick = () => setMenuOpen(false);
 
   const logoText = site?.logoText || "Devfolio";
@@ -47,13 +70,13 @@ export default function FloatingNav() {
     <>
       {/* Desktop Navigation */}
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
+        initial={false}
         animate={{ y: 0, opacity: 1 }}
         role="navigation"
         aria-label="Main navigation"
         className={`fixed top-0 left-0 right-0 z-50 hidden lg:block transition-all duration-300 ${
           scrolled
-            ? "bg-[#0a0a0f]/90 backdrop-blur-md py-3"
+            ? "bg-surface/90 backdrop-blur-md py-3"
             : "bg-transparent py-6"
         }`}
       >
@@ -61,12 +84,12 @@ export default function FloatingNav() {
           <Link
             to="/"
             onClick={handleNavClick}
-            className="text-xl font-extrabold text-white tracking-wider bg-gradient-to-r from-white to-white/70 bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-violet-400 hover:to-cyan-400 transition-all duration-300"
+            className="text-xl font-extrabold text-ink tracking-wider bg-gradient-to-r from-ink to-ink/70 bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-violet-400 hover:to-cyan-400 transition-all duration-300"
           >
             {logoText}
           </Link>
           
-          <div className="flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/5 backdrop-blur-md">
+          <div className="flex items-center gap-1 bg-ink/5 p-1 rounded-full border border-ink/5 backdrop-blur-md">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
@@ -74,7 +97,7 @@ export default function FloatingNav() {
                   key={item.path}
                   to={item.path}
                   className={`relative px-5 py-2 text-sm font-semibold rounded-full transition-colors duration-300 ${
-                    isActive ? "text-white" : "text-white/60 hover:text-white"
+                    isActive ? "text-ink" : "text-ink/60 hover:text-ink"
                   }`}
                 >
                   {isActive && (
@@ -90,6 +113,7 @@ export default function FloatingNav() {
             })}
           </div>
 
+          <ThemeToggle />
           {github && (
             <motion.a
               href={github}
@@ -97,7 +121,7 @@ export default function FloatingNav() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05, y: -1 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider bg-white/5 hover:bg-white/10 text-white rounded-full border border-white/10 hover:border-violet-500/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all duration-300"
+              className="flex items-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider bg-ink/5 hover:bg-ink/10 text-ink rounded-full border border-ink/10 hover:border-violet-500/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all duration-300"
             >
               <TbBrandGithub size={16} />
               <span>GitHub</span>
@@ -111,36 +135,40 @@ export default function FloatingNav() {
         <div
           className={`flex items-center justify-between px-6 py-4 transition-colors duration-300 ${
             scrolled || menuOpen
-              ? "bg-[#0a0a0f]/95 backdrop-blur-xl"
+              ? "bg-surface/95 backdrop-blur-xl"
               : "bg-transparent"
           }`}
         >
           <Link
             to="/"
             onClick={handleNavClick}
-            className="text-xl font-extrabold text-white tracking-wider"
+            className="text-xl font-extrabold text-ink tracking-wider"
           >
             {logoText}
           </Link>
+          <div className="flex items-center gap-3"><ThemeToggle />
           <motion.button
             whileTap={{ scale: 0.9 }}
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 text-white/80 hover:text-white rounded-xl bg-white/5 border border-white/5 flex items-center justify-center"
+            className="p-2 text-ink/80 hover:text-ink rounded-xl bg-ink/5 border border-ink/5 flex items-center justify-center"
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             {menuOpen ? <TbX size={20} /> : <TbMenu2 size={20} />}
-          </motion.button>
+          </motion.button></div>
         </div>
 
         <AnimatePresence>
           {menuOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25, ease: "easeInOut" }}
-              className="fixed inset-x-0 top-[61px] bottom-0 z-40 bg-[#0a0a0f]/98 backdrop-blur-2xl border-t border-white/5 flex flex-col justify-between py-10 px-6"
+              id="mobile-menu"
+              className="fixed inset-x-0 top-[61px] bottom-0 z-40 bg-surface/98 backdrop-blur-2xl border-t border-ink/5 flex flex-col justify-between py-10 px-6"
             >
               <div className="flex flex-col gap-2">
                 {navItems.map((item, idx) => {
@@ -148,7 +176,7 @@ export default function FloatingNav() {
                   return (
                     <motion.div
                       key={item.path}
-                      initial={{ opacity: 0, x: -10 }}
+                      initial={false}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.04 }}
                     >
@@ -158,7 +186,7 @@ export default function FloatingNav() {
                         className={`flex items-center gap-4 px-5 py-4 rounded-2xl text-lg font-bold transition-all duration-300 ${
                           isActive
                             ? "bg-gradient-to-r from-violet-600/20 to-cyan-500/20 border border-violet-500/30 text-violet-300"
-                            : "text-white/70 hover:text-white hover:bg-white/5"
+                            : "text-ink/70 hover:text-ink hover:bg-ink/5"
                         }`}
                       >
                         <item.icon size={22} className="shrink-0" />
@@ -171,17 +199,17 @@ export default function FloatingNav() {
 
               {/* Mobile Menu Footer */}
               <motion.div
-                initial={{ opacity: 0, y: 15 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
-                className="pt-6 border-t border-white/5 flex flex-col items-center gap-6"
+                className="pt-6 border-t border-ink/5 flex flex-col items-center gap-6"
               >
                 {github && (
                   <a
                     href={github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold text-sm tracking-wide shadow-lg shadow-violet-500/25"
+                    className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-cyan-500 text-ink font-bold text-sm tracking-wide shadow-lg shadow-violet-500/25"
                   >
                     <TbBrandGithub size={20} />
                     <span>Connect on GitHub</span>
