@@ -1,4 +1,3 @@
-import ThemeToggle from "../ui/ThemeToggle";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -74,7 +73,7 @@ export default function FloatingNav() {
         animate={{ y: 0, opacity: 1 }}
         role="navigation"
         aria-label="Main navigation"
-        className={`fixed top-0 left-0 right-0 z-50 hidden lg:block transition-all duration-300 ${
+        className={`portfolio-nav fixed top-0 left-0 right-0 z-50 hidden lg:block transition-all duration-300 ${
           scrolled
             ? "bg-surface/90 backdrop-blur-md py-3"
             : "bg-transparent py-6"
@@ -113,7 +112,6 @@ export default function FloatingNav() {
             })}
           </div>
 
-          <ThemeToggle />
           {github && (
             <motion.a
               href={github}
@@ -146,7 +144,7 @@ export default function FloatingNav() {
           >
             {logoText}
           </Link>
-          <div className="flex items-center gap-3"><ThemeToggle />
+          <div className="flex items-center gap-3">
           <motion.button
             whileTap={{ scale: 0.9 }}
             type="button"

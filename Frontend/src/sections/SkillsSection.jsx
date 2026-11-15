@@ -1,5 +1,4 @@
 import { memo } from "react";
-import { Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { TbCode } from "react-icons/tb";
 import SectionHeader from "../components/ui/SectionHeader";
@@ -54,17 +53,9 @@ function SkillsSection() {
               key={skill._id}
               variants={itemVariants}
               whileHover={{ scale: 1.05, y: -2 }}
-              className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-ink/[0.03] border border-ink/[0.06] hover:border-violet-500/30 hover:bg-violet-500/5 transition-all duration-300 cursor-default group"
+              className="skill-pill cursor-default"
             >
-              {skill.icon ? (
-                <div className="w-5 h-5 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <Code2 aria-hidden="true" className="max-w-full max-h-full text-xl" />
-                </div>
-              ) : (
-                <div className="w-5 h-5 flex items-center justify-center shrink-0">
-                  <TbCode className="text-xl text-violet-400" aria-hidden="true" />
-                </div>
-              )}
+              <span className="skill-pill__logo"><img src={`/icons/skills/${skill._id}.svg`} alt="" width="28" height="28" loading="lazy" decoding="async" /></span>
               <span className="font-medium text-sm text-ink/80">{skill.title}</span>
             </motion.div>
           ))}

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { memo, useMemo, useState, forwardRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TbBriefcase, TbStar, TbExternalLink, TbArrowRight } from "react-icons/tb";
+import { TbBriefcase, TbStar, TbExternalLink, TbBrandGithub } from "react-icons/tb";
 import SectionHeader from "../components/ui/SectionHeader";
 import ProjectModal from "../components/projects/ProjectModal";
 import { usePortfolio } from "../hooks/usePortfolio";
@@ -13,94 +13,23 @@ const TABS = [
 ];
 
 const ProjectCard = forwardRef(function ProjectCard({ project, onSelect }, ref) {
-  return (
-    <motion.article
-      ref={ref}
-      layout
-      initial={false}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      whileHover={{ y: -8 }}
-      onClick={(event) => { if (!event.target.closest("a,button")) onSelect(project); }}
-      className="group relative flex flex-col rounded-3xl bg-panel border border-ink/5 overflow-hidden cursor-pointer hover:border-violet-500/30 transition-all duration-500 shadow-lg hover:shadow-[0_0_40px_rgba(139,92,246,0.15)]"
-    >
-      {/* Glow effect behind card */}
-      <div className="absolute inset-0 bg-gradient-to-b from-violet-500/0 to-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-      {/* Image Area */}
-      <div className="relative h-60 w-full overflow-hidden bg-gradient-to-br from-[#1a1a24] to-panel">
-        <div className="absolute inset-0 bg-gradient-to-t from-panel via-transparent to-transparent z-10" />
-        <div className="absolute inset-0 bg-violet-500/20 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-700 z-10" />
-
-        {project.imageUrl ? (
-          <img
-            src={project.imageUrl}
-            alt={project.title}
-            loading="lazy"
-            decoding="async"
-            width="900"
-            height="506"
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <TbBriefcase size={48} className="text-ink/10" />
-          </div>
-        )}
-
-        {/* Badges */}
-        <div className="absolute top-5 left-5 z-20 flex flex-col gap-2">
-          {project.featured && (
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-400 text-black text-[10px] uppercase tracking-wider font-extrabold shadow-lg shadow-amber-500/25">
-              <TbStar size={12} className="fill-black" /> Featured
-            </span>
-          )}
-        </div>
-
-        {project.year && (
-          <span className="absolute top-5 right-5 z-20 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md text-[10px] uppercase tracking-wider font-bold text-ink border border-ink/10">
-            {project.year}
-          </span>
-        )}
-
-        {/* Hover Overlay Button */}
-        <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/20 backdrop-blur-[2px]">
-           <div className="px-6 py-2.5 rounded-full bg-ink text-surface font-bold flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl">
-             View<TbArrowRight size={18} />
-           </div>
-        </div>
-      </div>
-
-      {/* Content Area */}
-      <div className="p-6 md:p-8 flex-1 flex flex-col relative z-20">
-        <h3 className="text-xl md:text-2xl font-bold text-ink mb-3 group-hover:text-violet-400 transition-colors duration-300 flex items-center justify-between">
-          {project.title}
-          <TbExternalLink className="opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-violet-400" />
-        </h3>
-
-        <p className="text-ink/50 text-sm md:text-base leading-relaxed line-clamp-2 flex-1 mb-6">
-          {project.description}
-        </p>
-
-        <div className="flex flex-wrap gap-4 mb-5"><button type="button" aria-haspopup="dialog" aria-label={`View ${project.title}`} onClick={() => onSelect(project)} className="text-violet-300 underline underline-offset-4 font-semibold">Project details</button>{project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-ink/70 underline underline-offset-4">Open live site<span className="sr-only"> for {project.title} (new tab)</span></a>}</div>
-        <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-ink/5">
-          {(project.techStack || []).slice(0, 4).map((t) => (
-            <span
-              key={t}
-              className="text-xs px-3 py-1.5 rounded-lg bg-violet-500/10 text-violet-300 border border-violet-500/20 font-semibold tracking-wide"
-            >
-              {t}
-            </span>
-          ))}
-          {(project.techStack || []).length > 4 && (
-            <span className="text-xs px-3 py-1.5 rounded-lg bg-ink/5 text-ink/40 border border-ink/5 font-semibold">
-              +{(project.techStack.length - 4)}
-            </span>
-          )}
-        </div>
-      </div>
-    </motion.article>
-  );
+  return <motion.article ref={ref} layout initial={false} animate={{opacity:1,y:0}} exit={{opacity:0,scale:.97}} whileHover={{y:-5}} className="project-card relative flex flex-col overflow-hidden">
+    <button type="button" className="project-card__trigger absolute inset-0 z-10" aria-haspopup="dialog" aria-label={`View ${project.title}`} onClick={() => onSelect(project)}><span className="sr-only">Open project details</span></button>
+    <div className="project-card__media relative overflow-hidden">
+      {project.imageUrl ? <img src={project.imageUrl} alt={project.title} loading="lazy" decoding="async" width="900" height="563" /> : <div className="w-full h-full flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-violet-100 via-indigo-50 to-cyan-100"><TbBriefcase size={38} className="text-violet-500"/><span className="text-sm font-semibold text-violet-800">{project.title.split(" — ")[0]}</span></div>}
+      {project.featured && <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 text-violet-800 border border-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider shadow-sm"><TbStar size={12}/> Featured</span>}
+      {project.year && <span className="absolute bottom-3 right-3 rounded-md bg-white/95 px-2 py-1 text-xs text-slate-700">{project.year}</span>}
+    </div>
+    <div className="p-6 md:p-7 flex flex-col flex-1">
+      <h3 className="project-card__title">{project.title}</h3>
+      <p className="project-card__description">{project.description}</p>
+      <div className="project-card__stack">{(project.techStack || []).slice(0,4).map(tech=><span key={tech}>{tech}</span>)}{project.techStack?.length>4 && <span>+{project.techStack.length-4}</span>}</div>
+      {(project.liveUrl || project.githubUrl) && <div className="relative z-20 flex gap-3 mt-auto">
+        {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="project-action project-action--primary" aria-label={`Open ${project.title} live site (new tab)`}><TbExternalLink size={17} aria-hidden="true"/>Live Site</a>}
+        {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="project-action project-action--secondary" aria-label={`View ${project.title} on GitHub (new tab)`}><TbBrandGithub size={17} aria-hidden="true"/>GitHub</a>}
+      </div>}
+    </div>
+  </motion.article>;
 });
 
 const MemoCard = memo(ProjectCard);

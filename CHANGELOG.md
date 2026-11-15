@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.3.0 — 2026-11-15
+
+- Restored fourteen local technology logos without runtime icon APIs.
+- Fixed light-only palette and removed the theme toggle and saved theme selection.
+- Restyled project cards with clear screenshots, a RepTrack thumbnail and consistent text spacing.
+- Card-wide detail opening plus full Live Site / optional GitHub action buttons.
+- Sanity link values override snapshot defaults; empty URLs hide actions.
+
 ## 2.2.0 — 2026-11-15
 
 - Prerendered pages with hydration and route-specific metadata.

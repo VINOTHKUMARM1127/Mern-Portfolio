@@ -1,0 +1,1 @@
+Product logos identify the skills shown; logos and trademarks belong to their respective owners. Local SVGs extracted from @iconify-json/logos and @iconify-json/simple-icons. Collection metadata: https://icon-sets.iconify.design/logos/ and https://icon-sets.iconify.design/simple-icons/. No runtime icon API is used.

@@ -121,9 +121,9 @@ export default function ProjectModal({ project, onClose }) {
                     href={project.liveUrl} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-ink text-surface font-bold hover:bg-violet-50 transition-colors shadow-lg shadow-ink/10"
+                    className="project-action project-action--primary"
                   >
-                    <TbExternalLink size={20} /> Live Demo
+                    <TbExternalLink size={20} /> Live Site
                   </a>
                 )}
                 {project.githubUrl && (
@@ -131,9 +131,9 @@ export default function ProjectModal({ project, onClose }) {
                     href={project.githubUrl} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-ink/10 hover:bg-ink/20 text-ink border border-ink/10 font-bold transition-colors"
+                    className="project-action project-action--secondary"
                   >
-                    <TbBrandGithub size={20} /> Source Code
+                    <TbBrandGithub size={20} /> GitHub
                   </a>
                 )}
               </div>

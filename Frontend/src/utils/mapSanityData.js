@@ -13,6 +13,11 @@ import {
   normalizeEmail,
 } from "./contactUtils";
 
+function externalUrl(value) {
+  if (typeof value !== "string" || !value.trim()) return null;
+  try { const url = new URL(value.trim()); return ["https:","http:"].includes(url.protocol) ? url.href : null; } catch { return null; }
+}
+
 function formatDate(dateStr) {
   if (!dateStr) return "";
   try {
@@ -26,9 +31,11 @@ export function mapPortfolioData(raw) {
   raw = raw || snapshot;
   raw = { ...snapshot, ...raw, hero: { ...snapshot.hero, ...raw.hero, profileImage: raw.hero?.profileImage?.asset?._ref?.includes(snapshot.hero.profileImage.split("/").pop().split("-")[0]) ? snapshot.hero.profileImage : (raw.hero?.profileImage || snapshot.hero.profileImage), description: snapshot.hero.description, designation: snapshot.hero.designation, resumeUrl: snapshot.hero.resumeUrl, primaryCtaText: snapshot.hero.primaryCtaText, primaryCtaLink: snapshot.hero.primaryCtaLink } };
   const liveProjects = raw.projects || [];
-  const mergedProjects = snapshot.projects.map((p) => {
-    const live = liveProjects.find((item) => item._id === p._id);
-    return { ...live, ...p };
+  const mergedProjects = snapshot.projects.map(p => {
+    const live = liveProjects.find(item => item._id === p._id || (p._id === "local-reptrack" && /\breptrack\b/i.test(item.title || "")));
+    if (!live) return p;
+    return { ...live, ...p, _id: live._id, githubUrl: live.githubUrl,
+      liveUrl: live.liveUrl === "https://snkfabricationsworks.vercel.app" ? p.liveUrl : live.liveUrl };
   });
   raw.projects = [...mergedProjects, ...liveProjects.filter(p => !mergedProjects.some(item => item._id === p._id))];
 
@@ -51,8 +58,8 @@ export function mapPortfolioData(raw) {
     description: p.description || "Project details will be available soon.",
     imageUrl: getImageUrl(p.image, { width: 800 }),
     techStack: p.techStack || [],
-    githubUrl: p.githubUrl,
-    liveUrl: p.liveUrl,
+    githubUrl: externalUrl(p.githubUrl),
+    liveUrl: externalUrl(p.liveUrl),
     category: p.category,
     featured: p.featured,
     year: formatDate(p.completedAt),

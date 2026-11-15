@@ -105,7 +105,7 @@ function CTAFloating() {
           onClick={() => setExpanded((p) => !p)}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="relative w-14 h-14 rounded-full bg-gradient-to-br from-violet-600 to-purple-600 text-ink flex items-center justify-center shadow-xl shadow-violet-600/30 hover:shadow-violet-600/50 transition-all duration-300"
+          className="relative w-14 h-14 rounded-full bg-gradient-to-br from-violet-600 to-purple-600 text-white flex items-center justify-center shadow-xl shadow-violet-600/30 hover:shadow-violet-600/50 transition-all duration-300"
           aria-label={expanded ? "Close contact options" : "Open contact options"}
         >
           {/* Pulse ring */}

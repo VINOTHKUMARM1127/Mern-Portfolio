@@ -124,7 +124,8 @@
       "liveUrl": "https://reptrack-dun.vercel.app",
       "category": "personal",
       "order": 2,
-      "featured": true
+      "featured": true,
+      "image": "/images/reptrack-1ac004da17097216.webp"
     }
   ],
   "testimonials": [

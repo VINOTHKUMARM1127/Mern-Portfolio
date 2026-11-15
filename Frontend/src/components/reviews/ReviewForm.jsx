@@ -105,7 +105,7 @@ export default function ReviewForm() {
             turnstileEl,
             {
               sitekey: siteKey,
-              theme: "auto",
+              theme: "light",
               callback: (token) => {
                 if (isMounted) {
                   setTurnstileToken(token);

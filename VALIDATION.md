@@ -15,3 +15,14 @@
 - gzip/Brotli artifacts and explicit cache headers generated; negotiated compression verified after deployment.
 
 Real EmailJS delivery, human CAPTCHA completion and real client review submissions are not exercised automatically. Public CMS records are read only; no review records are modified by these checks. No private credentials or resume PDF are added to GitHub. Static published-content snapshots can require a rebuild after editorial changes.
+
+
+## Version 2.3 design checks
+- 28 production-preview route/viewport checks at 360, 390, 768 and 1440px; no overflow or hydration errors.
+- Fixed light mode ignores a previously saved dark preference and the theme toggle is absent.
+- All fourteen local skill-logo SVGs load with nonzero natural dimensions.
+- Card image/body clicks and keyboard activation open the details dialog; Escape restores focus.
+- No visible details link; a single live action fills the row, and personal projects with a repository show two links.
+- External GitHub link opens separately without also opening the dialog.
+- CMS data mapping checked for new URL values, explicit empty/null clears, unsafe URL rejection and RepTrack deduplication.
+- Real RepTrack thumbnail captured from its public landing page; no account data or review records changed.

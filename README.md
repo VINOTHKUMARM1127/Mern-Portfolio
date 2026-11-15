@@ -1,4 +1,4 @@
-# Vinoth Kumar — portfolio v2.2.0
+# Vinoth Kumar — portfolio v2.3.0
 
 Source for the revised portfolio. Run it locally with the instructions below. Production releases are published only when requested by the owner.
 
@@ -50,7 +50,7 @@ npm run preview
 Manual checks: each navigation route, 404, project filters, keyboard Enter/Escape and focus return, resume download, mobile menu, service enquiry prefill, form validation and published review carousel.
 
 ## Deployment after approval only
-Keep Frontend as the portfolio Vercel root and studio as the Studio project's root. Production variables already in Vercel are separate from this ZIP and must remain there. The owner has authorized publication of version 2.2.0. Keep credentials in Vercel and local .env files, never in Git.
+Keep Frontend as the portfolio Vercel root and studio as the Studio project's root. Production variables already in Vercel are separate from this ZIP and must remain there. The owner has authorized publication of version 2.3.0. Keep credentials in Vercel and local .env files, never in Git.
 
 ## Changes
 - Evidence-focused copy; six curated projects including RepTrack; local images and the existing CV link.
@@ -70,8 +70,16 @@ Dependency versions remain locked. Automated checks do not prove third-party acc
 
 Fonts are self-hosted (Inter, OFL license in public/fonts) and images are local WebP files. Route chunks, native image loading, a shared Sanity request cache and bounded external calls reduce unnecessary work. Core content is available without JavaScript; interactive forms stay disabled until hydration to prevent accidental non-JavaScript GET submissions.
 
-The light/dark toggle follows the system preference initially and remembers an explicit selection. Contact details have copy controls. The mobile menu traps keyboard focus, closes on Escape and resets when resized to desktop. A small scroll progress indicator and existing back-to-top button aid navigation.
+The portfolio uses a fixed light design; the theme switcher and saved-theme behavior have been removed. Contact details have copy controls. The mobile menu traps keyboard focus, closes on Escape and resets when resized to desktop. A small scroll progress indicator and existing back-to-top button aid navigation.
 
 Optional real-user performance monitoring uses Vercel Speed Insights. Set VITE_ENABLE_PERFORMANCE_MONITORING=true to show the consent panel. Its script loads only after approval; privacy settings allow withdrawal. Query strings and hashes are removed before measurements are sent; form content is never included. Check Vercel's Speed Insights panel for data after visitors opt in. The SDK integration does not authorize changing plans or buying paid monitoring.
 
 Search, autocomplete, pagination, UTM campaign collection, Redis, SQL indexes and database connection pooling have not been added: this six-project portfolio uses Sanity's managed APIs and does not need them. There are no destructive visitor actions requiring extra confirmation dialogs. See FEATURES.md and VALIDATION.md for implementation and testing details.
+
+
+## Project actions and skill logos (v2.3)
+Skill logos are real, locally bundled SVG brand marks, with source notices under Frontend/public/icons/skills. There are no runtime icon API calls.
+
+Project cards use a stretched native button: clicking the card opens the existing details dialog, and keyboard users can use Enter/Space. The explicit visible details link has been removed. Live Site and GitHub are separate native links above that hit area; opening one does not open the dialog. A single available link fills the action row; two links share it. Empty or invalid URLs hide the respective action.
+
+For published Sanity project records, githubUrl and liveUrl take precedence over snapshot links, including explicit nulls. Other curated copy remains in the source snapshot. A future RepTrack CMS record is matched to the local fallback by title so it can supply links without creating a duplicate card. Set optional GitHub/Live Site URLs in Sanity Studio → Projects. The known obsolete SNK URL retains its verified replacement until its CMS field is updated. No CMS records were modified automatically.

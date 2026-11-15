@@ -18,8 +18,8 @@ export default {
       type: "array",
       of: [{ type: "string" }],
     },
-    { name: "githubUrl", title: "GitHub URL", type: "url" },
-    { name: "liveUrl", title: "Live Demo URL", type: "url" },
+    { name: "githubUrl", title: "GitHub URL", type: "url", description: "Optional. Shows a GitHub button on the card and in project details. Leave empty to hide it.", validation: Rule => Rule.uri({ scheme: ["http", "https"] }) },
+    { name: "liveUrl", title: "Live Site URL", type: "url", description: "Optional. Shows the Live Site button. If GitHub is also provided, the buttons share the row.", validation: Rule => Rule.uri({ scheme: ["http", "https"] }) },
     {
       name: "category",
       title: "Category",
