@@ -82,17 +82,14 @@ export default {
       clientName: "clientName",
       clientRole: "clientRole",
       rating: "rating",
-      id: "_id",
       media: "clientImage",
     },
-    prepare({ clientName, clientRole, rating, id, media }) {
+    prepare({ clientName, clientRole, rating, media }) {
       const stars = rating ? `⭐ ${rating}` : "No rating";
-      const isDraft = id ? id.startsWith("drafts.") : false;
-      const status = isDraft ? "⏳ Pending (Unpublished)" : "✅ Published";
       const role = clientRole || "Client";
       return {
         title: clientName || "Anonymous",
-        subtitle: `${stars} · ${status} · ${role}`,
+        subtitle: `${stars} · ${role}`,
         media,
       };
     },
