@@ -37,3 +37,5 @@ Real EmailJS delivery, human CAPTCHA completion and real client review submissio
 - Contact contains no form or Send Message control. Email/WhatsApp/Call hrefs checked; no real email or calls initiated.
 - Email and phone clipboard controls copied their exact corresponding values, with controls aligned in each value row.
 - Visual review of project spacing, process cards and contact cards completed.
+
+- Direct Contact service-enquiry URLs and full reloads preserve their context without hydration errors.

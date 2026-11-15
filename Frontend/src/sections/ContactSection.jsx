@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Mail, Phone, ArrowUpRight, MapPin } from "lucide-react";
 import { TbBrandWhatsapp } from "react-icons/tb";
@@ -11,7 +11,9 @@ function ContactSection({standalone=false}) {
  const {contact,social}=usePortfolio();const [search]=useSearchParams();
  const email=contact?.email||"vinothkumarm1127@gmail.com";
  const phone=contact?.phone||"+919344842329";
- const service=(search.get("service")||"").slice(0,200);
+ const [hydrated,setHydrated]=useState(false);
+ useEffect(()=>setHydrated(true),[]);
+ const service=hydrated?(search.get("service")||"").slice(0,200):"";
  const subject=service?`Project enquiry: ${service}`:"Website project enquiry";
  const mail=`mailto:${email}?subject=${encodeURIComponent(subject)}`;
  const whatsapp=getWhatsAppUrl(social?.whatsapp||contact?.whatsapp||phone,service?`Hi Vinoth, I'd like to discuss ${service}.`:"Hi Vinoth, I'd like to discuss a website project.");
